@@ -1,0 +1,6 @@
+src/.vs/
+src/ConsoleApp1/bin/
+src/ConsoleApp1/obj/
+src/TikTok.ApiClient/bin/
+src/TikTok.ApiClient/obj/
+*.user
