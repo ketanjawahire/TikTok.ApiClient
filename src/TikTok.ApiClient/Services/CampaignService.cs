@@ -1,6 +1,11 @@
-﻿using RestSharp;
+﻿using Newtonsoft.Json;
+using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
+using TikTok.ApiClient.Entities;
 using TikTok.ApiClient.Services.Interfaces;
 
 namespace TikTok.ApiClient.Services
@@ -10,6 +15,22 @@ namespace TikTok.ApiClient.Services
         internal CampaignService(AuthenticationService authenticationService)
             : base(authenticationService)
         {
+        }
+
+        public IEnumerable<Campaign> Get(CampaignRequestModel requestModel)
+        {
+            using(var client = new HttpClient())
+            {
+                var message = new HttpRequestMessage(HttpMethod.Get, "https://ads.tiktok.com/open_api/2/campaign/get/");
+
+                message.Content = new StringContent(JsonConvert.SerializeObject(requestModel, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }), Encoding.UTF8, "application/json");
+
+                var response = Execute<CampaignRootObject>(message);
+
+                var result = Extract<CampaignRootObject, CampaignWrapper, Campaign>(response);
+
+                return result;
+            }
         }
 
         public IEnumerable<CampaignInsight> GetReport(InputModel model)
@@ -48,5 +69,4 @@ namespace TikTok.ApiClient.Services
             return result;
         }
     }
-
 }

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using TikTok.ApiClient.Exceptions;
 using TikTok.ApiClient.Services.Interfaces;
 using UnauthorizedAccessException = TikTok.ApiClient.Exceptions.UnauthorizedAccessException;
@@ -22,6 +23,35 @@ namespace TikTok.ApiClient.Services
         {
             _authService = authenticationService;
             _restClient = new RestClient(_apiRequestBaseUrl);
+        }
+
+        public TEntity Execute<TEntity>(HttpRequestMessage message)
+            where TEntity : class, new()
+        {
+            var authResponse = _authService.Get();
+
+            using (var client = new HttpClient())
+            {
+                message.Headers.TryAddWithoutValidation("Content-Type", "application/json");
+                message.Headers.TryAddWithoutValidation("Access-Token", $"Bearer {authResponse.AccessToken}");
+
+                var response = client.SendAsync(message).Result;
+
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    var result = Deserialize<TEntity>(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+                    return result;
+                }
+                else if (response.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    throw new UnauthorizedAccessException();
+                }
+
+                // TODO : move deserialize into seperate method
+                var apiError = Deserialize<ApiError>(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+
+                throw new ApiException(apiError, response.StatusCode);
+            }
         }
 
         public TEntity Execute<TEntity>(IRestRequest restRequest)
