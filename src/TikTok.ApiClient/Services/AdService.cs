@@ -2,6 +2,9 @@
 using RestSharp;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
+using TikTok.ApiClient.Entities;
 using TikTok.ApiClient.Services.Interfaces;
 
 namespace TikTok.ApiClient.Services
@@ -11,6 +14,19 @@ namespace TikTok.ApiClient.Services
         internal AdService(AuthenticationService authenticationService)
             : base(authenticationService)
         {
+        }
+
+        public IEnumerable<Ad> Get(AdRequestModel model)
+        {
+            var message = new HttpRequestMessage(HttpMethod.Get, "https://ads.tiktok.com/open_api/2/ad/get/");
+
+            message.Content = new StringContent(JsonConvert.SerializeObject(model, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }), Encoding.UTF8, "application/json");
+
+            var response = Execute<AdRootObject>(message);
+
+            var result = Extract<AdRootObject, AdWrapper, Ad>(response);
+
+            return result;
         }
 
         public IEnumerable<AdInsight> GetReport(InputModel model)

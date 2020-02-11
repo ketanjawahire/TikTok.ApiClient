@@ -1,6 +1,10 @@
-﻿using RestSharp;
+﻿using Newtonsoft.Json;
+using RestSharp;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
+using TikTok.ApiClient.Entities;
 using TikTok.ApiClient.Services.Interfaces;
 
 namespace TikTok.ApiClient.Services
@@ -10,6 +14,19 @@ namespace TikTok.ApiClient.Services
         internal AdgroupService(AuthenticationService authenticationService)
             : base(authenticationService)
         {
+        }
+
+        public IEnumerable<Adgroup> Get(AdgroupRequestModel model)
+        {
+            var message = new HttpRequestMessage(HttpMethod.Get, "https://ads.tiktok.com/open_api/2/adgroup/get/");
+
+            message.Content = new StringContent(JsonConvert.SerializeObject(model, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }), Encoding.UTF8, "application/json");
+
+            var response = Execute<AdgroupRootObject>(message);
+
+            var result = Extract<AdgroupRootObject, AdgroupWrapper, Adgroup>(response);
+
+            return result;
         }
 
         public IEnumerable<AdgroupInsight> GetReport(InputModel model)

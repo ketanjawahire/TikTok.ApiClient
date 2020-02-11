@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using TikTok.ApiClient.Enums;
 
 namespace TikTok.ApiClient.Services
 {

@@ -8,6 +8,6 @@ namespace TikTok.ApiClient.Services.Interfaces
     {
         IEnumerable<CampaignInsight> GetReport(InputModel model);
 
-        IEnumerable<Campaign> Get(CampaignRequestModel requestModel);
+        IEnumerable<Adgroup> Get(CampaignRequestModel requestModel);
     }
 }

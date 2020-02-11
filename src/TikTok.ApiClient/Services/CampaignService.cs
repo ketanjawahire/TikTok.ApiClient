@@ -17,20 +17,17 @@ namespace TikTok.ApiClient.Services
         {
         }
 
-        public IEnumerable<Campaign> Get(CampaignRequestModel requestModel)
+        public IEnumerable<Adgroup> Get(CampaignRequestModel requestModel)
         {
-            using(var client = new HttpClient())
-            {
-                var message = new HttpRequestMessage(HttpMethod.Get, "https://ads.tiktok.com/open_api/2/campaign/get/");
+            var message = new HttpRequestMessage(HttpMethod.Get, "https://ads.tiktok.com/open_api/2/campaign/get/");
 
-                message.Content = new StringContent(JsonConvert.SerializeObject(requestModel, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }), Encoding.UTF8, "application/json");
+            message.Content = new StringContent(JsonConvert.SerializeObject(requestModel, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }), Encoding.UTF8, "application/json");
 
-                var response = Execute<CampaignRootObject>(message);
+            var response = Execute<CampaignRootObject>(message);
 
-                var result = Extract<CampaignRootObject, CampaignWrapper, Campaign>(response);
+            var result = Extract<CampaignRootObject, CampaignWrapper, Adgroup>(response);
 
-                return result;
-            }
+            return result;
         }
 
         public IEnumerable<CampaignInsight> GetReport(InputModel model)

@@ -1,4 +1,4 @@
-﻿namespace TikTok.ApiClient.Services
+﻿namespace TikTok.ApiClient.Enums
 {
     public enum AdStatus
     {
