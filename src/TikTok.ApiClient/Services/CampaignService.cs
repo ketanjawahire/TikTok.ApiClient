@@ -17,7 +17,7 @@ namespace TikTok.ApiClient.Services
         {
         }
 
-        public IEnumerable<Adgroup> Get(CampaignRequestModel requestModel)
+        public IEnumerable<Campaign> Get(CampaignRequestModel requestModel)
         {
             var message = new HttpRequestMessage(HttpMethod.Get, "https://ads.tiktok.com/open_api/2/campaign/get/");
 
@@ -25,7 +25,7 @@ namespace TikTok.ApiClient.Services
 
             var response = Execute<CampaignRootObject>(message);
 
-            var result = Extract<CampaignRootObject, CampaignWrapper, Adgroup>(response);
+            var result = Extract<CampaignRootObject, CampaignWrapper, Campaign>(response);
 
             return result;
         }
