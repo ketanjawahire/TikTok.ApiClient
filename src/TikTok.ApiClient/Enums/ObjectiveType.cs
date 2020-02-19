@@ -1,16 +1,15 @@
 ﻿namespace TikTok.ApiClient.Enums
 {
+    /// <summary>
+    /// Objective Type enum
+    /// </summary>
     public enum ObjectiveType
     {
-        /// <summary>
-        /// Landing page
-        /// </summary>
-        Landing_page,
 
         /// <summary>
-        /// App install
+        /// Null Objective Type
         /// </summary>
-        APP,
+        NONE,
 
         /// <summary>
         /// traffic

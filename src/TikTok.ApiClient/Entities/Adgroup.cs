@@ -1,6 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
+using System.Linq;
 using TikTok.ApiClient.Enums;
 using TikTok.ApiClient.Services;
 
@@ -43,6 +45,17 @@ namespace TikTok.ApiClient.Entities
         /// </summary>
         [JsonProperty("placement")]
         public List<string> Placement { get; set; }
+
+        /// <summary>
+        /// Gets the tik tok placements.
+        /// </summary>
+        /// <value>
+        /// The tik tok placements into list of Placements enum.
+        /// </value>
+        public List<Placements> TikTokPlacements
+        {
+            get { return this.Placement.Select(item => (Placements) Enum.Parse(typeof(Placements), item)).ToList(); }
+        }
 
         /// <summary>
         /// landing page URL will return, when campaign objective is CONVERSIONS；And when campaign objective TRAFFIC and choose landing_page_url, it will return.
@@ -141,6 +154,11 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("age")]
         public List<string> Age { get; set; }
 
+        public List<AgeGroups> TikTokAgeGroups
+        {
+            get { return this.Age.Select(item => (AgeGroups) Enum.Parse(typeof(AgeGroups), item)).ToList(); }
+        }
+
         /// <summary>
         /// language is unlimited if it is null
         /// </summary>
@@ -163,55 +181,62 @@ namespace TikTok.ApiClient.Entities
         /// budget
         /// </summary>
         [JsonProperty("budget")]
-        public float Budget { get; set; }
+        public decimal Budget { get; set; }
 
         /// <summary>
         /// budget mode, please see detail from appendix[budget mode]
         /// </summary>
         [JsonProperty("budget_mode")]
-        public string BudgetMode { get; set; }
+        public BudgetMode BudgetMode { get; set; }
 
         /// <summary>
         /// pacing speed, please see detail from appendix [pacing speed]
         /// </summary>
         [JsonProperty("pacing")]
-        public string Pacing { get; set; }
+        public Pacing Pacing { get; set; }
+
+        ///// <summary>
+        ///// schedule type, please see detail from appendix [schedule type]
+        ///// </summary>
+        //[JsonProperty("schedule_type")]
+        //public string ScheduleType { get; set; }
 
         /// <summary>
-        /// schedule type, please see detail from appendix [schedule type]
+        /// Optimization goalEnum value:CONVERT: ConversionCLICK: ClickSHOW: ShowREACH: reachVIDEO_VIEW: video viewingINSTALL: installIN_APP_EVENT: in-app event
         /// </summary>
-        [JsonProperty("schedule_type")]
-        public string ScheduleType { get; set; }
+        [JsonProperty("optimize_goal")]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public OptimizeGoal OptimizeGoal { get; set; }
+
+        /// <summary>
+        /// event, please see detail from appendix[billing event]
+        /// </summary>
+        [JsonProperty("billing_event")]
+        public BillingEvent BillingEvent { get; set; }
+
+        /// <summary>
+        /// CPC, CPM bid, oCPC learning bid
+        /// </summary>
+        [JsonProperty("bid")]
+        public decimal Bid { get; set; }
 
         /// <summary>
         /// schedule start time,UTC, format: YYYY-MM-DD HH:mm:ss
         /// </summary>
         [JsonProperty("schedule_start_time")]
-        public string ScheduleStartTime { get; set; }
+        public DateTime ScheduleStartTime { get; set; }
 
         /// <summary>
         /// schedule end time,UTC, format: YYYY-MM-DD HH:mm:ss
         /// </summary>
         [JsonProperty("schedule_end_time")]
-        public string ScheduleEndTime { get; set; }
+        public DateTime ScheduleEndTime { get; set; }
 
         /// <summary>
         /// ad serving period, which is delivered by default at full time. The format is 48*7-bit string and both are 0 or 1. The minimum granularity is half an hour. From Monday to Sunday, it is divided into 48 sections, 0 is not delivered, 1 is delivery, no transmission, all transmission 0, and all transmission 1 are all stand for full time delivery.
         /// </summary>
         [JsonProperty("dayparting")]
         public string Dayparting { get; set; }
-
-        /// <summary>
-        /// event, please see detail from appendix[billing event]
-        /// </summary>
-        [JsonProperty("billing_eventbilling")]
-        public string BillingEventbilling { get; set; }
-
-        /// <summary>
-        /// CPC, CPM bid, oCPC learning bid
-        /// </summary>
-        [JsonProperty("bid")]
-        public float Bid { get; set; }
 
         /// <summary>
         /// conversion id
@@ -268,13 +293,6 @@ namespace TikTok.ApiClient.Entities
         public string CreativeMaterialMode { get; set; }
 
         /// <summary>
-        /// Optimization goalEnum value:CONVERT: ConversionCLICK: ClickSHOW: ShowREACH: reachVIDEO_VIEW: video viewingINSTALL: installIN_APP_EVENT: in-app event
-        /// </summary>
-        [JsonProperty("optimize_goal")]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public OptimizeGoal OptimizeGoal { get; set; }
-
-        /// <summary>
         /// Shallow eventEnum:ACTIVE: activateACTIVE_REGISTER: activate and registerCREATE_GAMEROLE: Activate and create a characterLOGIN: login successfullyCOMPLETE_TUTORIAL: Complete the tutorial
         /// </summary>
         [JsonProperty("external_action")]
@@ -293,5 +311,9 @@ namespace TikTok.ApiClient.Entities
         /// </summary>
         [JsonProperty("deep_bid_type")]
         public DeepBidType DeepBidType { get; set; }
+
+        /// <summary>Gets or sets the target string.</summary>
+        /// <value>The target string.</value>
+        public string TargetString { get; set; }
     }
 }

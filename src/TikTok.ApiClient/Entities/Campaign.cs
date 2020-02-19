@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using TikTok.ApiClient.Enums;
 
@@ -25,7 +26,13 @@ namespace TikTok.ApiClient.Entities
         /// campaign_name
         /// </summary>
         [JsonProperty("campaign_name")]
-        public string Name { get; set; }
+        public string CampaignName { get; set; }
+
+        /// <summary>
+        /// budget
+        /// </summary>
+        [JsonProperty("budget")]
+        public decimal Budget { get; set; }
 
         /// <summary>
         /// budget_mode
@@ -33,12 +40,6 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("budget_mode")]
         [JsonConverter(typeof(StringEnumConverter))]
         public BudgetMode BudgetMode { get; set; }
-
-        /// <summary>
-        /// budget
-        /// </summary>
-        [JsonProperty("budget")]
-        public string Budget { get; set; }
 
         /// <summary>
         /// objective
@@ -51,6 +52,19 @@ namespace TikTok.ApiClient.Entities
         /// </summary>
         [JsonProperty("objective_type")]
         public string ObjectiveType { get; set; }
+
+        public ObjectiveType CampaignObjectiveType
+        {
+            get
+            {
+                if (ObjectiveType == null)
+                {
+                    return Enums.ObjectiveType.NONE;
+                }
+
+                return (ObjectiveType) Enum.Parse(typeof(ObjectiveType), this.ObjectiveType);
+            }
+        }
 
         /// <summary>
         /// create_time
