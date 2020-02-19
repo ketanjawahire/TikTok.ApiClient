@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace TikTok.ApiClient
 {
@@ -8,46 +9,43 @@ namespace TikTok.ApiClient
         public long ActiveRegister { get; set; }
 
         [JsonProperty("skip")]
-        public long Skip { get; set; }
-
-        [JsonProperty("convert_rate")]
-        public long ConvertRate { get; set; }
+        public decimal Skip { get; set; }
 
         [JsonProperty("active_register_rate")]
-        public long ActiveRegisterRate { get; set; }
+        public decimal ActiveRegisterRate { get; set; }
 
         [JsonProperty("active_rate")]
-        public long ActiveRate { get; set; }
+        public decimal ActiveRate { get; set; }
 
         [JsonProperty("active_show")]
-        public long ActiveShow { get; set; }
+        public decimal ActiveShow { get; set; }
 
         [JsonProperty("active_pay_avg_amount")]
-        public long ActivePayAvgAmount { get; set; }
+        public decimal ActivePayAvgAmount { get; set; }
 
         [JsonProperty("dy_comment")]
-        public long DyComment { get; set; }
+        public decimal DyComment { get; set; }
 
         [JsonProperty("active_pay_cost")]
-        public long ActivePayCost { get; set; }
+        public decimal ActivePayCost { get; set; }
 
         [JsonProperty("ad_name")]
         public string AdName { get; set; }
 
         [JsonProperty("conversion_rate")]
-        public long ConversionRate { get; set; }
+        public decimal ConversionRate { get; set; }
 
         [JsonProperty("show_uv")]
         public long ShowUv { get; set; }
 
         [JsonProperty("ecpm")]
-        public long Ecpm { get; set; }
+        public decimal Ecpm { get; set; }
 
         [JsonProperty("campaign_name")]
         public string CampaignName { get; set; }
 
         [JsonProperty("active_register_click_cost")]
-        public long ActiveRegisterClickCost { get; set; }
+        public decimal ActiveRegisterClickCost { get; set; }
 
         [JsonProperty("adgroup_id")]
         public long AdgroupId { get; set; }
@@ -56,28 +54,28 @@ namespace TikTok.ApiClient
         public long ShowCnt { get; set; }
 
         [JsonProperty("active_register_click")]
-        public long ActiveRegisterClick { get; set; }
+        public decimal ActiveRegisterClick { get; set; }
 
         [JsonProperty("active_click_cost")]
-        public long ActiveClickCost { get; set; }
+        public decimal ActiveClickCost { get; set; }
 
         [JsonProperty("adgroup_name")]
         public string AdgroupName { get; set; }
 
         [JsonProperty("stat_cost")]
-        public long StatCost { get; set; }
+        public decimal StatCost { get; set; }
 
         [JsonProperty("active_pay_click_cost")]
-        public long ActivePayClickCost { get; set; }
+        public decimal ActivePayClickCost { get; set; }
 
         [JsonProperty("active_register_cost")]
-        public long ActiveRegisterCost { get; set; }
+        public decimal ActiveRegisterCost { get; set; }
 
         [JsonProperty("active_pay_click")]
-        public long ActivePayClick { get; set; }
+        public decimal ActivePayClick { get; set; }
 
-        [JsonProperty("convert_cost")]
-        public long ConvertCost { get; set; }
+        [JsonProperty("conversion_cost")]
+        public decimal ConversionCost { get; set; }
 
         [JsonProperty("ad_id")]
         public long AdId { get; set; }
@@ -86,72 +84,78 @@ namespace TikTok.ApiClient
         public long TotalPlay { get; set; }
 
         [JsonProperty("dy_like")]
-        public long DyLike { get; set; }
+        public decimal DyLike { get; set; }
 
         [JsonProperty("dy_share")]
-        public long DyShare { get; set; }
+        public decimal DyShare { get; set; }
 
         [JsonProperty("ad_text")]
         public string AdText { get; set; }
 
         [JsonProperty("click_cost")]
-        public long ClickCost { get; set; }
+        public decimal ClickCost { get; set; }
 
         [JsonProperty("campaign_id")]
         public long CampaignId { get; set; }
 
         [JsonProperty("active_click")]
-        public long ActiveClick { get; set; }
+        public decimal ActiveClick { get; set; }
 
         [JsonProperty("active")]
-        public long Active { get; set; }
+        public decimal Active { get; set; }
 
         [JsonProperty("convert_cnt")]
         public long ConvertCnt { get; set; }
 
         [JsonProperty("active_register_show_cost")]
-        public long ActiveRegisterShowCost { get; set; }
+        public decimal ActiveRegisterShowCost { get; set; }
 
         [JsonProperty("average_video_play")]
-        public long AverageVideoPlay { get; set; }
+        public decimal AverageVideoPlay { get; set; }
 
         [JsonProperty("active_pay_rate")]
-        public long ActivePayRate { get; set; }
+        public decimal ActivePayRate { get; set; }
 
         [JsonProperty("activate_cost")]
-        public long ActivateCost { get; set; }
+        public decimal ActivateCost { get; set; }
 
         [JsonProperty("ctr")]
-        public long Ctr { get; set; }
+        public decimal Ctr { get; set; }
 
         [JsonProperty("active_pay")]
-        public long ActivePay { get; set; }
+        public decimal ActivePay { get; set; }
 
         [JsonProperty("click_cnt")]
         public long ClickCnt { get; set; }
 
         [JsonProperty("active_register_show")]
-        public long ActiveRegisterShow { get; set; }
+        public decimal ActiveRegisterShow { get; set; }
 
         [JsonProperty("active_pay_amount")]
-        public long ActivePayAmount { get; set; }
+        public decimal ActivePayAmount { get; set; }
 
         [JsonProperty("active_pay_show_cost")]
-        public long ActivePayShowCost { get; set; }
+        public decimal ActivePayShowCost { get; set; }
 
         [JsonProperty("dy_home_visited")]
-        public long DyHomeVisited { get; set; }
+        public decimal DyHomeVisited { get; set; }
 
         [JsonProperty("activate_rate")]
-        public long ActivateRate { get; set; }
+        public decimal ActivateRate { get; set; }
 
         [JsonProperty("active_cost")]
-        public long ActiveCost { get; set; }
+        public decimal ActiveCost { get; set; }
 
         [JsonProperty("active_pay_show")]
-        public long ActivePayShow { get; set; }
+        public decimal ActivePayShow { get; set; }
 
         [JsonProperty("active_show_cost")]
-        public long ActiveShowCost { get; set; }
+        public decimal ActiveShowCost { get; set; }
+
+        [JsonProperty("stat_datetime")]
+        public DateTime StatDateTime { get; set; }
+
+        [JsonProperty("time_attr_convert_cnt")]
+        public decimal TimeAttrConvertCnt { get; set; }
     }
 }
