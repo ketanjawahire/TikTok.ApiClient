@@ -8,7 +8,7 @@ namespace TikTok.ApiClient
         public string Message { get; set; }
 
         [JsonProperty("code")]
-        public string Code { get; set; }
+        public long Code { get; set; }
 
         [JsonProperty("data")]
         public AuthResponse Data { get; set; }

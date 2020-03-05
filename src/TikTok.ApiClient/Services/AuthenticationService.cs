@@ -1,10 +1,13 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
+using RestSharp.Serialization;
+using System;
 using System.IO;
-using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using TikTok.ApiClient.Exceptions;
 
 namespace TikTok.ApiClient.Services
@@ -31,7 +34,7 @@ namespace TikTok.ApiClient.Services
             }
         }
 
-        public AuthResponse Get()
+        public async Task<AuthResponse> Get()
         {
             if (GetAccessTokenFromCache(out AuthResponse cachedResponse))
             {
@@ -40,11 +43,11 @@ namespace TikTok.ApiClient.Services
 
             var response = GetAccessTokenFromApi(_refreshToken);
 
-            var authResponse = response.Data;
+            var authResponse = await response;
 
-            AddTokenToCache(authResponse);
+            AddTokenToCache(authResponse.Data);
 
-            return authResponse;
+            return authResponse.Data;
         }
 
         private static JsonSerializer GetJsonSerializer()
@@ -71,24 +74,46 @@ namespace TikTok.ApiClient.Services
             return result.ToString();
         }
 
-        private AuthResponseRootObject GetAccessTokenFromApi(string refreshToken)
+        private async Task<AuthResponseRootObject> GetAccessTokenFromApi(string refreshToken)
         {
-            var request = new RestRequest("/open_api/oauth2/refresh_token/", Method.POST);
+            var result = new AuthResponseRootObject();
+            var response = new HttpResponseMessage();
+            var responseBody = string.Empty;
 
-            request.AddJsonBody(new { app_id = _appId, secret = _clientSecret, grant_type = "refresh_token", refresh_token = refreshToken });
+            var requestBody = new
+            {
+                app_id = _appId,
+                secret = _clientSecret,
+                grant_type = "refresh_token",
+                refresh_token = refreshToken
+            };
 
-            var response = _restClient.Execute(request);
+            var request = new HttpRequestMessage
+            {
+                Content = new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, ContentType.Json),
+                Method = HttpMethod.Post,
+                RequestUri = new Uri("https://ads.tiktok.com/open_api/oauth2/refresh_token/")
+            };
+
+            using (var httpClient = new HttpClient())
+            {
+                response = await httpClient.SendAsync(request);
+                responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                result = JsonConvert.DeserializeObject<AuthResponseRootObject>(responseBody);
+            }
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
-                var result = Deserialize<AuthResponseRootObject>(response.Content);
+                if (result.Code == 40103)
+                {
+                    throw new Exceptions.UnauthorizedAccessException();
+                }
+
                 return result;
             }
-            else if (response.StatusCode == HttpStatusCode.Unauthorized)
-                throw new UnauthorizedAccessException();
 
-            // TODO : move deserialize into seperate method
-            var apiError = Deserialize<ErrorResponse>(response.Content);
+            // TODO : move deserialize into separate method
+            var apiError = Deserialize<ErrorResponse>(responseBody);
 
             throw new ApiException(apiError, response.StatusCode);
         }

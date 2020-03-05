@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using TikTok.ApiClient.Entities;
 using TikTok.ApiClient.Services.Interfaces;
 
@@ -17,13 +18,13 @@ namespace TikTok.ApiClient.Services
         {
         }
 
-        public IEnumerable<Campaign> Get(CampaignRequestModel requestModel)
+        public async Task<IEnumerable<Campaign>> Get(CampaignRequestModel requestModel)
         {
             var message = new HttpRequestMessage(HttpMethod.Get, "https://ads.tiktok.com/open_api/2/campaign/get/");
 
             message.Content = new StringContent(JsonConvert.SerializeObject(requestModel, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }), Encoding.UTF8, "application/json");
 
-            var response = Execute<CampaignRootObject>(message);
+            var response = await Execute<CampaignRootObject>(message);
 
             var result = Extract<CampaignRootObject, CampaignWrapper, Campaign>(response);
 
