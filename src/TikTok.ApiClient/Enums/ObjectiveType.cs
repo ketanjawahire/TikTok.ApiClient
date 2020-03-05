@@ -24,6 +24,11 @@
         /// <summary>
         /// convertions
         /// </summary>
-        CONVERSIONS
+        CONVERSIONS,
+
+        /// <summary>
+        /// The video views
+        /// </summary>
+        VIDEO_VIEWS
     }
 }

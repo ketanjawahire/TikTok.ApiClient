@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using TikTok.ApiClient.Exceptions;
 using TikTok.ApiClient.Services.Interfaces;
 using UnauthorizedAccessException = TikTok.ApiClient.Exceptions.UnauthorizedAccessException;
@@ -25,17 +26,17 @@ namespace TikTok.ApiClient.Services
             _restClient = new RestClient(_apiRequestBaseUrl);
         }
 
-        public TEntity Execute<TEntity>(HttpRequestMessage message)
+        public async Task<TEntity> Execute<TEntity>(HttpRequestMessage message)
             where TEntity : class, new()
         {
-            var authResponse = _authService.Get();
+            var authResponse = await _authService.Get();
 
             using (var client = new HttpClient())
             {
                 message.Headers.TryAddWithoutValidation("Content-Type", "application/json");
-                message.Headers.TryAddWithoutValidation("Access-Token", $"Bearer {authResponse.AccessToken}");
+                message.Headers.TryAddWithoutValidation("Access-Token", $"{authResponse.AccessToken}");
 
-                var response = client.SendAsync(message).Result;
+                var response = await client.SendAsync(message);
 
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
@@ -149,14 +150,15 @@ namespace TikTok.ApiClient.Services
                 MissingMemberHandling = MissingMemberHandling.Ignore,
                 ConstructorHandling = ConstructorHandling.Default,
                 ObjectCreationHandling = ObjectCreationHandling.Auto,
+                NullValueHandling = NullValueHandling.Ignore
             };
 
             return jsonSerializer;
         }
 
-        private void Authorize()
+        private async Task Authorize()
         {
-            var authResponse = _authService.Get();
+            var authResponse = await _authService.Get();
 
             _restClient.Authenticator = new TikTokAuthenticator(authResponse.AccessToken);
         }

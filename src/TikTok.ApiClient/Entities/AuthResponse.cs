@@ -8,10 +8,10 @@ namespace TikTok.ApiClient
         public string AccessToken { get; set; }
 
         [JsonProperty("refresh_token_expires_in")]
-        public string RefreshTokenExpiresIn { get; set; }
+        public long RefreshTokenExpiresIn { get; set; }
 
         [JsonProperty("expires_in")]
-        public string ExpiresIn { get; set; }
+        public long ExpiresIn { get; set; }
 
         [JsonProperty("refresh_token")]
         public string RefreshToken { get; set; }

@@ -43,6 +43,10 @@ namespace TikTok.ApiClient
             {
                 apiService = new AdService(_authService);
             }
+            else if (typeof(TEntity) == typeof(IAccessTokenService))
+            {
+                apiService = new AccessTokenService(_authService);
+            }
             else
             {
                 throw new ApiServiceNotFoundException(typeof(TEntity));
