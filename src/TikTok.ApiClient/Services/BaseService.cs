@@ -142,7 +142,7 @@ namespace TikTok.ApiClient.Services
             var currentPage = pageInfo.Page;
             var totalPages = pageInfo.TotalPage;
 
-            while (currentPage <= totalPages)
+            while (currentPage < totalPages)
             {
                 currentPage++;
                 request.AddOrUpdateParameter("page", currentPage);
@@ -163,7 +163,7 @@ namespace TikTok.ApiClient.Services
             var currentPage = pageInfo.Page;
             var totalPages = pageInfo.TotalPage;
 
-            while (currentPage <= totalPages)
+            while (currentPage < totalPages)
             {
                 currentPage++;
                 model.Page = currentPage;
