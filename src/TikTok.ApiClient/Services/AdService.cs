@@ -19,15 +19,23 @@ namespace TikTok.ApiClient.Services
 
         public async Task<IEnumerable<Ad>> Get(AdRequestModel model)
         {
-            var message = new HttpRequestMessage(HttpMethod.Get, "https://ads.tiktok.com/open_api/2/ad/get/");
+            var ads = new List<Ad>();
 
-            message.Content = new StringContent(JsonConvert.SerializeObject(model, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }), Encoding.UTF8, "application/json");
+            var message = new HttpRequestMessage(HttpMethod.Get, "https://ads.tiktok.com/open_api/2/ad/get/")
+            {
+                Content = new StringContent(
+                    JsonConvert.SerializeObject(model,
+                        new JsonSerializerSettings() {NullValueHandling = NullValueHandling.Ignore}), Encoding.UTF8,
+                    "application/json")
+            };
 
             var response = await Execute<AdRootObject>(message);
 
             var result = Extract<AdRootObject, AdWrapper, Ad>(response);
 
-            return result;
+            await MultiplePageHandlerForHttpClient<AdRootObject, AdWrapper, Ad>(result, message, model, ads);
+
+            return ads;
         }
 
         public IEnumerable<AdInsight> GetReport(InputModel model)
@@ -37,6 +45,8 @@ namespace TikTok.ApiClient.Services
             {
                 return new List<AdInsight>();
             }
+
+            var adInsights = new List<AdInsight>();
 
             var request = new RestRequest("/2/reports/ad/get/", Method.GET);
 
@@ -62,12 +72,13 @@ namespace TikTok.ApiClient.Services
             if (model.OrderType != null)
                 request.AddParameter("order_type", model.OrderType.Value.ToString());
 
-
             var response = Execute<AdInsightRootObject>(request);
 
             var result = Extract<AdInsightRootObject, AdInsightWrapper, AdInsight>(response);
 
-            return result;
+            MultiplePageHandlerForRestClient<AdInsightRootObject, AdInsightWrapper, AdInsight>(result, adInsights, request);
+
+            return adInsights;
         }
     }
 }

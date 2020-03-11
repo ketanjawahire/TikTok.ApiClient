@@ -19,6 +19,8 @@ namespace TikTok.ApiClient.Services
 
         public async Task<IEnumerable<Adgroup>> Get(AdgroupRequestModel model)
         {
+            var adgroups = new List<Adgroup>();
+
             var message = new HttpRequestMessage(HttpMethod.Get, "https://ads.tiktok.com/open_api/2/adgroup/get/");
 
             message.Content = new StringContent(JsonConvert.SerializeObject(model, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }), Encoding.UTF8, "application/json");
@@ -27,12 +29,15 @@ namespace TikTok.ApiClient.Services
 
             var result = Extract<AdgroupRootObject, AdgroupWrapper, Adgroup>(response);
 
-            return result;
+            await MultiplePageHandlerForHttpClient<AdgroupRootObject, AdgroupWrapper, Adgroup>(result, message, model, adgroups);
+
+            return adgroups;
         }
 
         public IEnumerable<AdgroupInsight> GetReport(InputModel model)
         {
             var request = new RestRequest("/2/reports/adgroup/get/", Method.GET);
+            var adgroupInsights = new List<AdgroupInsight>();
 
             //TODO : Throw exception if advertiserId, startDate, endDate value is null
             request.AddParameter("advertiser_id", model.AdvertiserId);
@@ -63,7 +68,9 @@ namespace TikTok.ApiClient.Services
 
             var result = Extract<AdgroupInsightRootObject, AdgroupInsightWrapper, AdgroupInsight>(response);
 
-            return result;
+            MultiplePageHandlerForRestClient<AdgroupInsightRootObject, AdgroupInsightWrapper, AdgroupInsight>(result, adgroupInsights, request);
+
+            return adgroupInsights;
         }
     }
 

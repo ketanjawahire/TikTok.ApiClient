@@ -1,4 +1,6 @@
-﻿namespace TikTok.ApiClient.Services.Interfaces
+﻿using TikTok.ApiClient.Entities;
+
+namespace TikTok.ApiClient.Services.Interfaces
 {
     using System.Threading.Tasks;
 

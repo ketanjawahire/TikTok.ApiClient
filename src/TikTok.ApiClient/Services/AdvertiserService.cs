@@ -1,6 +1,7 @@
 ﻿using RestSharp;
 using System.Collections.Generic;
 using System.Linq;
+using TikTok.ApiClient.Entities;
 using TikTok.ApiClient.Services.Interfaces;
 
 namespace TikTok.ApiClient.Services
@@ -12,7 +13,7 @@ namespace TikTok.ApiClient.Services
         {
         }
 
-        public IEnumerable<AgentAdvertiser> GetAdvertiers()
+        public IEnumerable<AgentAdvertiser> GetAdvertisers()
         {
             var request = new RestRequest("/oauth2/advertiser/get/", Method.GET);
 
@@ -23,7 +24,7 @@ namespace TikTok.ApiClient.Services
 
             var result = Extract<AgentAdvertiserRootObject, AgentAdvertiserWrapper, AgentAdvertiser>(response);
 
-            return result;
+            return result.List;
         }
 
         //TODO : fix it. Its not working 
@@ -37,7 +38,7 @@ namespace TikTok.ApiClient.Services
 
             var result = Extract<AdvertiserRootObject, AdvertiserWrapper, Advertiser>(response);
 
-            return result;
+            return result.List;
         }
 
     }

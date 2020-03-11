@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using TikTok.ApiClient.Entities;
 using TikTok.ApiClient.Exceptions;
 
 namespace TikTok.ApiClient.Services

@@ -20,20 +20,29 @@ namespace TikTok.ApiClient.Services
 
         public async Task<IEnumerable<Campaign>> Get(CampaignRequestModel requestModel)
         {
-            var message = new HttpRequestMessage(HttpMethod.Get, "https://ads.tiktok.com/open_api/2/campaign/get/");
+            var campaigns = new List<Campaign>();
 
-            message.Content = new StringContent(JsonConvert.SerializeObject(requestModel, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }), Encoding.UTF8, "application/json");
+            var message = new HttpRequestMessage(HttpMethod.Get, "https://ads.tiktok.com/open_api/2/campaign/get/")
+            {
+                Content = new StringContent(
+                    JsonConvert.SerializeObject(requestModel,
+                        new JsonSerializerSettings() {NullValueHandling = NullValueHandling.Ignore}), Encoding.UTF8,
+                    "application/json")
+            };
 
             var response = await Execute<CampaignRootObject>(message);
 
             var result = Extract<CampaignRootObject, CampaignWrapper, Campaign>(response);
 
-            return result;
+            await MultiplePageHandlerForHttpClient<CampaignRootObject, CampaignWrapper, Campaign>(result, message, requestModel, campaigns);
+
+            return campaigns;
         }
 
         public IEnumerable<CampaignInsight> GetReport(InputModel model)
         {
             var request = new RestRequest("/2/reports/campaign/get/", Method.GET);
+            var campaignInsights = new List<CampaignInsight>();
 
             //TODO : Throw exception if advertiserId, startDate, endDate value is null
             request.AddParameter("advertiser_id", model.AdvertiserId);
@@ -64,7 +73,9 @@ namespace TikTok.ApiClient.Services
 
             var result = Extract<CampaignInsightRootObject, CampaignInsightWrapper, CampaignInsight>(response);
 
-            return result;
+            MultiplePageHandlerForRestClient<CampaignInsightRootObject, CampaignInsightWrapper, CampaignInsight>(result, campaignInsights, request);
+
+            return campaignInsights;
         }
     }
 }
