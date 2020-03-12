@@ -72,7 +72,7 @@ namespace TikTok.ApiClient.Services
             if (model.OrderType != null)
                 request.AddParameter("order_type", model.OrderType.Value.ToString());
 
-            var response = Execute<AdInsightRootObject>(request);
+            var response = Execute<AdInsightRootObject>(request).Result;
 
             var result = Extract<AdInsightRootObject, AdInsightWrapper, AdInsight>(response);
 

@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TikTok.ApiClient.Entities;
 using TikTok.ApiClient.Exceptions;
+using TikTok.ApiClient.Helpers;
 using TikTok.ApiClient.Services.Interfaces;
 using UnauthorizedAccessException = TikTok.ApiClient.Exceptions.UnauthorizedAccessException;
 
@@ -57,10 +58,10 @@ namespace TikTok.ApiClient.Services
             }
         }
 
-        public TEntity Execute<TEntity>(IRestRequest restRequest)
+        public async Task<TEntity> Execute<TEntity>(IRestRequest restRequest)
             where TEntity : class, new()
         {
-            Authorize();
+            await Authorize();
 
             var response = _restClient.Execute(restRequest);
 
@@ -146,7 +147,7 @@ namespace TikTok.ApiClient.Services
             {
                 currentPage++;
                 request.AddOrUpdateParameter("page", currentPage);
-                var currentPageResponse = Execute<TRoot>(request);
+                var currentPageResponse = Execute<TRoot>(request).Result;
                 var currentPageResult = Extract<TRoot, TWrapper, TEntity>(currentPageResponse);
                 entityList.AddRange(currentPageResult.List);
             }

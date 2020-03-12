@@ -69,7 +69,7 @@ namespace TikTok.ApiClient.Services
                 request.AddParameter("order_type", model.OrderType.Value.ToString());
 
 
-            var response = Execute<CampaignInsightRootObject>(request);
+            var response = Execute<CampaignInsightRootObject>(request).Result;
 
             var result = Extract<CampaignInsightRootObject, CampaignInsightWrapper, CampaignInsight>(response);
 
