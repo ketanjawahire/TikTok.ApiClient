@@ -8,7 +8,7 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("list")]
         public List<Campaign> List { get; set; }
 
-        [JsonProperty("advertiser_id")]
+        [JsonProperty("page_info")]
         public PageInfo PageInfo { get; set; }
     }
 }

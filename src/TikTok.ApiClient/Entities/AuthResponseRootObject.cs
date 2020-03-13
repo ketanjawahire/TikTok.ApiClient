@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace TikTok.ApiClient
+namespace TikTok.ApiClient.Entities
 {
     public class AuthResponseRootObject
     {

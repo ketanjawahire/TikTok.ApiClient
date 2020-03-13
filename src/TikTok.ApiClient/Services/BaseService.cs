@@ -6,8 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
+using TikTok.ApiClient.Entities;
 using TikTok.ApiClient.Exceptions;
+using TikTok.ApiClient.Helpers;
 using TikTok.ApiClient.Services.Interfaces;
 using UnauthorizedAccessException = TikTok.ApiClient.Exceptions.UnauthorizedAccessException;
 
@@ -55,10 +58,10 @@ namespace TikTok.ApiClient.Services
             }
         }
 
-        public TEntity Execute<TEntity>(IRestRequest restRequest)
+        public async Task<TEntity> Execute<TEntity>(IRestRequest restRequest)
             where TEntity : class, new()
         {
-            Authorize();
+            await Authorize();
 
             var response = _restClient.Execute(restRequest);
 
@@ -83,7 +86,7 @@ namespace TikTok.ApiClient.Services
         //    return string.IsNullOrEmpty(pagingUrl) ? pagingUrl : pagingUrl.Replace($"{_apiRequestBaseUrl}{_apiVersion}", string.Empty);
         //}
 
-            //TODO : Fix paging
+        //TODO : Fix paging
         //protected IEnumerable<TEntity> ExecutePagedRequest<TRoot, TEntity>(string url, PagingOption pagingOption)
         //    where TRoot : class, IRootObject<TEntity>, new()
         //    where TEntity : class, IApiEntity, new()
@@ -129,7 +132,50 @@ namespace TikTok.ApiClient.Services
         //    return entities;
         //}
 
-        protected IEnumerable<TEntity> Extract<TRoot, TWrapper, TEntity>(TRoot response)
+        public void MultiplePageHandlerForRestClient<TRoot, TWrapper, TEntity>(TWrapper wrapper, List<TEntity> entityList, IRestRequest request)
+            where TRoot : class, IRootObject<TWrapper, TEntity>, new()
+            where TWrapper : class, IWrapper<TEntity>, new()
+            where TEntity : class, IApiEntity, new()
+        {
+            entityList.AddRange(wrapper.List);
+
+            var pageInfo = wrapper.PageInfo;
+            var currentPage = pageInfo.Page;
+            var totalPages = pageInfo.TotalPage;
+
+            while (currentPage < totalPages)
+            {
+                currentPage++;
+                request.AddOrUpdateParameter("page", currentPage);
+                var currentPageResponse = Execute<TRoot>(request).Result;
+                var currentPageResult = Extract<TRoot, TWrapper, TEntity>(currentPageResponse);
+                entityList.AddRange(currentPageResult.List);
+            }
+        }
+
+        public async Task MultiplePageHandlerForHttpClient<TRoot, TWrapper, TEntity>(TWrapper wrapper, HttpRequestMessage message, BaseRequestModel model, List<TEntity> entityList)
+            where TRoot : class, IRootObject<TWrapper, TEntity>, new()
+            where TWrapper : class, IWrapper<TEntity>, new()
+            where TEntity : class, IApiEntity, new()
+        {
+            entityList.AddRange(wrapper.List);
+
+            var pageInfo = wrapper.PageInfo;
+            var currentPage = pageInfo.Page;
+            var totalPages = pageInfo.TotalPage;
+
+            while (currentPage < totalPages)
+            {
+                currentPage++;
+                model.Page = currentPage;
+                message.Content = new StringContent(JsonConvert.SerializeObject(model, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }), Encoding.UTF8, "application/json");
+                var currentPageResponse = await Execute<TRoot>(message);
+                var currentPageResult = Extract<TRoot, TWrapper, TEntity>(currentPageResponse);
+                entityList.AddRange(currentPageResult.List);
+            }
+        }
+
+        protected TWrapper Extract<TRoot, TWrapper, TEntity>(TRoot response)
             where TRoot : class, IRootObject<TWrapper, TEntity>, new()
             where TWrapper : class, IWrapper<TEntity>, new()
             where TEntity : class, IApiEntity, new()
@@ -139,7 +185,7 @@ namespace TikTok.ApiClient.Services
                 throw new ArgumentNullException(nameof(response));
             }
 
-            return response.Data.List;
+            return response.Data;
         }
 
         private static JsonSerializer GetJsonSerializer()
