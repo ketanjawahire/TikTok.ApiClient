@@ -29,6 +29,12 @@ namespace TikTok.ApiClient.Entities
         public string AdgroupName { get; set; }
 
         /// <summary>
+        /// Adgroup status
+        /// </summary>
+        [JsonProperty("status")]
+        public AdgroupStatus AdgroupStatus { get; set; }
+
+        /// <summary>
         /// campaign id
         /// </summary>
         [JsonProperty("campaign_id")]
