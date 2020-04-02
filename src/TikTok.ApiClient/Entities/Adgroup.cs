@@ -320,6 +320,14 @@ namespace TikTok.ApiClient.Entities
 
         /// <summary>Gets or sets the target string.</summary>
         /// <value>The target string.</value>
-        public string TargetString { get; set; }
+        public string TargetString => JsonConvert.SerializeObject(new
+        {
+            Pacing = this.Pacing,
+            Placement = this.TikTokPlacements,
+            AgeGroups = this.TikTokAgeGroups,
+            Gender = this.Gender,
+            Locations = this.Location,
+            Languages = this.Languages
+        });
     }
 }
