@@ -116,9 +116,6 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("active_pay_rate")]
         public decimal ActivePayRate { get; set; }
 
-        [JsonProperty("activate_cost")]
-        public decimal ActivateCost { get; set; }
-
         [JsonProperty("ctr")]
         public decimal Ctr { get; set; }
 
@@ -139,9 +136,6 @@ namespace TikTok.ApiClient.Entities
 
         [JsonProperty("dy_home_visited")]
         public decimal DyHomeVisited { get; set; }
-
-        [JsonProperty("activate_rate")]
-        public decimal ActivateRate { get; set; }
 
         [JsonProperty("active_cost")]
         public decimal ActiveCost { get; set; }
