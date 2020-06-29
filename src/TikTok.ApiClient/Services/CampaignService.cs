@@ -32,6 +32,11 @@ namespace TikTok.ApiClient.Services
 
             var response = await Execute<CampaignRootObject>(message);
 
+            if (response.code == 40105)
+            {
+                throw new Exceptions.UnauthorizedAccessException();
+            }
+
             var result = Extract<CampaignRootObject, CampaignWrapper, Campaign>(response);
 
             await MultiplePageHandlerForHttpClient<CampaignRootObject, CampaignWrapper, Campaign>(result, message, requestModel, campaigns);
@@ -68,8 +73,12 @@ namespace TikTok.ApiClient.Services
             if (model.OrderType.HasValue)
                 request.AddParameter("order_type", model.OrderType.Value.ToString());
 
-
             var response = Execute<CampaignInsightRootObject>(request).Result;
+
+            if (response.code == 40105)
+            {
+                throw new Exceptions.UnauthorizedAccessException();
+            }
 
             var result = Extract<CampaignInsightRootObject, CampaignInsightWrapper, CampaignInsight>(response);
 

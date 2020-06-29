@@ -1,0 +1,55 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace TikTok.ApiClient.Enums
+{
+    public enum AdInsightFields
+    {
+        active_register,
+        skip,
+        active_register_rate,
+        active_show,
+        active_pay_avg_amount,
+        dy_comment,
+        active_pay_cost,
+        ad_name,
+        conversion_rate,
+        show_uv,
+        ecpm,
+        campaign_name,
+        active_register_click_cost,
+        adgroup_id,
+        show_cnt,
+        active_register_click,
+        active_click_cost,
+        adgroup_name,
+        stat_cost,
+        active_pay_click_cost,
+        active_register_cost,
+        active_pay_click,
+        conversion_cost,
+        ad_id,
+        dy_like,
+        dy_share,
+        ad_text,
+        click_cost,
+        campaign_id,
+        active_click,
+        active,
+        convert_cnt,
+        active_register_show_cost,
+        active_pay_rate,
+        ctr,
+        active_pay,
+        click_cnt,
+        active_register_show,
+        active_pay_amount,
+        active_pay_show_cost,
+        dy_home_visited,
+        active_pay_show,
+        active_show_cost,
+        stat_datetime,
+        time_attr_convert_cnt,
+    }
+}

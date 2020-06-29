@@ -27,6 +27,11 @@ namespace TikTok.ApiClient.Services
 
             var response = await Execute<AdgroupRootObject>(message);
 
+            if (response.code == 40105)
+            {
+                throw new Exceptions.UnauthorizedAccessException();
+            }
+
             var result = Extract<AdgroupRootObject, AdgroupWrapper, Adgroup>(response);
 
             await MultiplePageHandlerForHttpClient<AdgroupRootObject, AdgroupWrapper, Adgroup>(result, message, model, adgroups);
@@ -63,8 +68,12 @@ namespace TikTok.ApiClient.Services
             if (model.OrderType.HasValue)
                 request.AddParameter("order_type", model.OrderType.Value.ToString());
 
-
             var response = Execute<AdgroupInsightRootObject>(request).Result;
+
+            if (response.code == 40105)
+            {
+                throw new Exceptions.UnauthorizedAccessException();
+            }
 
             var result = Extract<AdgroupInsightRootObject, AdgroupInsightWrapper, AdgroupInsight>(response);
 

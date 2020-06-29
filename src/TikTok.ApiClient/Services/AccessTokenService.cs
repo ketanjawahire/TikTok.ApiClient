@@ -14,9 +14,9 @@ namespace TikTok.ApiClient.Services
             _authService = authenticationService;
         }
 
-        public async Task<AuthResponse> Get()
+        public string Get()
         {
-            return await _authService.Get();
+            return _authService.Get();
         }
     }
 }

@@ -6,6 +6,6 @@ namespace TikTok.ApiClient.Services.Interfaces
 
     public interface IAccessTokenService : IApiService
     {
-        Task<AuthResponse> Get();
+        string Get();
     }
 }

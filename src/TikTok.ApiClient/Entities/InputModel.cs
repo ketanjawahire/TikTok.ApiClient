@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using TikTok.ApiClient.Enums;
 
 namespace TikTok.ApiClient.Services
 {
@@ -26,5 +27,7 @@ namespace TikTok.ApiClient.Services
         public OrderType? OrderType { get; set; }
         [JsonProperty("filtering")]
         public Filtering Filtering { get; set; }
+        [JsonProperty("fields")]
+        public List<AdInsightFields> Fields { get; set; }
     }
 }

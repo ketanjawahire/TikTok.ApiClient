@@ -18,118 +18,43 @@ namespace TikTok.ApiClient.Services
         private static AccessTokenCacheProvider _accessTokenCacheProvider;
         private readonly string _appId;
         private readonly string _clientSecret;
-        private readonly IRestClient _restClient;
-        private string _refreshToken;
+        private string _accessToken;
+        private const string _accessTokenKey = "AccessToken";
 
-        internal AuthenticationService(string appId, string clientSecret, string refreshToken)
+        internal AuthenticationService(string appId, string clientSecret, string accessToken)
         {
             _appId = appId;
             _clientSecret = clientSecret;
-            _refreshToken = refreshToken;
-
-            _restClient = new RestClient("https://ads.tiktok.com");
+            _accessToken = accessToken;
 
             if (_accessTokenCacheProvider is null)
             {
                 _accessTokenCacheProvider = new AccessTokenCacheProvider();
+                AddTokenToCache();
             }
         }
 
-        public async Task<AuthResponse> Get()
+        public string Get()
         {
-            if (GetAccessTokenFromCache(out AuthResponse cachedResponse))
+            if (GetAccessTokenFromCache(out string accessToken))
             {
-                return cachedResponse;
+                return accessToken;
             }
 
-            var response = GetAccessTokenFromApi(_refreshToken);
-
-            var authResponse = await response;
-
-            AddTokenToCache(authResponse.Data);
-
-            return authResponse.Data;
+            throw new Exceptions.UnauthorizedAccessException();
         }
 
-        private static JsonSerializer GetJsonSerializer()
+        private bool GetAccessTokenFromCache(out string accessToken)
         {
-            var jsonSerializer = new JsonSerializer
+            accessToken = string.Empty;
+
+            if (_accessTokenCacheProvider.Contains(_accessTokenKey))
             {
-                CheckAdditionalContent = true,
-                MissingMemberHandling = MissingMemberHandling.Ignore,
-                ConstructorHandling = ConstructorHandling.Default,
-                ObjectCreationHandling = ObjectCreationHandling.Auto,
-            };
-
-            return jsonSerializer;
-        }
-
-        private static string Serialize(object input)
-        {
-            var jsonSerializer = GetJsonSerializer();
-            var result = new StringBuilder();
-
-            using (var writer = new JsonTextWriter(new StringWriter(result)) { Formatting = Formatting.None })
-                jsonSerializer.Serialize(writer, input);
-
-            return result.ToString();
-        }
-
-        private async Task<AuthResponseRootObject> GetAccessTokenFromApi(string refreshToken)
-        {
-            var result = new AuthResponseRootObject();
-            var response = new HttpResponseMessage();
-            var responseBody = string.Empty;
-
-            var requestBody = new
-            {
-                app_id = _appId,
-                secret = _clientSecret,
-                grant_type = "refresh_token",
-                refresh_token = refreshToken
-            };
-
-            var request = new HttpRequestMessage
-            {
-                Content = new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, ContentType.Json),
-                Method = HttpMethod.Post,
-                RequestUri = new Uri("https://ads.tiktok.com/open_api/oauth2/refresh_token/")
-            };
-
-            using (var httpClient = new HttpClient())
-            {
-                response = await httpClient.SendAsync(request);
-                responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result = JsonConvert.DeserializeObject<AuthResponseRootObject>(responseBody);
-            }
-
-            if (response.StatusCode == HttpStatusCode.OK)
-            {
-                if (result.Code == 40103)
-                {
-                    throw new Exceptions.UnauthorizedAccessException();
-                }
-
-                return result;
-            }
-
-            // TODO : move deserialize into separate method
-            var apiError = Deserialize<ErrorResponse>(responseBody);
-
-            throw new ApiException(apiError, response.StatusCode);
-        }
-
-        private bool GetAccessTokenFromCache(out AuthResponse authResponse)
-        {
-            authResponse = new AuthResponse();
-
-            if (_accessTokenCacheProvider.Contains(_refreshToken))
-            {
-                var cachedValue = _accessTokenCacheProvider.Get(_refreshToken);
+                var cachedValue = _accessTokenCacheProvider.Get(_accessTokenKey);
 
                 if (!string.IsNullOrEmpty(cachedValue))
                 {
-                    authResponse = Deserialize<AuthResponse>(cachedValue);
+                    accessToken = cachedValue;
 
                     return true;
                 }
@@ -138,22 +63,9 @@ namespace TikTok.ApiClient.Services
             return false;
         }
 
-        private void AddTokenToCache(AuthResponse authResponse)
+        private void AddTokenToCache()
         {
-            _accessTokenCacheProvider.Add(_refreshToken, Serialize(authResponse));
-        }
-
-        private T Deserialize<T>(string content)
-            where T : class, new()
-        {
-            var jsonSerializer = GetJsonSerializer();
-
-            using (var reader = new JTokenReader(JToken.Parse(content)))
-            {
-                var result = jsonSerializer.Deserialize<T>(reader);
-
-                return result;
-            }
+            _accessTokenCacheProvider.Add(_accessTokenKey, _accessToken);
         }
     }
 }
