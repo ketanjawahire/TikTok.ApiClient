@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using TikTok.ApiClient.Entities;
 using TikTok.ApiClient.Services.Interfaces;
 
@@ -20,10 +21,22 @@ namespace TikTok.ApiClient.Services
         public async Task<IEnumerable<Adgroup>> Get(AdgroupRequestModel model)
         {
             var adgroups = new List<Adgroup>();
+            
+            var queryString = HttpUtility.ParseQueryString(string.Empty);
+            foreach (var property in model.GetType().GetProperties())
+            {
+                if (property.PropertyType == typeof(AdgroupRequestFilter))
+                {
+                    var filterValue = JsonConvert.SerializeObject(property.GetValue(model, null), new JsonSerializerSettings() {NullValueHandling = NullValueHandling.Ignore});
+                    queryString.Add("filtering", filterValue);
+                }
+                else if (property.Name == "AdvertiserId")
+                {
+                    queryString.Add("advertiser_id", property.GetValue(model, null).ToString());
+                }
+            }
 
-            var message = new HttpRequestMessage(HttpMethod.Get, "https://ads.tiktok.com/open_api/2/adgroup/get/");
-
-            message.Content = new StringContent(JsonConvert.SerializeObject(model, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }), Encoding.UTF8, "application/json");
+            var message = new HttpRequestMessage(HttpMethod.Get, $"https://ads.tiktok.com/open_api/2/adgroup/get/?{queryString}");
 
             var response = await Execute<AdgroupRootObject>(message);
 
@@ -45,28 +58,28 @@ namespace TikTok.ApiClient.Services
             var adgroupInsights = new List<AdgroupInsight>();
 
             //TODO : Throw exception if advertiserId, startDate, endDate value is null
-            request.AddParameter("advertiser_id", model.AdvertiserId);
-            request.AddParameter("start_date", model.StartDate.Value.ToString("yyyy-MM-dd"));
-            request.AddParameter("end_date", model.EndDate.Value.ToString("yyyy-MM-dd"));
+            request.AddQueryParameter("advertiser_id", model.AdvertiserId.ToString());
+            request.AddQueryParameter("start_date", model.StartDate.Value.ToString("yyyy-MM-dd"));
+            request.AddQueryParameter("end_date", model.EndDate.Value.ToString("yyyy-MM-dd"));
 
 
             if (model.Page.HasValue)
-                request.AddParameter("page", model.Page.Value);
+                request.AddQueryParameter("page", model.Page.Value.ToString());
 
             if (model.PageSize.HasValue)
-                request.AddParameter("page_size", model.PageSize.Value);
+                request.AddQueryParameter("page_size", model.PageSize.Value.ToString());
 
             if (model.GroupBy.Any())
-                request.AddParameter("group_by", "[\"" + string.Join("\",\"", model.GroupBy.Select(e => e.ToString())) + "\"]");
+                request.AddQueryParameter("group_by", "[\"" + string.Join("\",\"", model.GroupBy.Select(e => e.ToString())) + "\"]");
 
             if (model.TimeGranularity.HasValue)
-                request.AddParameter("time_granuarity", model.TimeGranularity.Value);
+                request.AddQueryParameter("time_granuarity", model.TimeGranularity.Value.ToString());
 
             if (!string.IsNullOrEmpty(model.OrderField))
-                request.AddParameter("order_field", model.OrderField);
+                request.AddQueryParameter("order_field", model.OrderField);
 
             if (model.OrderType.HasValue)
-                request.AddParameter("order_type", model.OrderType.Value.ToString());
+                request.AddQueryParameter("order_type", model.OrderType.Value.ToString());
 
             var response = Execute<AdgroupInsightRootObject>(request).Result;
 
