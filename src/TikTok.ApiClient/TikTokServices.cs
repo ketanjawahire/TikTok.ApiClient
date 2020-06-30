@@ -8,9 +8,9 @@ namespace TikTok.ApiClient
     {
         private readonly AuthenticationService _authService;
 
-        public TikTokServices(string clientId, string clientSecret, string accessToken)
+        public TikTokServices(string accessToken)
         {
-            _authService = new AuthenticationService(clientId, clientSecret, accessToken);
+            _authService = new AuthenticationService(accessToken);
         }
 
         /// <summary>
