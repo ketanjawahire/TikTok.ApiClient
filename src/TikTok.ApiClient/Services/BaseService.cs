@@ -32,12 +32,12 @@ namespace TikTok.ApiClient.Services
         public async Task<TEntity> Execute<TEntity>(HttpRequestMessage message)
             where TEntity : class, new()
         {
-            var authResponse = await _authService.Get();
+            var accessToken = _authService.Get();
 
             using (var client = new HttpClient())
             {
                 message.Headers.TryAddWithoutValidation("Content-Type", "application/json");
-                message.Headers.TryAddWithoutValidation("Access-Token", $"{authResponse.AccessToken}");
+                message.Headers.TryAddWithoutValidation("Access-Token", $"{accessToken}");
 
                 var response = await client.SendAsync(message);
 
@@ -61,7 +61,7 @@ namespace TikTok.ApiClient.Services
         public async Task<TEntity> Execute<TEntity>(IRestRequest restRequest)
             where TEntity : class, new()
         {
-            await Authorize();
+            Authorize();
 
             var response = _restClient.Execute(restRequest);
 
@@ -202,11 +202,11 @@ namespace TikTok.ApiClient.Services
             return jsonSerializer;
         }
 
-        private async Task Authorize()
+        private void Authorize()
         {
-            var authResponse = await _authService.Get();
+            var accessToken = _authService.Get();
 
-            _restClient.Authenticator = new TikTokAuthenticator(authResponse.AccessToken);
+            _restClient.Authenticator = new TikTokAuthenticator(accessToken);
         }
 
         private T Deserialize<T>(string content)

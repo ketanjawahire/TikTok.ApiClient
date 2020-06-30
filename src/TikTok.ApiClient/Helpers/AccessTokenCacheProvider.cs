@@ -26,17 +26,17 @@ namespace TikTok.ApiClient.Services
         /// <summary>
         /// Add access token to cache. Here refresh token will be used as key.
         /// </summary>
-        /// <param name="refreshToken">Refrech token.</param>
+        /// <param name="key">Key.</param>
         /// <param name="accessToken">Access token.</param>
         /// <returns>true if the insertion try succeeds, or false if there is an already an entry in the cache with the same key as key.</returns>
-        public bool Add(string refreshToken, string accessToken)
+        public bool Add(string key, string accessToken)
         {
-            if (_memoryCache.Contains(refreshToken))
+            if (_memoryCache.Contains(accessToken))
             {
-                _memoryCache.Remove(refreshToken);
+                _memoryCache.Remove(accessToken);
             }
 
-            return _memoryCache.Add(refreshToken, accessToken, new CacheItemPolicy() { AbsoluteExpiration = GetTokenExpirationTime() });
+            return _memoryCache.Add(key, accessToken, new CacheItemPolicy() { AbsoluteExpiration = GetTokenExpirationTime() });
         }
 
         /// <summary>

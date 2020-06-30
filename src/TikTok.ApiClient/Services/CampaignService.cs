@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using TikTok.ApiClient.Entities;
 using TikTok.ApiClient.Services.Interfaces;
 
@@ -22,15 +23,28 @@ namespace TikTok.ApiClient.Services
         {
             var campaigns = new List<Campaign>();
 
-            var message = new HttpRequestMessage(HttpMethod.Get, "https://ads.tiktok.com/open_api/2/campaign/get/")
+            var queryString = HttpUtility.ParseQueryString(string.Empty);
+            foreach (var property in requestModel.GetType().GetProperties())
             {
-                Content = new StringContent(
-                    JsonConvert.SerializeObject(requestModel,
-                        new JsonSerializerSettings() {NullValueHandling = NullValueHandling.Ignore}), Encoding.UTF8,
-                    "application/json")
-            };
+                if (property.PropertyType == typeof(CampaignRequestFilter))
+                {
+                    var filterValue = JsonConvert.SerializeObject(property.GetValue(requestModel, null), new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+                    queryString.Add("filtering", filterValue);
+                }
+                else if (property.Name == "AdvertiserId")
+                {
+                    queryString.Add("advertiser_id", property.GetValue(requestModel, null).ToString());
+                }
+            }
+
+            var message = new HttpRequestMessage(HttpMethod.Get, $"https://ads.tiktok.com/open_api/2/campaign/get/?{queryString}");
 
             var response = await Execute<CampaignRootObject>(message);
+
+            if (response.code == 40105)
+            {
+                throw new Exceptions.UnauthorizedAccessException();
+            }
 
             var result = Extract<CampaignRootObject, CampaignWrapper, Campaign>(response);
 
@@ -45,31 +59,35 @@ namespace TikTok.ApiClient.Services
             var campaignInsights = new List<CampaignInsight>();
 
             //TODO : Throw exception if advertiserId, startDate, endDate value is null
-            request.AddParameter("advertiser_id", model.AdvertiserId);
-            request.AddParameter("start_date", model.StartDate.Value.ToString("yyyy-MM-dd"));
-            request.AddParameter("end_date", model.EndDate.Value.ToString("yyyy-MM-dd"));
+            request.AddQueryParameter("advertiser_id", model.AdvertiserId.ToString());
+            request.AddQueryParameter("start_date", model.StartDate.Value.ToString("yyyy-MM-dd"));
+            request.AddQueryParameter("end_date", model.EndDate.Value.ToString("yyyy-MM-dd"));
 
 
             if (model.Page.HasValue)
-                request.AddParameter("page", model.Page.Value);
+                request.AddQueryParameter("page", model.Page.Value.ToString());
 
             if (model.PageSize.HasValue)
-                request.AddParameter("page_size", model.PageSize.Value);
+                request.AddQueryParameter("page_size", model.PageSize.Value.ToString());
 
             if (model.GroupBy.Any())
-                request.AddParameter("group_by", "[\"" + string.Join("\",\"", model.GroupBy.Select(e => e.ToString())) + "\"]");
+                request.AddQueryParameter("group_by", "[\"" + string.Join("\",\"", model.GroupBy.Select(e => e.ToString())) + "\"]");
 
             if (model.TimeGranularity.HasValue)
-                request.AddParameter("time_granuarity", model.TimeGranularity.Value);
+                request.AddQueryParameter("time_granuarity", model.TimeGranularity.Value.ToString());
 
             if (!string.IsNullOrEmpty(model.OrderField))
-                request.AddParameter("order_field", model.OrderField);
+                request.AddQueryParameter("order_field", model.OrderField);
 
             if (model.OrderType.HasValue)
-                request.AddParameter("order_type", model.OrderType.Value.ToString());
-
+                request.AddQueryParameter("order_type", model.OrderType.Value.ToString());
 
             var response = Execute<CampaignInsightRootObject>(request).Result;
+
+            if (response.code == 40105)
+            {
+                throw new Exceptions.UnauthorizedAccessException();
+            }
 
             var result = Extract<CampaignInsightRootObject, CampaignInsightWrapper, CampaignInsight>(response);
 
