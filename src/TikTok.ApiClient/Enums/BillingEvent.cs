@@ -18,6 +18,11 @@
         /// <summary>
         /// The CPC
         /// </summary>
-        CPC
+        CPC,
+
+        /// <summary>
+        /// The OCPM
+        /// </summary>
+        OCPM
     }
 }
