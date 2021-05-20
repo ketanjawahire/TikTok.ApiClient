@@ -15,6 +15,11 @@
         /// <summary>
         /// Dynamic bidding
         /// </summary>
-        PACING
+        PACING,
+
+        /// <summary>
+        /// AEO
+        /// </summary>
+        AEO
     }
 }
