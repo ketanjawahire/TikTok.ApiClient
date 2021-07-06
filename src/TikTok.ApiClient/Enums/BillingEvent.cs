@@ -23,6 +23,11 @@
         /// <summary>
         /// The OCPM
         /// </summary>
-        OCPM
+        OCPM,
+        
+        /// <summary>
+        /// The GD
+        /// </summary>
+        GD
     }
 }
