@@ -1,25 +1,36 @@
-﻿namespace TikTok.ApiClient.Enums
+﻿using System;
+
+namespace TikTok.ApiClient.Enums
 {
     public enum DeepBidType
     {
         /// <summary>
-        /// standard bidding
+        /// No deep event bid
         /// </summary>
         DEFAULT,
 
         /// <summary>
-        ///  Custom bidding
+        /// Double bid. Operation Method: Tiktok Ads platform will bid to keep your average cost around your target, including installation and target costs. Recommended for: Maintaining a stable cost on your bid for both installation costs and your target costs.
+        /// Note This might cause a lower install volume.
         /// </summary>
         MIN,
 
         /// <summary>
-        /// Dynamic bidding
+        /// Automatic optimization. Operation method: Tiktok Ads platform will bid to keep your average instalation cost around your target goal, while aiming to get you the maximum number of target events.
+        /// Recommended for: Maintaining a stable cost around your installation bid and getting an optimized cost for your target goal.
+        /// Note The cost for your target goal might be higher than that from Multi Bid mode.
         /// </summary>
         PACING,
 
         /// <summary>
         /// AEO
         /// </summary>
-        AEO
+        [Obsolete]
+        AEO,
+
+        /// <summary>
+        /// When optimize_goal is VALUE, the deep event bidding type must be ROI_PACING
+        /// </summary>
+        ROI_PACING
     }
 }

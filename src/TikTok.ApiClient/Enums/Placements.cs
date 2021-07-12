@@ -17,6 +17,7 @@ namespace TikTok.ApiClient.Enums
         /// <summary>
         /// The placement vigo
         /// </summary>
+        [Obsolete]
         PLACEMENT_VIGO,
 
         /// <summary>
