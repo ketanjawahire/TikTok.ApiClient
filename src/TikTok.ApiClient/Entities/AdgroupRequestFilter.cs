@@ -9,7 +9,7 @@ namespace TikTok.ApiClient.Entities
         /// filter by adgroup id.
         /// </summary>
         [JsonProperty("adgroup_ids")]
-        public List<long> adgroup_ids { get; set; }
+        public List<long> AdGroupIds { get; set; }
 
         /// <summary>
         /// filter by campaign id.
@@ -40,6 +40,11 @@ namespace TikTok.ApiClient.Entities
         /// </summary>
         [JsonProperty("adgroup_name")]
         public string AdgroupName { get; set; }
-
+        
+        /// <summary>
+        /// Ad group status. Filter ad groups based on their status.
+        /// </summary>
+        [JsonProperty("primary_status")]
+        public string PrimaryStatus { get; set; }
     }
 }

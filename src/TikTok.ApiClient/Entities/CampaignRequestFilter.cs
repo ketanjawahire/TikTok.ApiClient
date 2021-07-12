@@ -29,5 +29,16 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("campaign_name")]
         public string CampaignName { get; set; }
 
+        /// <summary>
+        /// Use this field to filter regular campaigns or iOS 14 campaigns. Valid values: REGULAR_CAMPAIGN and IOS14_CAMPAIGN.
+        /// </summary>
+        [JsonProperty("campaign_type")]
+        public string CampaignType { get; set; }
+
+        /// <summary>
+        /// Filter by ad status. See doc for more info - https://ads.tiktok.com/marketing_api/docs?id=100641
+        /// </summary>
+        [JsonProperty("primary_status")]
+        public string PrimaryStatus { get; set; }
     }
 }

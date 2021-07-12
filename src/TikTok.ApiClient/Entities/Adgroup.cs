@@ -8,6 +8,10 @@ using TikTok.ApiClient.Services;
 
 namespace TikTok.ApiClient.Entities
 {
+    /// <summary>
+    /// Contain AdGroup metrics available at TikTok endpoint.
+    /// See <a href="https://ads.tiktok.com/marketing_api/docs?id=1701890929565697"></a>
+    /// </summary>
     public class Adgroup : IApiEntity
     {
         /// <summary>
@@ -329,5 +333,173 @@ namespace TikTok.ApiClient.Entities
             Locations = this.Location,
             Languages = this.Languages
         });
+        
+        /// <summary>
+        /// Placement type Selected values: PLACEMENT_TYPE_AUTOMATIC (automatic placement), PLACEMENT_TYPE_NORMAL (manual placement)
+        /// </summary>
+        [JsonProperty("placement_type")]
+        public string PlacementType { get; set; }
+
+        /// <summary>
+        /// Inventory filtering (filtering security videos, hides unsafe videos), valid only for the PLACEMENT_TIKTOK placement. Optional values are: true to filter, false not to filter.
+        /// </summary>
+        [JsonProperty("enable_inventory_filter")]
+        public bool EnableInventoryFilter { get; set; }
+
+        /// <summary>
+        /// Pixel ID, can be found through 【Pixel management】. It is only applicable for landing pages.
+        /// </summary>
+        [JsonProperty("pixel_id")]
+        public long PixelId { get; set; }
+
+        /// <summary>
+        /// Audience rule, see【Ads-Ad Group-App Audience Rule】
+        /// </summary>
+        [JsonProperty("audience_rule")]
+        public object AudienceRule { get; set; }
+
+        /// <summary>
+        /// Audience Type, Optional values: CUSTOM_AUDIENCE(Customize your audience),EXCLUDE_INTERACT_USERS(Exclude audience who have interacted with your App),INCLUDE_INTERACT_USERS(Include audience who have interacted with your App) ,INCLUDE_SPECIFIC_EVENTS (Include audience who satisfy specific audience_rule),EXCLUDE_SPECIFIC_EVENTS (Exclude audience who satisfy specific audience_rule)
+        /// </summary>
+        [JsonProperty("audience_type")]
+        public string AudienceType { get; set; }
+
+        /// <summary>
+        /// Whether the promoted product is HFSS foods (foods that are high in fat, salt, or sugar)
+        /// </summary>
+        [JsonProperty("is_hfss")]
+        public bool IsHfss { get; set; }
+
+        /// <summary>
+        /// Interest classification. If the interest is specified, users that do not meet interest target will be excluded during delivery. Do not specify if you wish to target everyone. See 【Appendix-Interest Category-Old Interest Category】 for optional values.
+        /// </summary>
+        [JsonProperty("interest_category")]
+        public List<int> InterestCategory { get; set; }
+
+        /// <summary>
+        /// Interest classification. If the interest is specified, users that do not meet interest target will be excluded during delivery. Do not specify if you wish to target everyone. See 【Appendix-Interest Category-New Interest Category】 for optional values.
+        /// </summary>
+        [JsonProperty("interest_category_v2")]
+        public List<int> InterestCategoryV2 { get; set; }
+
+        /// <summary>
+        /// Device price orientation (10000 represents 10000+), for example: [0,300] represents price range is from $0 to $300
+        /// </summary>
+        [JsonProperty("device_price")]
+        public List<int> DevicePrice { get; set; }
+
+        /// <summary>
+        /// Audience minimum Android version. See 【Appendix-Android version of audience】 for details
+        /// </summary>
+        [JsonProperty("android_osv")]
+        public string AndroidOsv { get; set; }
+
+        /// <summary>
+        /// Audience minimum ios version. See 【Appendix-Audience ios version】 for details.
+        /// </summary>
+        [JsonProperty("ios_osv")]
+        public string IosOsv { get; set; }
+
+        /// <summary>
+        /// Optimized video playback duration Optional values include: SIX_SECONDS (video playback 6 seconds) and TWO_SECONDS (video playback 2 seconds)
+        /// </summary>
+        [JsonProperty("cpv_video_duration")]
+        public string CpvVideoDuration { get; set; }
+
+        /// <summary>
+        /// Bidding Strategy See 【Appendix-Bidding Strategy】
+        /// </summary>
+        [JsonProperty("bid_type")]
+        public string BidType { get; set; }
+
+        /// <summary>
+        /// Deep bid
+        /// </summary>
+        [JsonProperty("deep_cpabid")]
+        public float DeepCpabid { get; set; }
+
+        /// <summary>
+        /// Operation status, optional values include: DISABLE, ENABLE
+        /// </summary>
+        [JsonProperty("opt_status")]
+        public string OptStatus { get; set; }
+
+        /// <summary>
+        /// "frequency, together with frequency_schedule, controls how often people see your ad (only available for REACH ads). For example, frequency = 2 frequency_schedule = 3 means """"show ads no more than twice every 3 day""""."
+        /// </summary>
+        [JsonProperty("frequency")]
+        public int Frequency { get; set; }
+
+        /// <summary>
+        /// frequency, together with frequency, controls how often people see your ad (only available for REACH ads). See frequency fields for more
+        /// </summary>
+        [JsonProperty("frequency_schedule")]
+        public int FrequencySchedule { get; set; }
+
+        /// <summary>
+        /// conversion bid statistic type, bid for EVERYTIME (Each Purchase)/ NONE (Unique Purchase)
+        /// </summary>
+        [JsonProperty("statistic_type")]
+        public string StatisticType { get; set; }
+
+        /// <summary>
+        /// Carriers, see 【Appendix-Carriers】 for optional values.
+        /// </summary>
+        [JsonProperty("carriers")]
+        public List<string> Carriers { get; set; }
+
+        /// <summary>
+        /// Whether users can download your video ads on TikTok. Allowed values: ALLOW_DOWNLOAD ,PREVENT_DOWNLOAD Default: ALLOW_DOWNLOAD.
+        /// </summary>
+        [JsonProperty("video_download")]
+        public string VideoDownload { get; set; }
+
+        /// <summary>
+        /// Pangle app block list ID.
+        /// </summary>
+        [JsonProperty("pangle_block_app_list_id")]
+        public List<int> PangleBlockAppListId { get; set; }
+
+        /// <summary>
+        /// The specific location where you want your audience to go if they have your app installed. See open_url_type for more.
+        /// </summary>
+        [JsonProperty("open_url")]
+        public string OpenUrl { get; set; }
+
+        /// <summary>
+        /// Open URL type. Allowed values differs according to campaign objectives. Allowed values: NORMAL(supported in Traffic, Conversion & CatalogSales), DEFERRED_DEEPLINK(supported in AppInstall & CatalogSales)
+        /// </summary>
+        [JsonProperty("open_url_type")]
+        public string OpenUrlType { get; set; }
+
+        /// <summary>
+        /// Fallback Type. If the audience do not have the app installed, you can have them fall back to install the app, or to view a specific web page. Not applicable for Deferred Deeplink. Allowed values: APP_INSTALL, WEBSITE, UNSET. If website is chosen, you need to specify the url via landing_page_url field.
+        /// </summary>
+        [JsonProperty("fallback_type")]
+        public string FallbackType { get; set; }
+
+        /// <summary>
+        /// Action Categories，See 【Appendix-Action Categories】for optional values
+        /// </summary>
+        [JsonProperty("action_categories")]
+        public List<int> ActionCategories { get; set; }
+
+        /// <summary>
+        /// Select a time period to include actions from. Optional values: 7, 15.
+        /// </summary>
+        [JsonProperty("action_days")]
+        public int ActionDays { get; set; }
+
+        /// <summary>
+        /// Video-related Actions. Optional values: WATCHED_TO_END,LIKED,COMMENTED,SHARED
+        /// </summary>
+        [JsonProperty("video_actions")]
+        public List<string> VideoActions { get; set; }
+
+        /// <summary>
+        /// Whether the campaign is a new structure (for the same campaign, the structure of campaign, adgroups and ads are the same)
+        /// </summary>
+        [JsonProperty("is_new_structure")]
+        public bool IsNewStructure { get; set; }
     }
 }

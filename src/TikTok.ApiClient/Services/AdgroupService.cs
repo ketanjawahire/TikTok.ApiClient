@@ -13,14 +13,17 @@ namespace TikTok.ApiClient.Services
 {
     internal class AdgroupService : BaseService, IAdgroupService
     {
+        private readonly string _getAdGroupEndpoint;
+
         internal AdgroupService(AuthenticationService authenticationService)
             : base(authenticationService)
         {
+            _getAdGroupEndpoint = $"https://ads.tiktok.com/open_api/v1.2/adgroup/get";
         }
 
         public async Task<IEnumerable<Adgroup>> Get(AdgroupRequestModel model)
         {
-            var adgroups = new List<Adgroup>();
+            var adGroups = new List<Adgroup>();
             
             var queryString = HttpUtility.ParseQueryString(string.Empty);
             foreach (var property in model.GetType().GetProperties())
@@ -36,7 +39,7 @@ namespace TikTok.ApiClient.Services
                 }
             }
 
-            var message = new HttpRequestMessage(HttpMethod.Get, $"https://ads.tiktok.com/open_api/2/adgroup/get/?{queryString}");
+            var message = new HttpRequestMessage(HttpMethod.Get, $"{_getAdGroupEndpoint}?{queryString}");
 
             var response = await Execute<AdgroupRootObject>(message);
 
@@ -47,9 +50,9 @@ namespace TikTok.ApiClient.Services
 
             var result = Extract<AdgroupRootObject, AdgroupWrapper, Adgroup>(response);
 
-            await MultiplePageHandlerForHttpClient<AdgroupRootObject, AdgroupWrapper, Adgroup>(result, message, model, adgroups);
+            await MultiplePageHandlerForHttpClient<AdgroupRootObject, AdgroupWrapper, Adgroup>(result, message, model, adGroups);
 
-            return adgroups;
+            return adGroups;
         }
 
         public IEnumerable<AdgroupInsight> GetReport(InputModel model)

@@ -1,10 +1,8 @@
 ﻿using Newtonsoft.Json;
 using RestSharp;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using TikTok.ApiClient.Entities;
@@ -12,13 +10,18 @@ using TikTok.ApiClient.Services.Interfaces;
 
 namespace TikTok.ApiClient.Services
 {
+    /// <inheritdoc cref="ICampaignService"/>
     internal class CampaignService : BaseService, ICampaignService
     {
         internal CampaignService(AuthenticationService authenticationService)
             : base(authenticationService)
         {
+            _getEndpoint = "https://ads.tiktok.com/open_api/v1.2/campaign/get";
         }
 
+        private readonly string _getEndpoint;
+
+        /// <inheritdoc />
         public async Task<IEnumerable<Campaign>> Get(CampaignRequestModel requestModel)
         {
             var campaigns = new List<Campaign>();
@@ -37,7 +40,7 @@ namespace TikTok.ApiClient.Services
                 }
             }
 
-            var message = new HttpRequestMessage(HttpMethod.Get, $"https://ads.tiktok.com/open_api/2/campaign/get/?{queryString}");
+            var message = new HttpRequestMessage(HttpMethod.Get, $"{_getEndpoint}?{queryString}");
 
             var response = await Execute<CampaignRootObject>(message);
 
