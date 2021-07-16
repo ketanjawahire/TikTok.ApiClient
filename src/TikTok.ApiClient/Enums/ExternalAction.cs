@@ -1,25 +1,28 @@
 ﻿namespace TikTok.ApiClient.Enums
 {
-    // https://ads.tiktok.com/marketing_api/docs?id=1701890988826626
+    /// <summary>
+    /// Conversion Events Enum
+    /// See Link - https://ads.tiktok.com/marketing_api/docs?id=1701890988826626
+    /// </summary>
     public enum ExternalAction
     {
         /// <summary>
-        /// activate
+        /// Activate
         /// </summary>
         ACTIVE,
 
         /// <summary>
-        /// activate and register
+        /// Successful registration
         /// </summary>
         ACTIVE_REGISTER,
 
         /// <summary>
-        /// Activate and create a character
+        /// Create a role
         /// </summary>
         CREATE_GAMEROLE,
 
         /// <summary>
-        /// login successfully
+        /// Log in successfully
         /// </summary>
         LOGIN,
 
@@ -107,6 +110,7 @@
         /// Unlock achievement
         /// </summary>
         UNLOCK_ACHIEVEMENT,
+
         /// <summary>
         /// Successfully complete a payment
         /// </summary>

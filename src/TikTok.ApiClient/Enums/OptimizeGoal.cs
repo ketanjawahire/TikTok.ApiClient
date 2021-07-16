@@ -3,38 +3,58 @@
     public enum OptimizeGoal
     {
         /// <summary>
-        /// : Conversion
-        /// </summary>
-        CONVERT,
-
-        /// <summary>
-        /// Clicks
+        /// Click
         /// </summary>
         CLICK,
 
         /// <summary>
-        /// Show
+        /// Conversion
         /// </summary>
-        SHOW,
+        CONVERT,
 
         /// <summary>
-        /// reach
-        /// </summary>
-        REACH,
-
-        /// <summary>
-        /// video viewing
-        /// </summary>
-        VIDEO_VIEW,
-
-        /// <summary>
-        /// install
+        /// Installation
         /// </summary>
         INSTALL,
 
         /// <summary>
-        /// in-app event
+        /// In-app event
         /// </summary>
-        IN_APP_EVENT
+        IN_APP_EVENT,
+
+        /// <summary>
+        /// Impression
+        /// </summary>
+        SHOW,
+
+        /// <summary>
+        /// Play video
+        /// </summary>
+        VIDEO_VIEW,
+
+        /// <summary>
+        /// Reach
+        /// </summary>
+        REACH,
+
+        /// <summary>
+        /// Leads
+        /// </summary>
+        LEAD_GENERATION,
+
+        /// <summary>
+        /// Follows
+        /// </summary>
+        FOLLOWERS,
+
+        /// <summary>
+        /// Profile Visits
+        /// </summary>
+        PROFILE_VIEWS,
+
+        /// <summary>
+        /// Maximize ROAS (Return on Ad Spend). Currently, it only support App Install and Catalog Sales objectives, and can only be used for Andorid apps. When this optimization goal is used, your ads cannot be deployed to Pangle placement only. skip_learning_phase cannot be set to NO_SKIP.
+        /// </summary>
+        VALUE
     }
 }
