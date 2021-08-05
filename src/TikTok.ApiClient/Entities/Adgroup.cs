@@ -374,13 +374,13 @@ namespace TikTok.ApiClient.Entities
         /// Interest classification. If the interest is specified, users that do not meet interest target will be excluded during delivery. Do not specify if you wish to target everyone. See 【Appendix-Interest Category-Old Interest Category】 for optional values.
         /// </summary>
         [JsonProperty("interest_category")]
-        public List<int> InterestCategory { get; set; }
+        public List<long> InterestCategory { get; set; }
 
         /// <summary>
         /// Interest classification. If the interest is specified, users that do not meet interest target will be excluded during delivery. Do not specify if you wish to target everyone. See 【Appendix-Interest Category-New Interest Category】 for optional values.
         /// </summary>
         [JsonProperty("interest_category_v2")]
-        public List<int> InterestCategoryV2 { get; set; }
+        public List<long> InterestCategoryV2 { get; set; }
 
         /// <summary>
         /// Device price orientation (10000 represents 10000+), for example: [0,300] represents price range is from $0 to $300
