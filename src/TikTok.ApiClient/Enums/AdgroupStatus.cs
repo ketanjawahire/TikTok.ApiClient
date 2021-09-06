@@ -108,6 +108,8 @@ namespace TikTok.ApiClient.Enums
         /// <summary>
         /// "All statuses (excluding ""Deleted"")"
         /// </summary>
-        ADGROUP_STATUS_NOT_DELETE
+        ADGROUP_STATUS_NOT_DELETE,
+
+        ADGROUP_STATUS_PRE_ONLINE
     }
 }

@@ -60,6 +60,8 @@
         /// Get more people to view your video content in R&F ads.
         /// NOTE: In Doc its RF_VIDEO_VIEWS but in API call coming as RF_VIDEO_VIEW
         /// </summary>
-        RF_VIDEO_VIEW
+        RF_VIDEO_VIEW,
+
+        RF_TRAFFIC
     }
 }
