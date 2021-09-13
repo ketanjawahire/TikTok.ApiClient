@@ -18,7 +18,7 @@ namespace TikTok.ApiClient.Services
 {
     internal abstract class BaseService : IApiService
     {
-        private const string _apiRequestBaseUrl = "https://ads.tiktok.com/open_api/";
+        private const string _apiRequestBaseUrl = "https://business-api.tiktok.com/open_api/";
 
         private AuthenticationService _authService;
         private RestClient _restClient;
