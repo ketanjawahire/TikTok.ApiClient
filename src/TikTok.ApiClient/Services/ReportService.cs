@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 using RestSharp;
 using TikTok.ApiClient.Entities;
 using TikTok.ApiClient.Services.Interfaces;
@@ -54,6 +55,9 @@ namespace TikTok.ApiClient.Services
 
             if (!string.IsNullOrEmpty(model.OrderType))
                 request.AddQueryParameter("order_type", model.OrderType);
+
+            if (model.Filters != null && model.Filters.Any())
+                request.AddQueryParameter("filters", JsonConvert.SerializeObject(model.Filters));
 
             var response = Execute<ReportResponseRootObject>(request).GetAwaiter().GetResult();
 
