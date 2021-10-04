@@ -64,7 +64,7 @@ namespace TikTok.ApiClient.Entities
         /// </value>
         public List<Placements> TikTokPlacements
         {
-            get { return this.Placement.Select(item => (Placements) Enum.Parse(typeof(Placements), item)).ToList(); }
+            get { return this.Placement?.Select(item => (Placements) Enum.Parse(typeof(Placements), item)).ToList(); }
         }
 
         /// <summary>
