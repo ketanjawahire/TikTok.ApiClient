@@ -166,7 +166,7 @@ namespace TikTok.ApiClient.Entities
 
         public List<AgeGroups> TikTokAgeGroups
         {
-            get { return this.Age.Select(item => (AgeGroups) Enum.Parse(typeof(AgeGroups), item)).ToList(); }
+            get { return this.Age?.Select(item => (AgeGroups) Enum.Parse(typeof(AgeGroups), item)).ToList(); }
         }
 
         /// <summary>
