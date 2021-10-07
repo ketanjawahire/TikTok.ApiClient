@@ -76,16 +76,16 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("order_type")]
         public string OrderType { get; set; }
 
-        // /// <summary>
-        // /// Filter criteria. Supported filtering criteria vary according to 'service_type' and 'data_level', see Auction Ads Report Supplement-Supported Filters and Reservation Ads Report Supplement-Supported filters
-        // /// </summary>
-        // [JsonProperty("filters")]
-        // public List<ReportInputFilter> Filters { get; set; }
+		/// <summary>
+		/// Filter criteria. Supported filtering criteria vary according to 'service_type' and 'data_level', see Auction Ads Report Supplement-Supported Filters and Reservation Ads Report Supplement-Supported filters
+		/// </summary>
+		[JsonProperty("filters")]
+		public List<ReportInputFilter> Filters { get; set; }
 
-        /// <summary>
-        /// Current int of pages. Default value: 1
-        /// </summary>
-        [JsonProperty("page")]
+		/// <summary>
+		/// Current int of pages. Default value: 1
+		/// </summary>
+		[JsonProperty("page")]
         public int? Page { get; set; }
 
         /// <summary>

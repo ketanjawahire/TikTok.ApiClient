@@ -370,5 +370,8 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("total_registration")] public string TotalRegistration { get; set; }
 
         [JsonProperty("spend")] public string Spend { get; set; }
-    }
+
+		[JsonProperty("frequency")]
+        public string Frequency { get; set; }
+	}
 }

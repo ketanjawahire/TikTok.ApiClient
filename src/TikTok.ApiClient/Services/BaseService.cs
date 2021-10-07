@@ -62,7 +62,7 @@ namespace TikTok.ApiClient.Services
             where TEntity : class, new()
         {
             Authorize();
-
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             var response = _restClient.Execute(restRequest);
 
             if (response.StatusCode == HttpStatusCode.OK)
