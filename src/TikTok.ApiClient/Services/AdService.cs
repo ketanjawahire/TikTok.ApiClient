@@ -34,9 +34,19 @@ namespace TikTok.ApiClient.Services
                 {
                     queryString.Add("advertiser_id", property.GetValue(model, null).ToString());
                 }
+                else if (property.Name == nameof(BaseRequestModel.Page))
+                {
+                    queryString.Add("page", property.GetValue(model,null).ToString());
+                }
+                else if (property.Name == nameof(BaseRequestModel.PageSize))
+                {
+                    queryString.Add("page_size", property.GetValue(model, null).ToString());
+                }
             }
 
-            var message = new HttpRequestMessage(HttpMethod.Get, $"https://ads.tiktok.com/open_api/2/ad/get/?{queryString}");
+            var resourceUrl = "https://ads.tiktok.com/open_api/2/ad/get/";
+
+            var message = new HttpRequestMessage(HttpMethod.Get, $"{resourceUrl}?{queryString}");
 
             var response = await Execute<AdRootObject>(message);
 
@@ -47,7 +57,7 @@ namespace TikTok.ApiClient.Services
 
             var result = Extract<AdRootObject, AdWrapper, Ad>(response);
 
-            await MultiplePageHandlerForHttpClient<AdRootObject, AdWrapper, Ad>(result, message, model, ads);
+            await MultiplePageHandlerForHttpClient<AdRootObject, AdWrapper, Ad>(result, resourceUrl, model, ads);
 
             return ads;
         }

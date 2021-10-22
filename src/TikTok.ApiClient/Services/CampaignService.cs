@@ -38,6 +38,14 @@ namespace TikTok.ApiClient.Services
                 {
                     queryString.Add("advertiser_id", property.GetValue(requestModel, null).ToString());
                 }
+                else if (property.Name == nameof(BaseRequestModel.Page))
+                {
+                    queryString.Add("page", property.GetValue(requestModel, null).ToString());
+                }
+                else if (property.Name == nameof(BaseRequestModel.PageSize))
+                {
+                    queryString.Add("page_size", property.GetValue(requestModel, null).ToString());
+                }
             }
 
             var message = new HttpRequestMessage(HttpMethod.Get, $"{_getEndpoint}?{queryString}");
@@ -51,7 +59,7 @@ namespace TikTok.ApiClient.Services
 
             var result = Extract<CampaignRootObject, CampaignWrapper, Campaign>(response);
 
-            await MultiplePageHandlerForHttpClient<CampaignRootObject, CampaignWrapper, Campaign>(result, message, requestModel, campaigns);
+            await MultiplePageHandlerForHttpClient<CampaignRootObject, CampaignWrapper, Campaign>(result, _getEndpoint, requestModel, campaigns);
 
             return campaigns;
         }
