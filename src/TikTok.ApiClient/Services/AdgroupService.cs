@@ -37,6 +37,14 @@ namespace TikTok.ApiClient.Services
                 {
                     queryString.Add("advertiser_id", property.GetValue(model, null).ToString());
                 }
+                else if (property.Name == nameof(BaseRequestModel.Page))
+                {
+                    queryString.Add("page", property.GetValue(model, null).ToString());
+                }
+                else if (property.Name == nameof(BaseRequestModel.PageSize))
+                {
+                    queryString.Add("page_size", property.GetValue(model, null).ToString());
+                }
             }
 
             var message = new HttpRequestMessage(HttpMethod.Get, $"{_getAdGroupEndpoint}?{queryString}");
@@ -50,7 +58,7 @@ namespace TikTok.ApiClient.Services
 
             var result = Extract<AdgroupRootObject, AdgroupWrapper, Adgroup>(response);
 
-            await MultiplePageHandlerForHttpClient<AdgroupRootObject, AdgroupWrapper, Adgroup>(result, message, model, adGroups);
+            await MultiplePageHandlerForHttpClient<AdgroupRootObject, AdgroupWrapper, Adgroup>(result, _getAdGroupEndpoint, model, adGroups);
 
             return adGroups;
         }

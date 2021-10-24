@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using TikTok.ApiClient.Entities;
 using TikTok.ApiClient.Exceptions;
 using TikTok.ApiClient.Helpers;
@@ -153,7 +154,7 @@ namespace TikTok.ApiClient.Services
             }
         }
 
-        public async Task MultiplePageHandlerForHttpClient<TRoot, TWrapper, TEntity>(TWrapper wrapper, HttpRequestMessage message, BaseRequestModel model, List<TEntity> entityList)
+        public async Task MultiplePageHandlerForHttpClient<TRoot, TWrapper, TEntity>(TWrapper wrapper, string resourceUrl, BaseRequestModel model, List<TEntity> entityList)
             where TRoot : class, IRootObject<TWrapper, TEntity>, new()
             where TWrapper : class, IWrapper<TEntity>, new()
             where TEntity : class, IApiEntity, new()
@@ -167,8 +168,28 @@ namespace TikTok.ApiClient.Services
             while (currentPage < totalPages)
             {
                 currentPage++;
-                model.Page = currentPage;
-                message.Content = new StringContent(JsonConvert.SerializeObject(model, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }), Encoding.UTF8, "application/json");
+                var queryString = HttpUtility.ParseQueryString(string.Empty);
+                foreach (var property in model.GetType().GetProperties())
+                {
+                    if (property.Name == "Filtering")
+                    {
+                        var filterValue = JsonConvert.SerializeObject(property.GetValue(model, null), new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+                        queryString.Add("filtering", filterValue);
+                    }
+                    else if (property.Name == "AdvertiserId")
+                    {
+                        queryString.Add("advertiser_id", property.GetValue(model, null).ToString());
+                    }
+                    else if (property.Name == nameof(BaseRequestModel.Page))
+                    {
+                        queryString.Add("page", currentPage.ToString());
+                    }
+                    else if (property.Name == nameof(BaseRequestModel.PageSize))
+                    {
+                        queryString.Add("page_size", wrapper.PageInfo.PageSize.ToString());
+                    }
+                }
+                var message = new HttpRequestMessage(HttpMethod.Get, $"{resourceUrl}?{queryString}");
                 var currentPageResponse = await Execute<TRoot>(message);
                 var currentPageResult = Extract<TRoot, TWrapper, TEntity>(currentPageResponse);
                 entityList.AddRange(currentPageResult.List);
