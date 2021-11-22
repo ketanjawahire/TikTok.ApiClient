@@ -205,6 +205,10 @@ namespace TikTok.ApiClient.Services
             {
                 throw new ArgumentNullException(nameof(response));
             }
+            else if (response.code != 0 && !response.Message.Equals("OK"))
+            {
+                throw new Exception($"API Call Failed, Code: {response.code}, Message: {response.Message}"); 
+            }
 
             return response.Data;
         }
