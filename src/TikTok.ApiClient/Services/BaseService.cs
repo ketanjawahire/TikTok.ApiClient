@@ -213,7 +213,7 @@ namespace TikTok.ApiClient.Services
                 throw new ArgumentNullException(nameof(response));
             }
 
-			return response.Data;
+            return response.Data;
         }
 
         private static JsonSerializer GetJsonSerializer()
