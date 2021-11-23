@@ -68,7 +68,14 @@ namespace TikTok.ApiClient.Services
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
+                var error = Deserialize<ApiError>(response.Content);
+                if (!error.Code.Equals("0") && !error.Message.Equals("OK"))
+                {
+                    throw new ApiException(error, response.StatusCode);
+                }
+
                 var result = Deserialize<TEntity>(response.Content);
+                
                 return result;
             }
             else if (response.StatusCode == HttpStatusCode.Unauthorized)
@@ -205,12 +212,8 @@ namespace TikTok.ApiClient.Services
             {
                 throw new ArgumentNullException(nameof(response));
             }
-            else if (response.code != 0 && !response.Message.Equals("OK"))
-            {
-                throw new Exception($"API Call Failed, Code: {response.code}, Message: {response.Message}"); 
-            }
 
-            return response.Data;
+			return response.Data;
         }
 
         private static JsonSerializer GetJsonSerializer()
