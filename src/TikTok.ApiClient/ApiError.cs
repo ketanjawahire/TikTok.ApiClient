@@ -17,13 +17,13 @@ namespace TikTok.ApiClient
         /// Gets or sets error code.
         /// </summary>
         [JsonProperty("code")]
-        public string Code { get; set; }
+        public int Code { get; set; }
 
         /// <summary>
         /// Gets or sets error code.
         /// </summary>
         [JsonProperty("data")]
-        public string Data { get; set; }
+        public object Data { get; set; }
 
         /// <summary>
         /// Gets or sets error code.

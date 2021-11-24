@@ -68,7 +68,14 @@ namespace TikTok.ApiClient.Services
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
+                var error = Deserialize<ApiError>(response.Content);
+                if (error.Code != 0 && !error.Message.Equals("OK", StringComparison.OrdinalIgnoreCase))
+                {
+                    throw new ApiException(error, response.StatusCode);
+                }
+
                 var result = Deserialize<TEntity>(response.Content);
+                
                 return result;
             }
             else if (response.StatusCode == HttpStatusCode.Unauthorized)
