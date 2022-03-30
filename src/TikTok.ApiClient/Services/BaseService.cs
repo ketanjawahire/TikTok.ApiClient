@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
@@ -61,7 +62,7 @@ namespace TikTok.ApiClient.Services
             }
         }
 
-        public async Task MultiplePageHandler<TRoot, TWrapper, TEntity>(TWrapper wrapper, string resourceUrl, BaseRequestModel model, List<TEntity> entityList)
+        public async Task MultiplePageHandler<TRoot, TWrapper, TEntity>(TWrapper wrapper, string resourceUrl, NameValueCollection queryStringCollection, List<TEntity> entityList)
             where TRoot : class, IRootObject<TWrapper, TEntity>, new()
             where TWrapper : class, IWrapper<TEntity>, new()
             where TEntity : class, IApiEntity, new()
@@ -75,29 +76,25 @@ namespace TikTok.ApiClient.Services
             while (currentPage < totalPages)
             {
                 currentPage++;
-                var queryString = HttpUtility.ParseQueryString(string.Empty);
-                foreach (var property in model.GetType().GetProperties())
+                if (queryStringCollection["page"] is null)
                 {
-                    switch (property.Name)
-                    {
-                        case "Filtering":
-                        {
-                            var filterValue = JsonConvert.SerializeObject(property.GetValue(model, null), new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
-                            queryString.Add("filtering", filterValue);
-                            break;
-                        }
-                        case "AdvertiserId":
-                            queryString.Add("advertiser_id", property.GetValue(model, null).ToString());
-                            break;
-                        case nameof(BaseRequestModel.Page):
-                            queryString.Add("page", currentPage.ToString());
-                            break;
-                        case nameof(BaseRequestModel.PageSize):
-                            queryString.Add("page_size", wrapper.PageInfo.PageSize.ToString());
-                            break;
-                    }
+                    queryStringCollection.Add("page", currentPage.ToString());
                 }
-                var message = new HttpRequestMessage(HttpMethod.Get, $"{resourceUrl}?{queryString}");
+                else
+                {
+                    queryStringCollection["page"] = currentPage.ToString();
+                }
+                
+                if (queryStringCollection["page_size"] is null)
+                {
+                    queryStringCollection.Add("page_size", wrapper.PageInfo.PageSize.ToString());
+                }
+                else
+                {
+                    queryStringCollection["page_size"] = wrapper.PageInfo.PageSize.ToString();
+                }
+                
+                var message = new HttpRequestMessage(HttpMethod.Get, $"{resourceUrl}?{queryStringCollection}");
                 var currentPageResponse = await Execute<TRoot>(message);
                 var currentPageResult = Extract<TRoot, TWrapper, TEntity>(currentPageResponse);
                 entityList.AddRange(currentPageResult.List);
@@ -146,3 +143,4 @@ namespace TikTok.ApiClient.Services
 
     }
 }
+ 
