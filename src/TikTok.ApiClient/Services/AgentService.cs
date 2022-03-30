@@ -1,5 +1,4 @@
-﻿using RestSharp;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TikTok.ApiClient.Services.Interfaces;
 
 namespace TikTok.ApiClient.Services
@@ -10,10 +9,5 @@ namespace TikTok.ApiClient.Services
             : base(authenticationService)
         {
         }
-
-        
     }
-
-    
-
 }

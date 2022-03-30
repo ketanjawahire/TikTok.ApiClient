@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using RestSharp;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -18,7 +17,7 @@ namespace TikTok.ApiClient.Services
         internal AdgroupService(AuthenticationService authenticationService)
             : base(authenticationService)
         {
-            _getAdGroupEndpoint = $"https://ads.tiktok.com/open_api/v1.2/adgroup/get";
+            _getAdGroupEndpoint = $"{BaseUrl}/{Version}/adgroup/get";
         }
 
         public async Task<IEnumerable<Adgroup>> Get(AdgroupRequestModel model)
@@ -62,49 +61,5 @@ namespace TikTok.ApiClient.Services
 
             return adGroups;
         }
-
-        public IEnumerable<AdgroupInsight> GetReport(InputModel model)
-        {
-            var request = new RestRequest("/2/reports/adgroup/get/", Method.GET);
-            var adgroupInsights = new List<AdgroupInsight>();
-
-            //TODO : Throw exception if advertiserId, startDate, endDate value is null
-            request.AddQueryParameter("advertiser_id", model.AdvertiserId.ToString());
-            request.AddQueryParameter("start_date", model.StartDate.Value.ToString("yyyy-MM-dd"));
-            request.AddQueryParameter("end_date", model.EndDate.Value.ToString("yyyy-MM-dd"));
-
-
-            if (model.Page.HasValue)
-                request.AddQueryParameter("page", model.Page.Value.ToString());
-
-            if (model.PageSize.HasValue)
-                request.AddQueryParameter("page_size", model.PageSize.Value.ToString());
-
-            if (model.GroupBy.Any())
-                request.AddQueryParameter("group_by", "[\"" + string.Join("\",\"", model.GroupBy.Select(e => e.ToString())) + "\"]");
-
-            if (model.TimeGranularity.HasValue)
-                request.AddQueryParameter("time_granuarity", model.TimeGranularity.Value.ToString());
-
-            if (!string.IsNullOrEmpty(model.OrderField))
-                request.AddQueryParameter("order_field", model.OrderField);
-
-            if (model.OrderType.HasValue)
-                request.AddQueryParameter("order_type", model.OrderType.Value.ToString());
-
-            var response = Execute<AdgroupInsightRootObject>(request).Result;
-
-            if (response.code == 40105)
-            {
-                throw new Exceptions.UnauthorizedAccessException();
-            }
-
-            var result = Extract<AdgroupInsightRootObject, AdgroupInsightWrapper, AdgroupInsight>(response);
-
-            MultiplePageHandlerForRestClient<AdgroupInsightRootObject, AdgroupInsightWrapper, AdgroupInsight>(result, adgroupInsights, request);
-
-            return adgroupInsights;
-        }
     }
-
 }

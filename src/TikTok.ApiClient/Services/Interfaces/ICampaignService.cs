@@ -10,9 +10,6 @@ namespace TikTok.ApiClient.Services.Interfaces
     /// </summary>
     public interface ICampaignService : IApiService
     {
-        [Obsolete("Use Report Service to fetch insights. See - https://ads.tiktok.com/marketing_api/docs?id=1701890949889025")]
-        IEnumerable<CampaignInsight> GetReport(InputModel model);
-
         /// <summary>
         /// Get Campaigns available at TikTok using API.
         /// </summary>

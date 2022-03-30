@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
-using RestSharp;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
@@ -16,7 +14,7 @@ namespace TikTok.ApiClient.Services
         internal CampaignService(AuthenticationService authenticationService)
             : base(authenticationService)
         {
-            _getEndpoint = "https://ads.tiktok.com/open_api/v1.2/campaign/get";
+            _getEndpoint = $"{BaseUrl}/{Version}/campaign/get";
         }
 
         private readonly string _getEndpoint;
@@ -62,49 +60,6 @@ namespace TikTok.ApiClient.Services
             await MultiplePageHandlerForHttpClient<CampaignRootObject, CampaignWrapper, Campaign>(result, _getEndpoint, requestModel, campaigns);
 
             return campaigns;
-        }
-
-        public IEnumerable<CampaignInsight> GetReport(InputModel model)
-        {
-            var request = new RestRequest("/2/reports/campaign/get/", Method.GET);
-            var campaignInsights = new List<CampaignInsight>();
-
-            //TODO : Throw exception if advertiserId, startDate, endDate value is null
-            request.AddQueryParameter("advertiser_id", model.AdvertiserId.ToString());
-            request.AddQueryParameter("start_date", model.StartDate.Value.ToString("yyyy-MM-dd"));
-            request.AddQueryParameter("end_date", model.EndDate.Value.ToString("yyyy-MM-dd"));
-
-
-            if (model.Page.HasValue)
-                request.AddQueryParameter("page", model.Page.Value.ToString());
-
-            if (model.PageSize.HasValue)
-                request.AddQueryParameter("page_size", model.PageSize.Value.ToString());
-
-            if (model.GroupBy.Any())
-                request.AddQueryParameter("group_by", "[\"" + string.Join("\",\"", model.GroupBy.Select(e => e.ToString())) + "\"]");
-
-            if (model.TimeGranularity.HasValue)
-                request.AddQueryParameter("time_granuarity", model.TimeGranularity.Value.ToString());
-
-            if (!string.IsNullOrEmpty(model.OrderField))
-                request.AddQueryParameter("order_field", model.OrderField);
-
-            if (model.OrderType.HasValue)
-                request.AddQueryParameter("order_type", model.OrderType.Value.ToString());
-
-            var response = Execute<CampaignInsightRootObject>(request).Result;
-
-            if (response.code == 40105)
-            {
-                throw new Exceptions.UnauthorizedAccessException();
-            }
-
-            var result = Extract<CampaignInsightRootObject, CampaignInsightWrapper, CampaignInsight>(response);
-
-            MultiplePageHandlerForRestClient<CampaignInsightRootObject, CampaignInsightWrapper, CampaignInsight>(result, campaignInsights, request);
-
-            return campaignInsights;
         }
     }
 }

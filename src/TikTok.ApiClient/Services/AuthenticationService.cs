@@ -1,21 +1,10 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using RestSharp;
-using RestSharp.Serialization;
-using System;
-using System.IO;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using TikTok.ApiClient.Entities;
-using TikTok.ApiClient.Exceptions;
+﻿using System;
 
 namespace TikTok.ApiClient.Services
 {
     internal class AuthenticationService
     {
-        private string _accessToken;
+        private readonly string _accessToken;
 
         internal AuthenticationService(string accessToken)
         {

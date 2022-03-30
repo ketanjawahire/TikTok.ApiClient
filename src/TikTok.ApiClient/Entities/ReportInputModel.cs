@@ -4,14 +4,8 @@ using Newtonsoft.Json;
 
 namespace TikTok.ApiClient.Entities
 {
-    public class ReportInputModel
+    public class ReportInputModel : BaseRequestModel
     {
-        /// <summary>
-        /// Advertiser ID
-        /// </summary>
-        [JsonProperty("advertiser_id")]
-        public long AdvertiserId { get; set; }
-
         /// <summary>
         /// Ad service type. Optional values:AUCTION,RESERVATION. See below [Enumeration Value-Advertising Service Type] for details. Default: AUCTION
         /// </summary>
@@ -81,18 +75,6 @@ namespace TikTok.ApiClient.Entities
 		/// </summary>
 		[JsonProperty("filters")]
 		public List<ReportInputFilter> Filters { get; set; }
-
-		/// <summary>
-		/// Current int of pages. Default value: 1
-		/// </summary>
-		[JsonProperty("page")]
-        public int? Page { get; set; }
-
-        /// <summary>
-        /// Pagination size. Value range: 1-1000. Default value: 10
-        /// </summary>
-        [JsonProperty("page_size")]
-        public int? PageSize { get; set; }
     }
 
     public class ReportInputFilter
