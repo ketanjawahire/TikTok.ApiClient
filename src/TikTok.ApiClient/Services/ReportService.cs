@@ -82,7 +82,7 @@ namespace TikTok.ApiClient.Services
 
             var insight = new List<ReportResponse>();
             
-            MultiplePageHandlerForHttpClient<ReportResponseRootObject, ReportResponseWrapper, ReportResponse>(result, _resourceUrl, model, insight).GetAwaiter().GetResult();
+            MultiplePageHandler<ReportResponseRootObject, ReportResponseWrapper, ReportResponse>(result, _resourceUrl, model, insight).GetAwaiter().GetResult();
 
             return insight;
         }

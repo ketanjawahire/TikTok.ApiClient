@@ -57,7 +57,7 @@ namespace TikTok.ApiClient.Services
 
             var result = Extract<CampaignRootObject, CampaignWrapper, Campaign>(response);
 
-            await MultiplePageHandlerForHttpClient<CampaignRootObject, CampaignWrapper, Campaign>(result, _getEndpoint, requestModel, campaigns);
+            await MultiplePageHandler<CampaignRootObject, CampaignWrapper, Campaign>(result, _getEndpoint, requestModel, campaigns);
 
             return campaigns;
         }

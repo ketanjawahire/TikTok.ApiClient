@@ -61,7 +61,7 @@ namespace TikTok.ApiClient.Services
             }
         }
 
-        public async Task MultiplePageHandlerForHttpClient<TRoot, TWrapper, TEntity>(TWrapper wrapper, string resourceUrl, BaseRequestModel model, List<TEntity> entityList)
+        public async Task MultiplePageHandler<TRoot, TWrapper, TEntity>(TWrapper wrapper, string resourceUrl, BaseRequestModel model, List<TEntity> entityList)
             where TRoot : class, IRootObject<TWrapper, TEntity>, new()
             where TWrapper : class, IWrapper<TEntity>, new()
             where TEntity : class, IApiEntity, new()
