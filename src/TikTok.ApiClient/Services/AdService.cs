@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
-using RestSharp;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using TikTok.ApiClient.Entities;
@@ -13,9 +10,12 @@ namespace TikTok.ApiClient.Services
 {
     internal class AdService : BaseService, IAdService
     {
+        private readonly string _resourceUrl;
+
         internal AdService(AuthenticationService authenticationService)
             : base(authenticationService)
         {
+            _resourceUrl = $"{BaseUrl}/{Version}/ad/get/";
         }
 
         public async Task<IEnumerable<Ad>> Get(AdRequestModel model)
@@ -44,9 +44,7 @@ namespace TikTok.ApiClient.Services
                 }
             }
 
-            var resourceUrl = "https://ads.tiktok.com/open_api/2/ad/get/";
-
-            var message = new HttpRequestMessage(HttpMethod.Get, $"{resourceUrl}?{queryString}");
+            var message = new HttpRequestMessage(HttpMethod.Get, $"{_resourceUrl}?{queryString}");
 
             var response = await Execute<AdRootObject>(message);
 
@@ -57,60 +55,9 @@ namespace TikTok.ApiClient.Services
 
             var result = Extract<AdRootObject, AdWrapper, Ad>(response);
 
-            await MultiplePageHandlerForHttpClient<AdRootObject, AdWrapper, Ad>(result, resourceUrl, model, ads);
+            await MultiplePageHandler<AdRootObject, AdWrapper, Ad>(result, _resourceUrl, model, ads);
 
             return ads;
-        }
-
-        public IEnumerable<AdInsight> GetReport(InputModel model)
-        {
-            //TODO : Throw exception if advertiserId, startDate, endDate value is null
-            if (model.AdvertiserId == 0 || model.StartDate == null || model.EndDate == null)
-            {
-                return new List<AdInsight>();
-            }
-
-            var adInsights = new List<AdInsight>();
-
-            var request = new RestRequest("/2/reports/ad/get/", Method.GET);
-
-            request.AddQueryParameter("advertiser_id", model.AdvertiserId.ToString());
-            request.AddQueryParameter("start_date", model.StartDate.Value.ToString("yyyy-MM-dd"));
-            request.AddQueryParameter("end_date", model.EndDate.Value.ToString("yyyy-MM-dd"));
-
-            if (model.Page != null)
-                request.AddQueryParameter("page", model.Page.Value.ToString());
-
-            if (model.PageSize != null)
-                request.AddQueryParameter("page_size", model.PageSize.Value.ToString());
-
-            if (model.GroupBy != null)
-                request.AddQueryParameter("group_by", "[\"" + string.Join("\",\"", model.GroupBy.Select(e => e.ToString())) + "\"]");
-
-            if (model.TimeGranularity != null)
-                request.AddQueryParameter("time_granuarity", model.TimeGranularity.Value.ToString());
-
-            if (!string.IsNullOrEmpty(model.OrderField))
-                request.AddQueryParameter("order_field", model.OrderField);
-
-            if (model.OrderType != null)
-                request.AddQueryParameter("order_type", model.OrderType.Value.ToString());
-
-            if (model.Fields != null)
-                request.AddQueryParameter("fields", "[\"" + string.Join("\",\"", model.Fields.Select(e => e.ToString())) + "\"]");
-
-            var response = Execute<AdInsightRootObject>(request).Result;
-
-            if (response.code == 40105)
-            {
-                throw new Exceptions.UnauthorizedAccessException();
-            }
-
-            var result = Extract<AdInsightRootObject, AdInsightWrapper, AdInsight>(response);
-
-            MultiplePageHandlerForRestClient<AdInsightRootObject, AdInsightWrapper, AdInsight>(result, adInsights, request);
-
-            return adInsights;
         }
     }
 }

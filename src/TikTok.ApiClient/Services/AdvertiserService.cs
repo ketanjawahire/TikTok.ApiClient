@@ -1,6 +1,7 @@
-﻿using RestSharp;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Net.Http;
+using System.Web;
 using TikTok.ApiClient.Entities;
 using TikTok.ApiClient.Services.Interfaces;
 
@@ -8,38 +9,37 @@ namespace TikTok.ApiClient.Services
 {
     internal class AdvertiserService : BaseService, IAdvertiserService
     {
+        private readonly string _getAdvertiserInfo;
+        private readonly string _getAdvertiser;
+
         internal AdvertiserService(AuthenticationService authenticationService)
             : base(authenticationService)
         {
+            _getAdvertiserInfo = $"{BaseUrl}/{Version}/advertiser/info/";
+            _getAdvertiser = $"{BaseUrl}/{Version}/oauth2/advertiser/get/";
         }
 
         public IEnumerable<AgentAdvertiser> GetAdvertisers()
         {
-            var request = new RestRequest("/oauth2/advertiser/get/", Method.GET);
-
-            //TODO : need to get access token here
-            request.AddObject(new { access_token = "ACCESS_TOKEN_HERE", app_id = "APP_ID_HERE", secret = "SECRET_HERE" });
-
-            var response = Execute<AgentAdvertiserRootObject>(request).Result;
-
-            if (response.code == 40105)
-            {
-                throw new Exceptions.UnauthorizedAccessException();
-            }
-
-            var result = Extract<AgentAdvertiserRootObject, AgentAdvertiserWrapper, AgentAdvertiser>(response);
-
-            return result.List;
+            throw new NotImplementedException();
         }
 
-        //TODO : fix it. Its not working 
         public IEnumerable<Advertiser> Get(IEnumerable<string> advertiserIds)
         {
-            var request = new RestRequest("/2/advertiser/info", Method.GET);
+            var queryString = HttpUtility.ParseQueryString(string.Empty);
+            queryString.Add("advertiser_ids", $"[{string.Join(",", advertiserIds)}]");
 
-            request.AddObject(new { advertiser_ids = advertiserIds.ToArray(), fields = new[] { "id", "name", "description", "email", "contacter", "phonenumber", "role", "status", "telephone", "address", "reason", "license_url", "license_no", "license_province", "license_city", "company", "brand", "promotion_area", "promotion_center_province", "promotion_center_city", "industry", "balance" } });
+            var listOfFields = new[]
+            {
+                "id", "name", "description", "email", "contacter", "phonenumber", "role", "status", "telephone",
+                "address", "reason", "license_url", "license_no", "license_province", "license_city", "company",
+                "brand", "promotion_area", "promotion_center_province", "promotion_center_city", "industry", "balance"
+            };
+            
+            queryString.Add("fields", $"[\"{string.Join("\",\"", listOfFields)}\"]");
 
-            var response = Execute<AdvertiserRootObject>(request).Result;
+            var message = new HttpRequestMessage(HttpMethod.Get, $"{_getAdvertiserInfo}?{queryString}");
+            var response = Execute<AdvertiserRootObject>(message).GetAwaiter().GetResult();
 
             if (response.code == 40105)
             {
@@ -47,7 +47,6 @@ namespace TikTok.ApiClient.Services
             }
 
             var result = Extract<AdvertiserRootObject, AdvertiserWrapper, Advertiser>(response);
-
             return result.List;
         }
 
