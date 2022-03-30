@@ -57,7 +57,7 @@ namespace TikTok.ApiClient.Services
 
             var result = Extract<AdgroupRootObject, AdgroupWrapper, Adgroup>(response);
 
-            await MultiplePageHandler<AdgroupRootObject, AdgroupWrapper, Adgroup>(result, _getAdGroupEndpoint, model, adGroups);
+            await MultiplePageHandler<AdgroupRootObject, AdgroupWrapper, Adgroup>(result, _getAdGroupEndpoint, queryString, adGroups);
 
             return adGroups;
         }
