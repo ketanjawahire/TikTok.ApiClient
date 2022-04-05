@@ -25,12 +25,22 @@ namespace TikTok.ApiClient.Services
         /// <summary>
         /// The OCPM
         /// </summary>
-        [Obsolete("From v1.0, TikTok do not support oCPC and support oCPM instead. See - https://ads.tiktok.com/marketing_api/docs?id=1701890929565697")]
         OCPM,
         
         /// <summary>
         /// The GD
         /// </summary>
-        GD
+        GD,
+
+        /// <summary>
+        /// CPA is equal to oCPC
+        /// </summary>
+        CPA,
+
+        /// <summary>
+        /// oCPC (CPA is equal to oCPC)
+        /// </summary>
+        [Obsolete("From v1.0, TikTok do not support oCPC and support oCPM instead. See - https://ads.tiktok.com/marketing_api/docs?id=1701890929565697")]
+        OCPC
     }
 }

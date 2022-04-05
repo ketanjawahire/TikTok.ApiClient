@@ -107,7 +107,7 @@ namespace TikTok.ApiClient.Entities
         /// Bidding strategy on the campaign level. Return only when Campaign Budget Optimization is enabled.
         /// </summary>
         [JsonProperty("bid_type")]
-        public int BidType { get; set; }
+        public string BidType { get; set; }
 
         /// <summary>
         /// Optimization goal. Return only when Campaign Budget Optimization is enabled.

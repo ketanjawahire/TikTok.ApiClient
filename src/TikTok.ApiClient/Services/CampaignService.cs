@@ -14,7 +14,7 @@ namespace TikTok.ApiClient.Services
         internal CampaignService(AuthenticationService authenticationService)
             : base(authenticationService)
         {
-            _getEndpoint = $"{BaseUrl}/{Version}/campaign/get";
+            _getEndpoint = $"{BaseUrl}/{Version}/campaign/get/";
         }
 
         private readonly string _getEndpoint;

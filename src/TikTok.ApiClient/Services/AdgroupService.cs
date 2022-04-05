@@ -17,7 +17,7 @@ namespace TikTok.ApiClient.Services
         internal AdgroupService(AuthenticationService authenticationService)
             : base(authenticationService)
         {
-            _getAdGroupEndpoint = $"{BaseUrl}/{Version}/adgroup/get";
+            _getAdGroupEndpoint = $"{BaseUrl}/{Version}/adgroup/get/";
         }
 
         public async Task<IEnumerable<Adgroup>> Get(AdgroupRequestModel model)
