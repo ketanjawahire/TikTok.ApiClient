@@ -37,12 +37,13 @@ namespace TikTok.ApiClient.Services
                 message.Headers.TryAddWithoutValidation("Access-Token", $"{accessToken}");
                 
                 var response = await client.SendAsync(message);
+                var content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
                 switch ((int) response.StatusCode)
                 {
                     case 200:
                     {
-                        var result = Deserialize<TEntity>(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+                        var result = Deserialize<TEntity>(content);
                         return result;
                     }
                     case 401:
@@ -55,7 +56,7 @@ namespace TikTok.ApiClient.Services
                         return await Execute<TEntity>(newMessage);
                     default:
                     {
-                        var apiError = Deserialize<ApiError>(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+                        var apiError = Deserialize<ApiError>(content);
                         throw new ApiException(apiError, response.StatusCode);
                     }
                 }

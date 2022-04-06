@@ -17,7 +17,7 @@ namespace TikTok.ApiClient.Services
         public ReportService(AuthenticationService authenticationService) 
             : base(authenticationService)
         {
-            _resourceUrl = $"{BaseUrl}/{Version}/reports/integrated/get";
+            _resourceUrl = $"{BaseUrl}/{Version}/reports/integrated/get/";
         }
 
         /// <inheritdoc />
