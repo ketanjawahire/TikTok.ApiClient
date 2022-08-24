@@ -110,6 +110,8 @@ namespace TikTok.ApiClient.Enums
         /// </summary>
         ADGROUP_STATUS_NOT_DELETE,
 
-        ADGROUP_STATUS_PRE_ONLINE
+        ADGROUP_STATUS_PRE_ONLINE,
+        
+        ADGROUP_STATUS_RF_BOOKING
     }
 }
