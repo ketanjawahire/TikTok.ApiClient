@@ -110,6 +110,116 @@ namespace TikTok.ApiClient.Enums
         /// </summary>
         ADGROUP_STATUS_NOT_DELETE,
 
-        ADGROUP_STATUS_PRE_ONLINE
+        ADGROUP_STATUS_PRE_ONLINE,
+
+        /// <summary>
+        /// Deduction failed for the R&F ad group
+        /// </summary>
+        ADGROUP_STATUS_RF_DEDUCTION_FAILED,
+
+        /// <summary>
+        /// No valid creatives in the R&F ad group
+        /// </summary>
+        ADGROUP_STATUS_RF_NO_VALID_CREATIVE,
+
+        /// <summary>
+        /// The R&F ad group is closed
+        /// </summary>
+        ADGROUP_STATUS_RF_CLOSED_OTHERS,
+
+        /// <summary>
+        /// Not enough balance in the R&F ad group
+        /// </summary>
+        ADGROUP_STATUS_RF_SHORT_BALANCE,
+
+        /// <summary>
+        /// Budget / inventory has been booked for this R&F ad group
+        /// </summary>
+        ADGROUP_STATUS_RF_BOOKING,
+
+        /// <summary>
+        /// No creatives in this R&F ad group
+        /// </summary>
+        ADGROUP_STATUS_RF_NO_DELIVERY_CREATIVE,
+
+        /// <summary>
+        /// A schedule has been created for the R&F ad group
+        /// </summary>
+        ADGROUP_STATUS_RF_SCHEDULE,
+
+        /// <summary>
+        /// The R&F ad group is terminated
+        /// </summary>
+        ADGROUP_STATUS_RF_TERMINATE,
+
+        /// <summary>
+        /// The R&F ad is rejected (can be used as filter)
+        /// </summary>
+        ADGROUP_STATUS_RF_AD_AUDIT_DENY,
+
+        /// <summary>
+        /// The advertiser account is invalid (can be used as filter)
+        /// </summary>
+        ADVERTISER_ACCOUNT_INVALID,
+
+        /// <summary>
+        /// The R&F ad group doesn't exist (can be used as filter)
+        /// </summary>
+        ADGROUP_STATUS_RF_ADGROUP_INVALID,
+
+        /// <summary>
+        /// The R&F order is withdrawn (can be used as filter)
+        /// </summary>
+        ADGROUP_STATUS_RF_WITHDRAW_ORDER,
+
+        /// <summary>
+        /// The R&F ad group is completed (can be used as filter)
+        /// </summary>
+        ADGROUP_STATUS_RF_TIME_DONE,
+
+        /// <summary>
+        /// Advertiser account is punished (can be used as filter)
+        /// </summary>
+        ADVERTISER_ACCOUNT_PUNISH,
+
+        /// <summary>
+        /// Ad group is frozen (can be used as filter)
+        /// </summary>
+        ADGROUP_STATUS_FROZEN,
+
+        /// <summary>
+        /// The associated pixel is unbound (can be used as filter)
+        /// </summary>
+        ADGROUP_STATUS_PIXEL_UNBIND,
+
+        /// <summary>
+        /// Live is not yet started
+        /// </summary>
+        ADGROUP_STATUS_LIVE_OFFLINE,
+
+        /// <summary>
+        /// Ad group in partial review progress and not in delivery (can be used as filter)
+        /// </summary>
+        ADGROUP_STATUS_PARTIAL_AUDIT_NO_DELIVERY,
+
+        /// <summary>
+        /// Ad group in partial review progress and in delivery (can be used as filter)
+        /// </summary>
+        ADGROUP_STATUS_PARTIAL_AUDIT_DELIVERY_OK,
+
+        /// <summary>
+        /// Industry qualification is missing
+        /// </summary>
+        ADGROUP_STATUS_INDUSTRY_QUALIFICATION_MISSING,
+
+        /// <summary>
+        /// Industry qualification is expired
+        /// </summary>
+        ADGROUP_STATUS_INDUSTRY_QUALIFICATION_EXPIRED,
+
+        /// <summary>
+        /// Industry qualification is rejected (can be used as filter)
+        /// </summary>
+        ADGROUP_STATUS_INDUSTRY_QUALIFICATION_DENY,
     }
 }
