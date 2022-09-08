@@ -75,7 +75,7 @@ namespace TikTok.ApiClient.Services
             var message = new HttpRequestMessage(HttpMethod.Get, $"{_resourceUrl}?{queryString}");
             var response = Execute<ReportResponseRootObject>(message).GetAwaiter().GetResult();
 
-            if (response.code == 40105) 
+            if (response.code == 40105 || response.code == 40001) 
                 throw new Exceptions.UnauthorizedAccessException();
 
             var result = Extract<ReportResponseRootObject, ReportResponseWrapper, ReportResponse>(response);
