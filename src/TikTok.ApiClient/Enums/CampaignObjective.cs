@@ -62,6 +62,8 @@
         /// </summary>
         RF_VIDEO_VIEW,
 
-        RF_TRAFFIC
+        RF_TRAFFIC,
+
+        APP_PROMOTION
     }
 }
