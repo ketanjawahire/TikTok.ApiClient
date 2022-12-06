@@ -89,7 +89,9 @@ namespace TikTok.ApiClient.Entities
         /// Campaign Type, indicates the campaign is a regular campaign or iOS 14 campaign. Enum values: REGULAR_CAMPAIGN and IOS14_CAMPAIGN.
         /// </summary>
         [JsonProperty("campaign_type")]
-        public string CampaignType { get; set; }
+        public string Type { get; set; }
+
+        public CampaignType CampaignType => (CampaignType) Enum.Parse(typeof(CampaignType), Type);
 
         /// <summary>
         /// "Operation status

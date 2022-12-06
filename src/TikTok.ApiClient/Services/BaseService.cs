@@ -16,7 +16,7 @@ namespace TikTok.ApiClient.Services
     internal abstract class BaseService : IApiService
     {
         public string BaseUrl = "https://business-api.tiktok.com/open_api";
-        public string Version = "v1.2";
+        public string Version = "v1.3";
 
         private readonly AuthenticationService _authService;
 

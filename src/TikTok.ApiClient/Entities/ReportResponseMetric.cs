@@ -123,7 +123,7 @@ namespace TikTok.ApiClient.Entities
         public string TotalDownloadStartValue { get; set; }
 
         [JsonProperty("campaign_id")] 
-        public long CampaignId { get; set; }
+        public string CampaignId { get; set; }
 
         [JsonProperty("profile_visits")] public string ProfileVisits { get; set; }
 
@@ -139,7 +139,8 @@ namespace TikTok.ApiClient.Entities
 
         [JsonProperty("spend_credits")] public string SpendCredits { get; set; }
 
-        [JsonProperty("adgroup_id")] public long AdgroupId { get; set; }
+        [JsonProperty("adgroup_id")] 
+        public string AdgroupId { get; set; }
 
         [JsonProperty("total_unlock_achievement")]
         public string TotalUnlockAchievement { get; set; }

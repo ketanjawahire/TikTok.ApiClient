@@ -12,13 +12,13 @@ namespace TikTok.ApiClient.Entities
         /// advertiser id
         /// </summary>
         [JsonProperty("advertiser_id")]
-        public long AdvertiserId { get; set; }
+        public string AdvertiserId { get; set; }
 
         /// <summary>
         /// ad id
         /// </summary>
         [JsonProperty("ad_id")]
-        public long AdId { get; set; }
+        public string AdId { get; set; }
 
         /// <summary>
         /// ad name
@@ -36,7 +36,7 @@ namespace TikTok.ApiClient.Entities
         /// adgroup id
         /// </summary>
         [JsonProperty("adgroup_id")]
-        public long AdgroupId { get; set; }
+        public string AdgroupId { get; set; }
 
         /// <summary>
         /// adgroup name
@@ -48,7 +48,7 @@ namespace TikTok.ApiClient.Entities
         /// campaign id
         /// </summary>
         [JsonProperty("campaign_id")]
-        public long CampaignId { get; set; }
+        public string CampaignId { get; set; }
 
         /// <summary>
         /// campaign name
