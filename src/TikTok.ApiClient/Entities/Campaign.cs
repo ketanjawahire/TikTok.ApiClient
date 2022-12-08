@@ -32,7 +32,7 @@ namespace TikTok.ApiClient.Entities
         /// <summary>
         /// The campaign status
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("secondary_status")]
         public CampaignStatus CampaignStatus { get; set; }
 
         /// <summary>
@@ -96,13 +96,13 @@ namespace TikTok.ApiClient.Entities
         /// <summary>
         /// "Operation status
         /// </summary>
-        [JsonProperty("opt_status")]
+        [JsonProperty("operation_status")]
         public string OptStatus { get; set; }
 
         /// <summary>
         /// Whether Campaign Budget Optimization is enabled. Return only when Campaign Budget Optimization is enabled.
         /// </summary>
-        [JsonProperty("budget_optimize_switch")]
+        [JsonProperty("budget_optimize_on")]
         public int BudgetOptimizeSwitch { get; set; }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace TikTok.ApiClient.Entities
         /// <summary>
         /// Optimization goal. Return only when Campaign Budget Optimization is enabled.
         /// </summary>
-        [JsonProperty("optimize_goal")]
+        [JsonProperty("optimization_goal")]
         public string OptimizeGoal { get; set; }
 
         /// <summary>
