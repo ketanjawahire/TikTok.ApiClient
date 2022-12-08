@@ -15,13 +15,13 @@ namespace TikTok.ApiClient.Entities
         /// advertiser_id
         /// </summary>
         [JsonProperty("advertiser_id")]
-        public long AdvertiserId { get; set; }
+        public string AdvertiserId { get; set; }
 
         /// <summary>
         /// campaign_id
         /// </summary>
         [JsonProperty("campaign_id")]
-        public long CampaignId { get; set; }
+        public string CampaignId { get; set; }
 
         /// <summary>
         /// campaign_name

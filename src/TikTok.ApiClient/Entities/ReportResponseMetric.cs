@@ -386,41 +386,20 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("skan_app_install")]
         public string SkanAppInstall { get; set; }
 
-        [JsonProperty("skan_cost_per_app_install")]
-        public string SkanCostPerAppInstall { get; set; }
-
         [JsonProperty("skan_app_install_withheld")]
         public string SkanAppInstallWithheld { get; set; }
 
         [JsonProperty("skan_registration")]
         public string SkanRegistration { get; set; }
 
-        [JsonProperty("skan_cost_per_registration")]
-        public string SkanCostPerRegistration { get; set; }
-
-        [JsonProperty("skan_registration_rate")]
-        public string SkanRegistrationRate { get; set; }
-
         [JsonProperty("skan_total_registration")]
         public string SkanTotalRegistration { get; set; }
-
-        [JsonProperty("skan_cost_per_total_registration")]
-        public string SkanCostPerTotalRegistration { get; set; }
 
         [JsonProperty("skan_purchase")]
         public string SkanPurchase { get; set; }
 
-        [JsonProperty("skan_cost_per_purchase")]
-        public string SkanCostPerPurchase { get; set; }
-
-        [JsonProperty("skan_purchase_rate")]
-        public string SkanPurchaseRate { get; set; }
-
         [JsonProperty("skan_total_purchase")]
         public string SkanTotalPurchase { get; set; }
-
-        [JsonProperty("skan_cost_per_total_purchase")]
-        public string SkanCostPerTotalPurchase { get; set; }
 
         [JsonProperty("skan_total_purchase_value")]
         public string SkanTotalPurchaseValue { get; set; }
@@ -431,17 +410,8 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("skan_add_to_cart")]
         public string SkanAddToCart { get; set; }
 
-        [JsonProperty("skan_cost_per_add_to_cart")]
-        public string SkanCostPerAddToCart { get; set; }
-
-        [JsonProperty("skan_add_to_cart_rate")]
-        public string SkanAddToCartRate { get; set; }
-
         [JsonProperty("skan_total_add_to_cart")]
         public string SkanTotalAddToCart { get; set; }
-
-        [JsonProperty("skan_cost_per_total_add_to_cart")]
-        public string SkanCostPerTotalAddToCart { get; set; }
 
         [JsonProperty("skan_total_add_to_cart_value")]
         public string SkanTotalAddToCartValue { get; set; }
@@ -449,17 +419,8 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("skan_checkout")]
         public string SkanCheckout { get; set; }
 
-        [JsonProperty("skan_cost_per_checkout")]
-        public string SkanCostPerCheckout { get; set; }
-
-        [JsonProperty("skan_checkout_rate")]
-        public string SkanCheckoutRate { get; set; }
-
         [JsonProperty("skan_total_checkout")]
         public string SkanTotalCheckout { get; set; }
-
-        [JsonProperty("skan_cost_per_total_checkout")]
-        public string SkanCostPerTotalCheckout { get; set; }
 
         [JsonProperty("skan_total_checkout_value")]
         public string SkanTotalCheckoutValue { get; set; }
@@ -467,17 +428,8 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("skan_view_content")]
         public string SkanViewContent { get; set; }
 
-        [JsonProperty("skan_cost_per_view_content")]
-        public string SkanCostPerViewContent { get; set; }
-
-        [JsonProperty("skan_view_content_rate")]
-        public string SkanViewContentRate { get; set; }
-
         [JsonProperty("skan_total_view_content")]
         public string SkanTotalViewContent { get; set; }
-
-        [JsonProperty("skan_cost_per_total_view_content")]
-        public string SkanCostPerTotalViewContent { get; set; }
 
         [JsonProperty("skan_total_view_content_value")]
         public string SkanTotalViewContentValue { get; set; }
@@ -485,32 +437,14 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("skan_add_payment_info")]
         public string SkanAddPaymentInfo { get; set; }
 
-        [JsonProperty("skan_cost_per_add_payment_info")]
-        public string SkanCostPerAddPaymentInfo { get; set; }
-
-        [JsonProperty("skan_add_payment_info_rate")]
-        public string SkanAddPaymentInfoRate { get; set; }
-
         [JsonProperty("skan_total_add_payment_info")]
         public string SkanTotalAddPaymentInfo { get; set; }
-
-        [JsonProperty("skan_cost_total_add_payment_info")]
-        public string SkanCostTotalAddPaymentInfo { get; set; }
 
         [JsonProperty("skan_add_to_wishlist")]
         public string SkanAddToWishlist { get; set; }
 
-        [JsonProperty("skan_cost_per_add_to_wishlist")]
-        public string SkanCostPerAddToWishlist { get; set; }
-
-        [JsonProperty("skan_add_to_wishlist_rate")]
-        public string SkanAddToWishlistRate { get; set; }
-
         [JsonProperty("skan_total_add_to_wishlist")]
         public string SkanTotalAddToWishlist { get; set; }
-
-        [JsonProperty("skan_cost_per_total_add_to_wishlist")]
-        public string SkanCostPerTotalAddToWishlist { get; set; }
 
         [JsonProperty("skan_total_add_to_wishlist_value")]
         public string SkanTotalAddToWishlistValue { get; set; }
@@ -518,32 +452,14 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("skan_launch_app")]
         public string SkanLaunchApp { get; set; }
 
-        [JsonProperty("skan_cost_per_launch_app")]
-        public string SkanCostPerLaunchApp { get; set; }
-
-        [JsonProperty("skan_launch_app_rate")]
-        public string SkanLaunchAppRate { get; set; }
-
         [JsonProperty("skan_total_launch_app")]
         public string SkanTotalLaunchApp { get; set; }
-
-        [JsonProperty("skan_cost_per_total_launch_app")]
-        public string SkanCostPerTotalLaunchApp { get; set; }
 
         [JsonProperty("skan_total_complete_tutorial")]
         public string SkanTotalCompleteTutorial { get; set; }
 
-        [JsonProperty("skan_cost_per_total_complete_tutorial")]
-        public string SkanCostPerTotalCompleteTutorial { get; set; }
-
         [JsonProperty("skan_complete_tutorial")]
         public string SkanCompleteTutorial { get; set; }
-
-        [JsonProperty("skan_cost_per_complete_tutorial")]
-        public string SkanCostPerCompleteTutorial { get; set; }
-
-        [JsonProperty("skan_complete_tutorial_rate")]
-        public string SkanCompleteTutorialRate { get; set; }
 
         [JsonProperty("skan_total_complete_tutorial_value")]
         public string SkanTotalCompleteTutorialValue { get; set; }
@@ -551,17 +467,8 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("skan_create_group")]
         public string SkanCreateGroup { get; set; }
 
-        [JsonProperty("skan_cost_per_create_group")]
-        public string SkanCostPerCreateGroup { get; set; }
-
-        [JsonProperty("skan_create_group_rate")]
-        public string SkanCreateGroupRate { get; set; }
-
         [JsonProperty("skan_total_create_group")]
         public string SkanTotalCreateGroup { get; set; }
-
-        [JsonProperty("skan_cost_per_total_create_group")]
-        public string SkanCostPerTotalCreateGroup { get; set; }
 
         [JsonProperty("skan_total_create_group_value")]
         public string SkanTotalCreateGroupValue { get; set; }
@@ -569,17 +476,8 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("skan_join_group")]
         public string SkanJoinGroup { get; set; }
 
-        [JsonProperty("skan_cost_per_join_group")]
-        public string SkanCostPerJoinGroup { get; set; }
-
-        [JsonProperty("skan_join_group_rate")]
-        public string SkanJoinGroupRate { get; set; }
-
         [JsonProperty("skan_total_join_group")]
         public string SkanTotalJoinGroup { get; set; }
-
-        [JsonProperty("skan_cost_per_total_join_group")]
-        public string SkanCostPerTotalJoinGroup { get; set; }
 
         [JsonProperty("skan_total_join_group_value")]
         public string SkanTotalJoinGroupValue { get; set; }
@@ -587,17 +485,8 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("skan_create_gamerole")]
         public string SkanCreateGamerole { get; set; }
 
-        [JsonProperty("skan_cost_per_create_gamerole")]
-        public string SkanCostPerCreateGamerole { get; set; }
-
-        [JsonProperty("skan_create_gamerole_rate")]
-        public string SkanCreateGameroleRate { get; set; }
-
         [JsonProperty("skan_total_create_gamerole")]
         public string SkanTotalCreateGamerole { get; set; }
-
-        [JsonProperty("skan_cost_per_total_create_gamerole")]
-        public string SkanCostPerTotalCreateGamerole { get; set; }
 
         [JsonProperty("skan_total_create_gamerole_value")]
         public string SkanTotalCreateGameroleValue { get; set; }
@@ -605,17 +494,8 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("skan_spend_credits")]
         public string SkanSpendCredits { get; set; }
 
-        [JsonProperty("skan_cost_per_spend_credits")]
-        public string SkanCostPerSpendCredits { get; set; }
-
-        [JsonProperty("skan_spend_credits_rate")]
-        public string SkanSpendCreditsRate { get; set; }
-
         [JsonProperty("skan_total_spend_credits")]
         public string SkanTotalSpendCredits { get; set; }
-
-        [JsonProperty("skan_cost_per_total_spend_credits")]
-        public string SkanCostPerTotalSpendCredits { get; set; }
 
         [JsonProperty("skan_total_spend_credits_value")]
         public string SkanTotalSpendCreditsValue { get; set; }
@@ -623,17 +503,8 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("skan_achieve_level")]
         public string SkanAchieveLevel { get; set; }
 
-        [JsonProperty("skan_cost_per_achieve_level")]
-        public string SkanCostPerAchieveLevel { get; set; }
-
-        [JsonProperty("skan_achieve_level_rate")]
-        public string SkanAchieveLevelRate { get; set; }
-
         [JsonProperty("skan_total_achieve_level")]
         public string SkanTotalAchieveLevel { get; set; }
-
-        [JsonProperty("skan_cost_per_total_achieve_level")]
-        public string SkanCostPerTotalAchieveLevel { get; set; }
 
         [JsonProperty("skan_total_achieve_level_value")]
         public string SkanTotalAchieveLevelValue { get; set; }
@@ -641,17 +512,8 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("skan_unlock_achievement")]
         public string SkanUnlockAchievement { get; set; }
 
-        [JsonProperty("skan_cost_per_unlock_achievement")]
-        public string SkanCostPerUnlockAchievement { get; set; }
-
-        [JsonProperty("skan_unlock_achievement_rate")]
-        public string SkanUnlockAchievementRate { get; set; }
-
         [JsonProperty("skan_total_unlock_achievement")]
         public string SkanTotalUnlockAchievement { get; set; }
-
-        [JsonProperty("skan_cost_per_total_unlock_achievement")]
-        public string SkanCostPerTotalUnlockAchievement { get; set; }
 
         [JsonProperty("skan_total_unlock_achievement_value")]
         public string SkanTotalUnlockAchievementValue { get; set; }
@@ -659,17 +521,8 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("skan_sales_lead")]
         public string SkanSalesLead { get; set; }
 
-        [JsonProperty("skan_cost_per_sales_lead")]
-        public string SkanCostPerSalesLead { get; set; }
-
-        [JsonProperty("skan_sales_lead_rate")]
-        public string SkanSalesLeadRate { get; set; }
-
         [JsonProperty("skan_total_sales_lead")]
         public string SkanTotalSalesLead { get; set; }
-
-        [JsonProperty("skan_cost_per_total_sales_lead")]
-        public string SkanCostPerTotalSalesLead { get; set; }
 
         [JsonProperty("skan_total_sales_lead_value")]
         public string SkanTotalSalesLeadValue { get; set; }
@@ -677,17 +530,8 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("skan_in_app_ad_click")]
         public string SkanInAppAdClick { get; set; }
 
-        [JsonProperty("skan_cost_per_in_app_ad_click")]
-        public string SkanCostPerInAppAdClick { get; set; }
-
-        [JsonProperty("skan_in_app_ad_click_rate")]
-        public string SkanInAppAdClickRate { get; set; }
-
         [JsonProperty("skan_total_in_app_ad_click")]
         public string SkanTotalInAppAdClick { get; set; }
-
-        [JsonProperty("skan_cost_per_total_in_app_ad_click")]
-        public string SkanCostPerTotalInAppAdClick { get; set; }
 
         [JsonProperty("skan_total_in_app_ad_click_value")]
         public string SkanTotalInAppAdClickValue { get; set; }
@@ -695,17 +539,8 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("skan_in_app_ad_impr")]
         public string SkanInAppAdImpr { get; set; }
 
-        [JsonProperty("skan_cost_per_in_app_ad_impr")]
-        public string SkanCostPerInAppAdImpr { get; set; }
-
-        [JsonProperty("skan_in_app_ad_impr_rate")]
-        public string SkanInAppAdImprRate { get; set; }
-
         [JsonProperty("skan_total_in_app_ad_impr")]
         public string SkanTotalInAppAdImpr { get; set; }
-
-        [JsonProperty("skan_cost_per_total_in_app_ad_impr")]
-        public string SkanCostPerTotalInAppAdImpr { get; set; }
 
         [JsonProperty("skan_total_in_app_ad_impr_value")]
         public string SkanTotalInAppAdImprValue { get; set; }
@@ -713,77 +548,32 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("skan_loan_apply")]
         public string SkanLoanApply { get; set; }
 
-        [JsonProperty("skan_cost_per_loan_apply")]
-        public string SkanCostPerLoanApply { get; set; }
-
-        [JsonProperty("skan_loan_apply_rate")]
-        public string SkanLoanApplyRate { get; set; }
-
         [JsonProperty("skan_total_loan_apply")]
         public string SkanTotalLoanApply { get; set; }
-
-        [JsonProperty("skan_cost_per_total_loan_apply")]
-        public string SkanCostPerTotalLoanApply { get; set; }
 
         [JsonProperty("skan_loan_credit")]
         public string SkanLoanCredit { get; set; }
 
-        [JsonProperty("skan_cost_per_loan_credit")]
-        public string SkanCostPerLoanCredit { get; set; }
-
-        [JsonProperty("skan_loan_credit_rate")]
-        public string SkanLoanCreditRate { get; set; }
-
         [JsonProperty("skan_total_loan_credit")]
         public string SkanTotalLoanCredit { get; set; }
-
-        [JsonProperty("skan_cost_per_total_loan_credit")]
-        public string SkanCostPerTotalLoanCredit { get; set; }
 
         [JsonProperty("skan_loan_disbursement")]
         public string SkanLoanDisbursement { get; set; }
 
-        [JsonProperty("skan_cost_per_loan_disbursement")]
-        public string SkanCostPerLoanDisbursement { get; set; }
-
-        [JsonProperty("skan_loan_disbursement_rate")]
-        public string SkanLoanDisbursementRate { get; set; }
-
         [JsonProperty("skan_total_loan_disbursement")]
         public string SkanTotalLoanDisbursement { get; set; }
-
-        [JsonProperty("skan_cost_per_total_loan_disbursement")]
-        public string SkanCostPerTotalLoanDisbursement { get; set; }
 
         [JsonProperty("skan_login")]
         public string SkanLogin { get; set; }
 
-        [JsonProperty("skan_cost_per_login")]
-        public string SkanCostPerLogin { get; set; }
-
-        [JsonProperty("skan_login_rate")]
-        public string SkanLoginRate { get; set; }
-
         [JsonProperty("skan_total_login")]
         public string SkanTotalLogin { get; set; }
-
-        [JsonProperty("skan_cost_per_total_login")]
-        public string SkanCostPerTotalLogin { get; set; }
 
         [JsonProperty("skan_ratings")]
         public string SkanRatings { get; set; }
 
-        [JsonProperty("skan_cost_per_ratings")]
-        public string SkanCostPerRatings { get; set; }
-
-        [JsonProperty("skan_ratings_rate")]
-        public string SkanRatingsRate { get; set; }
-
         [JsonProperty("skan_total_ratings")]
         public string SkanTotalRatings { get; set; }
-
-        [JsonProperty("skan_cost_per_total_ratings")]
-        public string SkanCostPerTotalRatings { get; set; }
 
         [JsonProperty("skan_total_ratings_value")]
         public string SkanTotalRatingsValue { get; set; }
@@ -791,47 +581,20 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("skan_search")]
         public string SkanSearch { get; set; }
 
-        [JsonProperty("skan_cost_per_search")]
-        public string SkanCostPerSearch { get; set; }
-
-        [JsonProperty("skan_search_rate")]
-        public string SkanSearchRate { get; set; }
-
         [JsonProperty("skan_total_search")]
         public string SkanTotalSearch { get; set; }
-
-        [JsonProperty("skan_cost_per_total_search")]
-        public string SkanCostPerTotalSearch { get; set; }
 
         [JsonProperty("skan_start_trial")]
         public string SkanStartTrial { get; set; }
 
-        [JsonProperty("skan_cost_per_start_trial")]
-        public string SkanCostPerStartTrial { get; set; }
-
-        [JsonProperty("skan_start_trial_rate")]
-        public string SkanStartTrialRate { get; set; }
-
         [JsonProperty("skan_total_start_trial")]
         public string SkanTotalStartTrial { get; set; }
-
-        [JsonProperty("skan_cost_per_total_start_trial")]
-        public string SkanCostPerTotalStartTrial { get; set; }
 
         [JsonProperty("skan_subscribe")]
         public string SkanSubscribe { get; set; }
 
-        [JsonProperty("skan_cost_per_subscribe")]
-        public string SkanCostPerSubscribe { get; set; }
-
-        [JsonProperty("skan_subscribe_rate")]
-        public string SkanSubscribeRate { get; set; }
-
         [JsonProperty("skan_total_subscribe")]
         public string SkanTotalSubscribe { get; set; }
-
-        [JsonProperty("skan_cost_per_total_subscribe")]
-        public string SkanCostPerTotalSubscribe { get; set; }
 
         [JsonProperty("skan_total_subscribe_value")]
         public string SkanTotalSubscribeValue { get; set; }
