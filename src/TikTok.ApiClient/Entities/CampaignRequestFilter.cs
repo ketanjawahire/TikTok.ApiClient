@@ -9,7 +9,7 @@ namespace TikTok.ApiClient.Entities
         /// filter by campaign id.
         /// </summary>
         [JsonProperty("campaign_ids")]
-        public List<long> CampaignIds { get; set; }
+        public List<string> CampaignIds { get; set; }
 
         /// <summary>
         /// campaign campaign objective, for details, please refer to【appendix-campaign objective（new）】
