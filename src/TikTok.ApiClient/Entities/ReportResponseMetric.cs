@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace TikTok.ApiClient.Entities
 {
@@ -176,6 +177,8 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("video_views_p25")] 
         public string VideoViewsP25 { get; set; }
 
+        [Obsolete("This metric is deprecated in v1.3")]
+
         [JsonProperty("form_button")] 
         public string FormButton { get; set; }
 
@@ -214,6 +217,7 @@ namespace TikTok.ApiClient.Entities
 
         [JsonProperty("online_consult")] public string OnlineConsult { get; set; }
 
+        [Obsolete("This metric is deprecated in v1.3")]
         [JsonProperty("download_button")] public string DownloadButton { get; set; }
 
         [JsonProperty("on_web_order")] public string OnWebOrder { get; set; }
@@ -235,8 +239,11 @@ namespace TikTok.ApiClient.Entities
 
         [JsonProperty("real_time_result")] public string RealTimeResult { get; set; }
 
+        [Obsolete("This metric is deprecated in v1.3")]
         [JsonProperty("button_click_consultation")]
         public string ButtonClickConsultation { get; set; }
+
+        [Obsolete("This metric is deprecated in v1.3")]
 
         [JsonProperty("total_form_button_value")]
         public string TotalFormButtonValue { get; set; }
@@ -248,10 +255,12 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("total_web_event_add_to_cart_value")]
         public string TotalWebEventAddToCartValue { get; set; }
 
+        [Obsolete("This metric is deprecated in v1.3")]
         [JsonProperty("consultation")] public string Consultation { get; set; }
 
         [JsonProperty("page_event_search")] public string PageEventSearch { get; set; }
 
+        [Obsolete("This metric is deprecated in v1.3")]
         [JsonProperty("total_consultation_value")]
         public string TotalConsultationValue { get; set; }
 
@@ -271,14 +280,17 @@ namespace TikTok.ApiClient.Entities
         [JsonProperty("total_spend_credits_value")]
         public string TotalSpendCreditsValue { get; set; }
 
+        [Obsolete("This metric is deprecated in v1.3")]
         [JsonProperty("download_detail")] public string DownloadDetail { get; set; }
 
         [JsonProperty("total_app_event_add_to_cart_value")]
         public string TotalAppEventAddToCartValue { get; set; }
 
+        [Obsolete("This metric is deprecated in v1.3")]
         [JsonProperty("total_button_click_consultation_value")]
         public string TotalButtonClickConsultationValue { get; set; }
 
+        [Obsolete("This metric is deprecated in v1.3")]
         [JsonProperty("total_download_detail_value")]
         public string TotalDownloadDetailValue { get; set; }
 
@@ -294,9 +306,11 @@ namespace TikTok.ApiClient.Entities
 
         [JsonProperty("add_to_wishlist")] public string AddToWishlist { get; set; }
 
+        [Obsolete("This metric is deprecated in v1.3")]
         [JsonProperty("page_browse_consultation")]
         public string PageBrowseConsultation { get; set; }
 
+        [Obsolete("This metric is deprecated in v1.3")]
         [JsonProperty("total_page_browse_consultation_value")]
         public string TotalPageBrowseConsultationValue { get; set; }
 
@@ -354,6 +368,7 @@ namespace TikTok.ApiClient.Entities
 
         [JsonProperty("start_trial")] public string StartTrial { get; set; }
 
+        [Obsolete("This metric is deprecated in v1.3")]
         [JsonProperty("total_download_button_value")]
         public string TotalDownloadButtonValue { get; set; }
 

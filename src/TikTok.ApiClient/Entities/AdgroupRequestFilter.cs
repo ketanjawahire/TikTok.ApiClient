@@ -9,13 +9,13 @@ namespace TikTok.ApiClient.Entities
         /// filter by adgroup id.
         /// </summary>
         [JsonProperty("adgroup_ids")]
-        public List<long> AdGroupIds { get; set; }
+        public List<string> AdGroupIds { get; set; }
 
         /// <summary>
         /// filter by campaign id.
         /// </summary>
         [JsonProperty("campaign_ids")]
-        public List<long> CampaignIds { get; set; }
+        public List<string> CampaignIds { get; set; }
 
         /// <summary>
         /// campaign campaign objective, for details, please refer to【appendix-campaign objective（new）】
@@ -33,7 +33,7 @@ namespace TikTok.ApiClient.Entities
         /// filter by billing events,details please find details from appendix[billing events]
         /// </summary>
         [JsonProperty("billing_events")]
-        public List<long> BillingEvents { get; set; }
+        public List<string> BillingEvents { get; set; }
 
         /// <summary>
         /// fuzzy search by adgroup name
