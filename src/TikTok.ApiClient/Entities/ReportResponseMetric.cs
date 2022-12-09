@@ -123,7 +123,7 @@ namespace TikTok.ApiClient.Entities
         public string TotalDownloadStartValue { get; set; }
 
         [JsonProperty("campaign_id")] 
-        public long CampaignId { get; set; }
+        public string CampaignId { get; set; }
 
         [JsonProperty("profile_visits")] public string ProfileVisits { get; set; }
 
@@ -139,7 +139,8 @@ namespace TikTok.ApiClient.Entities
 
         [JsonProperty("spend_credits")] public string SpendCredits { get; set; }
 
-        [JsonProperty("adgroup_id")] public long AdgroupId { get; set; }
+        [JsonProperty("adgroup_id")] 
+        public string AdgroupId { get; set; }
 
         [JsonProperty("total_unlock_achievement")]
         public string TotalUnlockAchievement { get; set; }
@@ -373,5 +374,229 @@ namespace TikTok.ApiClient.Entities
 
 		[JsonProperty("frequency")]
         public string Frequency { get; set; }
-	}
+
+        // SKAN Metrics
+
+        [JsonProperty("skan_conversion")]
+        public string SkanConversion { get; set; }
+        
+        [JsonProperty("skan_result")]
+        public string SkanResult { get; set; }
+        
+        [JsonProperty("skan_app_install")]
+        public string SkanAppInstall { get; set; }
+
+        [JsonProperty("skan_app_install_withheld")]
+        public string SkanAppInstallWithheld { get; set; }
+
+        [JsonProperty("skan_registration")]
+        public string SkanRegistration { get; set; }
+
+        [JsonProperty("skan_total_registration")]
+        public string SkanTotalRegistration { get; set; }
+
+        [JsonProperty("skan_purchase")]
+        public string SkanPurchase { get; set; }
+
+        [JsonProperty("skan_total_purchase")]
+        public string SkanTotalPurchase { get; set; }
+
+        [JsonProperty("skan_total_purchase_value")]
+        public string SkanTotalPurchaseValue { get; set; }
+
+        [JsonProperty("skan_total_repetitive_active_pay_roas")]
+        public string SkanTotalRepetitiveActivePayRoas { get; set; }
+
+        [JsonProperty("skan_add_to_cart")]
+        public string SkanAddToCart { get; set; }
+
+        [JsonProperty("skan_total_add_to_cart")]
+        public string SkanTotalAddToCart { get; set; }
+
+        [JsonProperty("skan_total_add_to_cart_value")]
+        public string SkanTotalAddToCartValue { get; set; }
+
+        [JsonProperty("skan_checkout")]
+        public string SkanCheckout { get; set; }
+
+        [JsonProperty("skan_total_checkout")]
+        public string SkanTotalCheckout { get; set; }
+
+        [JsonProperty("skan_total_checkout_value")]
+        public string SkanTotalCheckoutValue { get; set; }
+
+        [JsonProperty("skan_view_content")]
+        public string SkanViewContent { get; set; }
+
+        [JsonProperty("skan_total_view_content")]
+        public string SkanTotalViewContent { get; set; }
+
+        [JsonProperty("skan_total_view_content_value")]
+        public string SkanTotalViewContentValue { get; set; }
+
+        [JsonProperty("skan_add_payment_info")]
+        public string SkanAddPaymentInfo { get; set; }
+
+        [JsonProperty("skan_total_add_payment_info")]
+        public string SkanTotalAddPaymentInfo { get; set; }
+
+        [JsonProperty("skan_add_to_wishlist")]
+        public string SkanAddToWishlist { get; set; }
+
+        [JsonProperty("skan_total_add_to_wishlist")]
+        public string SkanTotalAddToWishlist { get; set; }
+
+        [JsonProperty("skan_total_add_to_wishlist_value")]
+        public string SkanTotalAddToWishlistValue { get; set; }
+
+        [JsonProperty("skan_launch_app")]
+        public string SkanLaunchApp { get; set; }
+
+        [JsonProperty("skan_total_launch_app")]
+        public string SkanTotalLaunchApp { get; set; }
+
+        [JsonProperty("skan_total_complete_tutorial")]
+        public string SkanTotalCompleteTutorial { get; set; }
+
+        [JsonProperty("skan_complete_tutorial")]
+        public string SkanCompleteTutorial { get; set; }
+
+        [JsonProperty("skan_total_complete_tutorial_value")]
+        public string SkanTotalCompleteTutorialValue { get; set; }
+
+        [JsonProperty("skan_create_group")]
+        public string SkanCreateGroup { get; set; }
+
+        [JsonProperty("skan_total_create_group")]
+        public string SkanTotalCreateGroup { get; set; }
+
+        [JsonProperty("skan_total_create_group_value")]
+        public string SkanTotalCreateGroupValue { get; set; }
+
+        [JsonProperty("skan_join_group")]
+        public string SkanJoinGroup { get; set; }
+
+        [JsonProperty("skan_total_join_group")]
+        public string SkanTotalJoinGroup { get; set; }
+
+        [JsonProperty("skan_total_join_group_value")]
+        public string SkanTotalJoinGroupValue { get; set; }
+
+        [JsonProperty("skan_create_gamerole")]
+        public string SkanCreateGamerole { get; set; }
+
+        [JsonProperty("skan_total_create_gamerole")]
+        public string SkanTotalCreateGamerole { get; set; }
+
+        [JsonProperty("skan_total_create_gamerole_value")]
+        public string SkanTotalCreateGameroleValue { get; set; }
+
+        [JsonProperty("skan_spend_credits")]
+        public string SkanSpendCredits { get; set; }
+
+        [JsonProperty("skan_total_spend_credits")]
+        public string SkanTotalSpendCredits { get; set; }
+
+        [JsonProperty("skan_total_spend_credits_value")]
+        public string SkanTotalSpendCreditsValue { get; set; }
+
+        [JsonProperty("skan_achieve_level")]
+        public string SkanAchieveLevel { get; set; }
+
+        [JsonProperty("skan_total_achieve_level")]
+        public string SkanTotalAchieveLevel { get; set; }
+
+        [JsonProperty("skan_total_achieve_level_value")]
+        public string SkanTotalAchieveLevelValue { get; set; }
+
+        [JsonProperty("skan_unlock_achievement")]
+        public string SkanUnlockAchievement { get; set; }
+
+        [JsonProperty("skan_total_unlock_achievement")]
+        public string SkanTotalUnlockAchievement { get; set; }
+
+        [JsonProperty("skan_total_unlock_achievement_value")]
+        public string SkanTotalUnlockAchievementValue { get; set; }
+
+        [JsonProperty("skan_sales_lead")]
+        public string SkanSalesLead { get; set; }
+
+        [JsonProperty("skan_total_sales_lead")]
+        public string SkanTotalSalesLead { get; set; }
+
+        [JsonProperty("skan_total_sales_lead_value")]
+        public string SkanTotalSalesLeadValue { get; set; }
+
+        [JsonProperty("skan_in_app_ad_click")]
+        public string SkanInAppAdClick { get; set; }
+
+        [JsonProperty("skan_total_in_app_ad_click")]
+        public string SkanTotalInAppAdClick { get; set; }
+
+        [JsonProperty("skan_total_in_app_ad_click_value")]
+        public string SkanTotalInAppAdClickValue { get; set; }
+
+        [JsonProperty("skan_in_app_ad_impr")]
+        public string SkanInAppAdImpr { get; set; }
+
+        [JsonProperty("skan_total_in_app_ad_impr")]
+        public string SkanTotalInAppAdImpr { get; set; }
+
+        [JsonProperty("skan_total_in_app_ad_impr_value")]
+        public string SkanTotalInAppAdImprValue { get; set; }
+
+        [JsonProperty("skan_loan_apply")]
+        public string SkanLoanApply { get; set; }
+
+        [JsonProperty("skan_total_loan_apply")]
+        public string SkanTotalLoanApply { get; set; }
+
+        [JsonProperty("skan_loan_credit")]
+        public string SkanLoanCredit { get; set; }
+
+        [JsonProperty("skan_total_loan_credit")]
+        public string SkanTotalLoanCredit { get; set; }
+
+        [JsonProperty("skan_loan_disbursement")]
+        public string SkanLoanDisbursement { get; set; }
+
+        [JsonProperty("skan_total_loan_disbursement")]
+        public string SkanTotalLoanDisbursement { get; set; }
+
+        [JsonProperty("skan_login")]
+        public string SkanLogin { get; set; }
+
+        [JsonProperty("skan_total_login")]
+        public string SkanTotalLogin { get; set; }
+
+        [JsonProperty("skan_ratings")]
+        public string SkanRatings { get; set; }
+
+        [JsonProperty("skan_total_ratings")]
+        public string SkanTotalRatings { get; set; }
+
+        [JsonProperty("skan_total_ratings_value")]
+        public string SkanTotalRatingsValue { get; set; }
+
+        [JsonProperty("skan_search")]
+        public string SkanSearch { get; set; }
+
+        [JsonProperty("skan_total_search")]
+        public string SkanTotalSearch { get; set; }
+
+        [JsonProperty("skan_start_trial")]
+        public string SkanStartTrial { get; set; }
+
+        [JsonProperty("skan_total_start_trial")]
+        public string SkanTotalStartTrial { get; set; }
+
+        [JsonProperty("skan_subscribe")]
+        public string SkanSubscribe { get; set; }
+
+        [JsonProperty("skan_total_subscribe")]
+        public string SkanTotalSubscribe { get; set; }
+
+        [JsonProperty("skan_total_subscribe_value")]
+        public string SkanTotalSubscribeValue { get; set; }
+    }
 }

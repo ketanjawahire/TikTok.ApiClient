@@ -26,7 +26,7 @@ namespace TikTok.ApiClient.Entities
         /// <summary>
         /// filter by ad group objective, please find details from appendix[adgroup objectives]
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("secondary_status")]
         public string Status { get; set; }
 
         /// <summary>

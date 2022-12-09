@@ -18,13 +18,13 @@ namespace TikTok.ApiClient.Entities
         /// advertiser id
         /// </summary>
         [JsonProperty("advertiser_id")]
-        public long AdvertiserId { get; set; }
+        public string AdvertiserId { get; set; }
 
         /// <summary>
         /// adgroup id
         /// </summary>
         [JsonProperty("adgroup_id")]
-        public long AdgroupId { get; set; }
+        public string AdgroupId { get; set; }
 
         /// <summary>
         /// adgroup name
@@ -35,14 +35,14 @@ namespace TikTok.ApiClient.Entities
         /// <summary>
         /// Adgroup status
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("secondary_status")]
         public AdgroupStatus AdgroupStatus { get; set; }
 
         /// <summary>
         /// campaign id
         /// </summary>
         [JsonProperty("campaign_id")]
-        public long CampaignId { get; set; }
+        public string CampaignId { get; set; }
 
         /// <summary>
         /// campaign name
@@ -53,7 +53,7 @@ namespace TikTok.ApiClient.Entities
         /// <summary>
         /// placement, please see detail from appendix[placement]
         /// </summary>
-        [JsonProperty("placement")]
+        [JsonProperty("placements")]
         public List<string> Placement { get; set; }
 
         /// <summary>
@@ -131,20 +131,20 @@ namespace TikTok.ApiClient.Entities
         /// <summary>
         /// whether to ban comments
         /// </summary>
-        [JsonProperty("is_comment_disable")]
-        public int IsCommentDisable { get; set; }
+        [JsonProperty("comment_disabled")]
+        public bool IsCommentDisable { get; set; }
 
         /// <summary>
         /// audience id list is unlimited if it is null
         /// </summary>
-        [JsonProperty("audience")]
-        public List<int> Audience { get; set; }
+        [JsonProperty("audience_ids")]
+        public List<string> Audience { get; set; }
 
         /// <summary>
         /// excluded audience id list is unlimited if it is null
         /// </summary>
-        [JsonProperty("excluded_audience")]
-        public List<int> ExcludedAudience { get; set; }
+        [JsonProperty("excluded_audience_ids")]
+        public List<string> ExcludedAudience { get; set; }
 
         /// <summary>
         /// gender is unlimited if it is null, please see detail from appendix[audience gender]
@@ -155,13 +155,13 @@ namespace TikTok.ApiClient.Entities
         /// <summary>
         /// location id list
         /// </summary>
-        [JsonProperty("location")]
+        [JsonProperty("location_ids")]
         public List<int> Location { get; set; }
 
         /// <summary>
         /// age is unlimited if it is null,please see detail from appendix[age range of audience]
         /// </summary>
-        [JsonProperty("age")]
+        [JsonProperty("age_groups")]
         public List<string> Age { get; set; }
 
         public List<AgeGroups> TikTokAgeGroups
@@ -178,13 +178,13 @@ namespace TikTok.ApiClient.Entities
         /// <summary>
         /// connection type is unlimited if it is null,please see detail from appendix[connection type of audience]
         /// </summary>
-        [JsonProperty("connection_type")]
+        [JsonProperty("network_types")]
         public List<string> ConnectionType { get; set; }
 
         /// <summary>
         /// operation system is unlimited if it is null,please see detail from appendix[operation system of audience]
         /// </summary>
-        [JsonProperty("operation_system")]
+        [JsonProperty("operating_systems")]
         public List<string> OperationSystem { get; set; }
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace TikTok.ApiClient.Entities
         /// <summary>
         /// Optimization goalEnum value:CONVERT: ConversionCLICK: ClickSHOW: ShowREACH: reachVIDEO_VIEW: video viewingINSTALL: installIN_APP_EVENT: in-app event
         /// </summary>
-        [JsonProperty("optimize_goal")]
+        [JsonProperty("optimization_goal")]
         [JsonConverter(typeof(StringEnumConverter))]
         public OptimizeGoal OptimizeGoal { get; set; }
 
@@ -227,7 +227,7 @@ namespace TikTok.ApiClient.Entities
         /// <summary>
         /// CPC, CPM bid, oCPC learning bid
         /// </summary>
-        [JsonProperty("bid")]
+        [JsonProperty("bid_price")]
         public decimal Bid { get; set; }
 
         /// <summary>
@@ -258,12 +258,12 @@ namespace TikTok.ApiClient.Entities
         /// 1/0，whether skip learning phase
         /// </summary>
         [JsonProperty("skip_learning_phase")]
-        public int SkipLearningPhase { get; set; }
+        public bool SkipLearningPhase { get; set; }
 
         /// <summary>
         /// oCPC conversion bid
         /// </summary>
-        [JsonProperty("conversion_bid")]
+        [JsonProperty("conversion_bid_price")]
         public float ConversionBid { get; set; }
 
         /// <summary>
@@ -305,14 +305,14 @@ namespace TikTok.ApiClient.Entities
         /// <summary>
         /// Shallow eventEnum:ACTIVE: activateACTIVE_REGISTER: activate and registerCREATE_GAMEROLE: Activate and create a characterLOGIN: login successfullyCOMPLETE_TUTORIAL: Complete the tutorial
         /// </summary>
-        [JsonProperty("external_action")]
+        [JsonProperty("optimization_event")]
         [JsonConverter(typeof(StringEnumConverter))]
         public ExternalAction ExternalAction { get; set; }
 
         /// <summary>
         /// Deep conversion eventEnum:ACTIVE_PAY: activate and make paymentADD_PAYMENT_INFO: Add payment informationLOAN_APPLY: Apply for a loanSTART_TRIAL: start trialSUBSCRIBE: SubscribeIN_APP_ORDER: Place order in app
         /// </summary>
-        [JsonProperty("deep_external_action")]
+        [JsonProperty("secondary_optimization_event")]
         [JsonConverter(typeof(StringEnumConverter))]
         public DeepExternalAction DeepExternalAction { get; set; }
 
@@ -343,14 +343,14 @@ namespace TikTok.ApiClient.Entities
         /// <summary>
         /// Inventory filtering (filtering security videos, hides unsafe videos), valid only for the PLACEMENT_TIKTOK placement. Optional values are: true to filter, false not to filter.
         /// </summary>
-        [JsonProperty("enable_inventory_filter")]
+        [JsonProperty("inventory_filter_enabled")]
         public bool EnableInventoryFilter { get; set; }
 
         /// <summary>
         /// Pixel ID, can be found through 【Pixel management】. It is only applicable for landing pages.
         /// </summary>
         [JsonProperty("pixel_id")]
-        public long PixelId { get; set; }
+        public string PixelId { get; set; }
 
         /// <summary>
         /// Audience rule, see【Ads-Ad Group-App Audience Rule】
@@ -379,25 +379,25 @@ namespace TikTok.ApiClient.Entities
         /// <summary>
         /// Interest classification. If the interest is specified, users that do not meet interest target will be excluded during delivery. Do not specify if you wish to target everyone. See 【Appendix-Interest Category-New Interest Category】 for optional values.
         /// </summary>
-        [JsonProperty("interest_category_v2")]
-        public List<long> InterestCategoryV2 { get; set; }
+        [JsonProperty("interest_category_ids")]
+        public List<string> InterestCategoryV2 { get; set; }
 
         /// <summary>
         /// Device price orientation (10000 represents 10000+), for example: [0,300] represents price range is from $0 to $300
         /// </summary>
-        [JsonProperty("device_price")]
+        [JsonProperty("device_price_ranges")]
         public List<int> DevicePrice { get; set; }
 
         /// <summary>
         /// Audience minimum Android version. See 【Appendix-Android version of audience】 for details
         /// </summary>
-        [JsonProperty("android_osv")]
+        [JsonProperty("min_android_version")]
         public string AndroidOsv { get; set; }
 
         /// <summary>
         /// Audience minimum ios version. See 【Appendix-Audience ios version】 for details.
         /// </summary>
-        [JsonProperty("ios_osv")]
+        [JsonProperty("min_ios_version")]
         public string IosOsv { get; set; }
 
         /// <summary>
@@ -415,13 +415,13 @@ namespace TikTok.ApiClient.Entities
         /// <summary>
         /// Deep bid
         /// </summary>
-        [JsonProperty("deep_cpabid")]
+        [JsonProperty("deep_cpa_bid")]
         public float DeepCpabid { get; set; }
 
         /// <summary>
         /// Operation status, optional values include: DISABLE, ENABLE
         /// </summary>
-        [JsonProperty("opt_status")]
+        [JsonProperty("operation_status")]
         public string OptStatus { get; set; }
 
         /// <summary>
@@ -445,20 +445,21 @@ namespace TikTok.ApiClient.Entities
         /// <summary>
         /// Carriers, see 【Appendix-Carriers】 for optional values.
         /// </summary>
+        [Obsolete("This metric has been deprecated in v1.3")]
         [JsonProperty("carriers")]
         public List<string> Carriers { get; set; }
 
         /// <summary>
         /// Whether users can download your video ads on TikTok. Allowed values: ALLOW_DOWNLOAD ,PREVENT_DOWNLOAD Default: ALLOW_DOWNLOAD.
         /// </summary>
-        [JsonProperty("video_download")]
-        public string VideoDownload { get; set; }
+        [JsonProperty("video_download_disabled")]
+        public bool VideoDownload { get; set; }
 
         /// <summary>
         /// Pangle app block list ID.
         /// </summary>
-        [JsonProperty("pangle_block_app_list_id")]
-        public List<int> PangleBlockAppListId { get; set; }
+        [JsonProperty("blocked_pangle_app_ids")]
+        public List<string> PangleBlockAppListId { get; set; }
 
         /// <summary>
         /// The specific location where you want your audience to go if they have your app installed. See open_url_type for more.
@@ -481,8 +482,8 @@ namespace TikTok.ApiClient.Entities
         /// <summary>
         /// Action Categories，See 【Appendix-Action Categories】for optional values
         /// </summary>
-        [JsonProperty("action_categories")]
-        public List<int> ActionCategories { get; set; }
+        [JsonProperty("action_category_ids")]
+        public List<string> ActionCategories { get; set; }
 
         /// <summary>
         /// Select a time period to include actions from. Optional values: 7, 15.

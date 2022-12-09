@@ -8,25 +8,25 @@ namespace TikTok.ApiClient.Entities
         /// Group by Advertiser ID
         /// </summary>
         [JsonProperty("advertiser_id")]
-        public long AdvertiserId { get; set; }
+        public string AdvertiserId { get; set; }
 
         /// <summary>
         /// Group by Campaign ID
         /// </summary>
         [JsonProperty("campaign_id")]
-        public long CampaignId { get; set; }
+        public string CampaignId { get; set; }
 
         /// <summary>
         /// Group by Ad Group ID
         /// </summary>
         [JsonProperty("adgroup_id")]
-        public long AdgroupId { get; set; }
+        public string AdgroupId { get; set; }
 
         /// <summary>
         /// Group by Ad ID
         /// </summary>
         [JsonProperty("ad_id")]
-        public long AdId { get; set; }
+        public string AdId { get; set; }
 
         /// <summary>
         /// Group by day

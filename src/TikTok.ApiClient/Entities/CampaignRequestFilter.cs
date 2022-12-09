@@ -18,9 +18,10 @@ namespace TikTok.ApiClient.Entities
         public string ObjectiveType { get; set; }
 
         /// <summary>
-        /// filter by ad group objective, please find details from appendix[adgroup objectives]
+        /// filter by ad group objective, please find details from appendix[adgroup objectives].
+        /// NOTE: If you wish to query deleted campaigns in your request, either specify the value of STATUS_DELETE in the primary_status field or CAMPAIGN_STATUS_DELETE in the secondary_status field. Deleted data are by default not queried.
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("secondary_status")]
         public string Status { get; set; }
 
         /// <summary>
@@ -36,7 +37,8 @@ namespace TikTok.ApiClient.Entities
         public string CampaignType { get; set; }
 
         /// <summary>
-        /// Filter by ad status. See doc for more info - https://ads.tiktok.com/marketing_api/docs?id=100641
+        /// Filter by ad status. See doc for more info - https://ads.tiktok.com/marketing_api/docs?id=100641.
+        /// NOTE: If you wish to query deleted campaigns in your request, either specify the value of STATUS_DELETE in the primary_status field or CAMPAIGN_STATUS_DELETE in the secondary_status field. Deleted data are by default not queried.
         /// </summary>
         [JsonProperty("primary_status")]
         public string PrimaryStatus { get; set; }

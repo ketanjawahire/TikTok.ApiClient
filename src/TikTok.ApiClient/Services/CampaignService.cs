@@ -8,6 +8,12 @@ using TikTok.ApiClient.Services.Interfaces;
 
 namespace TikTok.ApiClient.Services
 {
+    /*
+     * ** API Upgrade **
+     * AG: v1.2 -> v1.3
+     * Refs - https://ads.tiktok.com/marketing_api/docs?id=1739315828649986
+     */
+
     /// <inheritdoc cref="ICampaignService"/>
     internal class CampaignService : BaseService, ICampaignService
     {

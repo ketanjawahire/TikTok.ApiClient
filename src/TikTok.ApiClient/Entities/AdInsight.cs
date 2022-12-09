@@ -48,7 +48,7 @@ namespace TikTok.ApiClient.Entities
         public decimal ActiveRegisterClickCost { get; set; }
 
         [JsonProperty("adgroup_id")]
-        public long AdgroupId { get; set; }
+        public string AdgroupId { get; set; }
 
         [JsonProperty("show_cnt")]
         public long ShowCnt { get; set; }
@@ -78,7 +78,7 @@ namespace TikTok.ApiClient.Entities
         public decimal ConversionCost { get; set; }
 
         [JsonProperty("ad_id")]
-        public long AdId { get; set; }
+        public string AdId { get; set; }
 
         [JsonProperty("total_play")]
         public long TotalPlay { get; set; }
@@ -96,7 +96,7 @@ namespace TikTok.ApiClient.Entities
         public decimal ClickCost { get; set; }
 
         [JsonProperty("campaign_id")]
-        public long CampaignId { get; set; }
+        public string CampaignId { get; set; }
 
         [JsonProperty("active_click")]
         public decimal ActiveClick { get; set; }

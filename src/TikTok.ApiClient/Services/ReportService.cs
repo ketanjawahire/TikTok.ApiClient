@@ -17,7 +17,7 @@ namespace TikTok.ApiClient.Services
         public ReportService(AuthenticationService authenticationService) 
             : base(authenticationService)
         {
-            _resourceUrl = $"{BaseUrl}/{Version}/reports/integrated/get/";
+            _resourceUrl = $"{BaseUrl}/{Version}/report/integrated/get/";
         }
 
         /// <inheritdoc />
@@ -60,9 +60,6 @@ namespace TikTok.ApiClient.Services
             if (model.EndDate.HasValue)
                 queryString.Add("end_date", model.EndDate?.ToString("yyyy-MM-dd"));
 
-            if (model.Lifetime.HasValue)
-                queryString.Add("lifetime", model.Lifetime.Value ? "true" : "false");
-
             if (!string.IsNullOrEmpty(model.OrderField))
                 queryString.Add("order_field", model.OrderField);
 
@@ -70,7 +67,7 @@ namespace TikTok.ApiClient.Services
                 queryString.Add("order_type", model.OrderType);
 
             if (model.Filters != null && model.Filters.Any())
-                queryString.Add("filters", JsonConvert.SerializeObject(model.Filters));
+                queryString.Add("filtering", JsonConvert.SerializeObject(model.Filters));
 
             var message = new HttpRequestMessage(HttpMethod.Get, $"{_resourceUrl}?{queryString}");
             var response = Execute<ReportResponseRootObject>(message).GetAwaiter().GetResult();

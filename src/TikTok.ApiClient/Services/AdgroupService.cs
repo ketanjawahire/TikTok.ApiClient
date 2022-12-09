@@ -10,6 +10,12 @@ using TikTok.ApiClient.Services.Interfaces;
 
 namespace TikTok.ApiClient.Services
 {
+    /*
+     * ** API Upgrade **
+     * AG: v1.2 -> v1.3
+     * Refs - https://ads.tiktok.com/marketing_api/docs?id=1739314558673922
+     */
+
     internal class AdgroupService : BaseService, IAdgroupService
     {
         private readonly string _getAdGroupEndpoint;

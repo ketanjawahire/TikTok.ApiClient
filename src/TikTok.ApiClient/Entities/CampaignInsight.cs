@@ -83,7 +83,7 @@ namespace TikTok.ApiClient.Entities
         public long ClickCost { get; set; }
 
         [JsonProperty("campaign_id")]
-        public long CampaignId { get; set; }
+        public string CampaignId { get; set; }
 
         [JsonProperty("active_click")]
         public long ActiveClick { get; set; }

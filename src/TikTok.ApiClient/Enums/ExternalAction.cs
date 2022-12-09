@@ -3,6 +3,7 @@
     /// <summary>
     /// Conversion Events Enum
     /// See Link - https://ads.tiktok.com/marketing_api/docs?id=1701890988826626
+    /// In v1.3 External Action are now called optimization_event - https://ads.tiktok.com/marketing_api/docs?id=1739361474981889
     /// </summary>
     public enum ExternalAction
     {
@@ -110,6 +111,30 @@
         /// Unlock achievement
         /// </summary>
         UNLOCK_ACHIEVEMENT,
+
+        /// <summary>
+        /// Time spent staying in the live shopping room. Valid when promotion_type is LIVE_SHOPPING and optimization_goal is MT_LIVE_ROOM. This event is managed by allowlist.
+        /// </summary>
+        LIVE_STAY_TIME,
+
+        /// <summary>
+        /// Number of clicks on the product links during the live shopping sessions. Valid when promotion_type is LIVE_SHOPPING and optimization_goal is PRODUCT_CLICK_IN_LIVE. This event is managed by allowlist.
+        /// </summary>
+        LIVE_CLICK_PRODUCT_ACTION,
+
+        /// <summary>
+        /// 6-second views (Focused view).
+        /// The number of times your video has been played at least 6 seconds, or received at least 1 engagement within 1 day of the user seeing a paid ad. Engagements to be measured: Likes, shares, follows, profile visits, clicks, hashtag clicks, music clicks, anchor clicks, and interactive add-ons activity clicks.
+        /// Valid when optimization_goal is ENGAGED_VIEW.
+        /// </summary>
+        ENGAGED_VIEW,
+
+        /// <summary>
+        /// 15-second views (Focused view).
+        /// The number of times your video has been played at least 15 seconds, or received at least 1 engagement within 1 day of the user seeing a paid ad. Engagements to be measured: Likes, shares, follows, profile visits, clicks, hashtag clicks, music clicks, anchor clicks, and interactive add-ons activity clicks.
+        /// Valid when optimization_goal is ENGAGED_VIEW_FIFTEEN. This event is managed by allowlist.
+        /// </summary>
+        ENGAGED_VIEW_FIFTEEN,
 
         /// <summary>
         /// Successfully complete a payment

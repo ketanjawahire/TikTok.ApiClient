@@ -15,13 +15,13 @@ namespace TikTok.ApiClient.Entities
         /// advertiser_id
         /// </summary>
         [JsonProperty("advertiser_id")]
-        public long AdvertiserId { get; set; }
+        public string AdvertiserId { get; set; }
 
         /// <summary>
         /// campaign_id
         /// </summary>
         [JsonProperty("campaign_id")]
-        public long CampaignId { get; set; }
+        public string CampaignId { get; set; }
 
         /// <summary>
         /// campaign_name
@@ -32,7 +32,7 @@ namespace TikTok.ApiClient.Entities
         /// <summary>
         /// The campaign status
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("secondary_status")]
         public CampaignStatus CampaignStatus { get; set; }
 
         /// <summary>
@@ -89,18 +89,20 @@ namespace TikTok.ApiClient.Entities
         /// Campaign Type, indicates the campaign is a regular campaign or iOS 14 campaign. Enum values: REGULAR_CAMPAIGN and IOS14_CAMPAIGN.
         /// </summary>
         [JsonProperty("campaign_type")]
-        public string CampaignType { get; set; }
+        public string Type { get; set; }
+
+        public CampaignType CampaignType => (CampaignType) Enum.Parse(typeof(CampaignType), Type);
 
         /// <summary>
         /// "Operation status
         /// </summary>
-        [JsonProperty("opt_status")]
+        [JsonProperty("operation_status")]
         public string OptStatus { get; set; }
 
         /// <summary>
         /// Whether Campaign Budget Optimization is enabled. Return only when Campaign Budget Optimization is enabled.
         /// </summary>
-        [JsonProperty("budget_optimize_switch")]
+        [JsonProperty("budget_optimize_on")]
         public int BudgetOptimizeSwitch { get; set; }
 
         /// <summary>
@@ -112,7 +114,7 @@ namespace TikTok.ApiClient.Entities
         /// <summary>
         /// Optimization goal. Return only when Campaign Budget Optimization is enabled.
         /// </summary>
-        [JsonProperty("optimize_goal")]
+        [JsonProperty("optimization_goal")]
         public string OptimizeGoal { get; set; }
 
         /// <summary>
