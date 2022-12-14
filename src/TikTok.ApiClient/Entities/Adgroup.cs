@@ -156,7 +156,7 @@ namespace TikTok.ApiClient.Entities
         /// location id list
         /// </summary>
         [JsonProperty("location_ids")]
-        public List<int> Location { get; set; }
+        public List<string> Location { get; set; }
 
         /// <summary>
         /// age is unlimited if it is null,please see detail from appendix[age range of audience]
