@@ -103,7 +103,7 @@ namespace TikTok.ApiClient.Entities
         /// Whether Campaign Budget Optimization is enabled. Return only when Campaign Budget Optimization is enabled.
         /// </summary>
         [JsonProperty("budget_optimize_on")]
-        public int BudgetOptimizeSwitch { get; set; }
+        public bool BudgetOptimizeSwitch { get; set; }
 
         /// <summary>
         /// Bidding strategy on the campaign level. Return only when Campaign Budget Optimization is enabled.
