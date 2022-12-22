@@ -55,6 +55,8 @@
         /// <summary>
         /// Maximize ROAS (Return on Ad Spend). Currently, it only support App Install and Catalog Sales objectives, and can only be used for Andorid apps. When this optimization goal is used, your ads cannot be deployed to Pangle placement only. skip_learning_phase cannot be set to NO_SKIP.
         /// </summary>
-        VALUE
+        VALUE,
+
+        ENGAGED_VIEW
     }
 }
