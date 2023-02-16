@@ -73,6 +73,9 @@
         /// </summary>
         ENGAGED_VIEW,
 
+        /// <summary>
+        /// Send people to your website, or TikTok Instant Page, to perform a specific action like making a purchase or adding an item to their cart.
+        /// </summary>
         WEB_CONVERSIONS
     }
 }
