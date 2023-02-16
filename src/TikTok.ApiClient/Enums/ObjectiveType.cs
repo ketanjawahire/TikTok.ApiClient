@@ -71,6 +71,8 @@
         /// The number of times your video has been played at least 6 seconds, or received at least 1 engagement within 1 day of the user seeing a paid ad. Engagements to be measured: Likes, shares, follows, profile visits, clicks, hashtag clicks, music clicks, anchor clicks, and interactive add-ons activity clicks.
         /// Valid when optimization_goal is ENGAGED_VIEW.
         /// </summary>
-        ENGAGED_VIEW
+        ENGAGED_VIEW,
+
+        WEB_CONVERSIONS
     }
 }
