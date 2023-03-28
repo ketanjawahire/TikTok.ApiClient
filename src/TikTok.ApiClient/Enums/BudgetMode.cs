@@ -15,6 +15,11 @@
         /// <summary>
         /// Total budget
         /// </summary>
-        BUDGET_MODE_TOTAL
+        BUDGET_MODE_TOTAL,
+
+        /// <summary>
+        /// Dynamic daily budget
+        /// </summary>
+        BUDGET_MODE_DYNAMIC_DAILY_BUDGET
     }
 }
