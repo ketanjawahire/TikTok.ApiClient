@@ -249,6 +249,11 @@
         /// <summary>
         /// Click to download (app promotion)
         /// </summary>
-        DOWNLOAD_START
+        DOWNLOAD_START,
+
+        /// <summary>
+        /// Landing Page View. The user clicks and loads the landing page successfully.
+        /// </summary>
+        LANDING_PAGE_VIEW
     }
 }
