@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using TikTok.ApiClient.Enums;
 
 namespace TikTok.ApiClient.Entities
 {
@@ -39,5 +40,17 @@ namespace TikTok.ApiClient.Entities
         /// </summary>
         [JsonProperty("stat_time_hour")]
         public string StatTimeHour { get; set; }
+
+        /// <summary>
+        /// Group by age
+        /// </summary>
+        [JsonProperty("age")]
+        public AgeGroups Age { get; set; }
+
+        /// <summary>
+        /// Group by gender
+        /// </summary>
+        [JsonProperty("gender")]
+        public Gender Gender { get; set; }
     }
 }
