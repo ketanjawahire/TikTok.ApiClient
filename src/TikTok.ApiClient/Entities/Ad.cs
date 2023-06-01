@@ -27,6 +27,12 @@ namespace TikTok.ApiClient.Entities
         public string AdName { get; set; }
 
         /// <summary>
+        /// ad format
+        /// </summary>
+        [JsonProperty("ad_format")]
+        public string AdFormat { get; set; }
+
+        /// <summary>
         /// ad text
         /// </summary>
         [JsonProperty("ad_text")]
