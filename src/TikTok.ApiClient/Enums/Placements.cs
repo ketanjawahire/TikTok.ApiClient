@@ -33,6 +33,11 @@ namespace TikTok.ApiClient.Enums
         /// <summary>
         /// The placement pangle
         /// </summary>
-        PLACEMENT_PANGLE
+        PLACEMENT_PANGLE,
+
+        /// <summary>
+        /// The placement global application bundle (Global App Bundle, including Capcut and Fizzo for now.)
+        /// </summary>
+        PLACEMENT_GLOBAL_APP_BUNDLE
     }
 }
