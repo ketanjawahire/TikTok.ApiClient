@@ -613,5 +613,8 @@ namespace TikTok.ApiClient.Entities
 
         [JsonProperty("skan_total_subscribe_value")]
         public string SkanTotalSubscribeValue { get; set; }
+
+        [JsonProperty("total_landing_page_view")]
+        public string TotalLandingPageView { get; set; }
     }
 }
