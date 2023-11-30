@@ -29,41 +29,53 @@ namespace TikTok.ApiClient.Services
         public async Task<IEnumerable<Adgroup>> Get(AdgroupRequestModel model)
         {
             var adGroups = new List<Adgroup>();
-            
-            var queryString = HttpUtility.ParseQueryString(string.Empty);
-            foreach (var property in model.GetType().GetProperties())
+
+            var adGroupIds = model.Filtering.AdGroupIds.ToList();
+
+            if (adGroupIds != null || model.Filtering.AdGroupIds.Count > 0)
             {
-                if (property.PropertyType == typeof(AdgroupRequestFilter))
+                for (int i = 0; i < adGroupIds.Count; i += 100)
                 {
-                    var filterValue = JsonConvert.SerializeObject(property.GetValue(model, null), new JsonSerializerSettings() {NullValueHandling = NullValueHandling.Ignore});
-                    queryString.Add("filtering", filterValue);
-                }
-                else if (property.Name == "AdvertiserId")
-                {
-                    queryString.Add("advertiser_id", property.GetValue(model, null).ToString());
-                }
-                else if (property.Name == nameof(BaseRequestModel.Page))
-                {
-                    queryString.Add("page", property.GetValue(model, null).ToString());
-                }
-                else if (property.Name == nameof(BaseRequestModel.PageSize))
-                {
-                    queryString.Add("page_size", property.GetValue(model, null).ToString());
+                    var adGroupIdBatch = adGroupIds.Skip(i).Take(100).ToList();
+                    model.Filtering.AdGroupIds = adGroupIdBatch;
+
+                    var queryString = HttpUtility.ParseQueryString(string.Empty);
+
+                    foreach (var property in model.GetType().GetProperties())
+                    {
+                        if (property.PropertyType == typeof(AdgroupRequestFilter))
+                        {
+                            var filterValue = JsonConvert.SerializeObject(property.GetValue(model, null), new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+                            queryString.Add("filtering", filterValue);
+                        }
+                        else if (property.Name == "AdvertiserId")
+                        {
+                            queryString.Add("advertiser_id", property.GetValue(model, null).ToString());
+                        }
+                        else if (property.Name == nameof(BaseRequestModel.Page))
+                        {
+                            queryString.Add("page", property.GetValue(model, null).ToString());
+                        }
+                        else if (property.Name == nameof(BaseRequestModel.PageSize))
+                        {
+                            queryString.Add("page_size", property.GetValue(model, null).ToString());
+                        }
+                    }
+
+                    var message = new HttpRequestMessage(HttpMethod.Get, $"{_getAdGroupEndpoint}?{queryString}");
+
+                    var response = await Execute<AdgroupRootObject>(message);
+
+                    if (response.code == 40105)
+                    {
+                        throw new Exceptions.UnauthorizedAccessException();
+                    }
+
+                    var result = Extract<AdgroupRootObject, AdgroupWrapper, Adgroup>(response);
+
+                    await MultiplePageHandler<AdgroupRootObject, AdgroupWrapper, Adgroup>(result, _getAdGroupEndpoint, queryString, adGroups);
                 }
             }
-
-            var message = new HttpRequestMessage(HttpMethod.Get, $"{_getAdGroupEndpoint}?{queryString}");
-
-            var response = await Execute<AdgroupRootObject>(message);
-
-            if (response.code == 40105)
-            {
-                throw new Exceptions.UnauthorizedAccessException();
-            }
-
-            var result = Extract<AdgroupRootObject, AdgroupWrapper, Adgroup>(response);
-
-            await MultiplePageHandler<AdgroupRootObject, AdgroupWrapper, Adgroup>(result, _getAdGroupEndpoint, queryString, adGroups);
 
             return adGroups;
         }
