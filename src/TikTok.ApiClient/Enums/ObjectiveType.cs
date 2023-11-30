@@ -76,6 +76,12 @@
         /// <summary>
         /// Send people to your website, or TikTok Instant Page, to perform a specific action like making a purchase or adding an item to their cart.
         /// </summary>
-        WEB_CONVERSIONS
+        WEB_CONVERSIONS,
+
+        /// <summary>
+        /// The product sales.
+        /// Product Shopping Ads that drive product purchases.
+        /// </summary>
+        PRODUCT_SALES
     }
 }
