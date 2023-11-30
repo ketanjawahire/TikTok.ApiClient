@@ -27,6 +27,12 @@ namespace TikTok.ApiClient.Entities
         public string AdName { get; set; }
 
         /// <summary>
+        /// ad format
+        /// </summary>
+        [JsonProperty("ad_format")]
+        public string AdFormat { get; set; }
+
+        /// <summary>
         /// ad text
         /// </summary>
         [JsonProperty("ad_text")]
@@ -91,5 +97,11 @@ namespace TikTok.ApiClient.Entities
         /// </summary>
         [JsonProperty("modify_time")]
         public string ModifyTime { get; set; }
+
+        /// <summary>
+        /// tiktok item id required to map spark ads
+        /// </summary>
+        [JsonProperty("tiktok_item_id")]
+        public string TikTokItemId { get; set; }
     }
 }

@@ -6,6 +6,11 @@
     public enum AgeGroups
     {
         /// <summary>
+        /// None
+        /// </summary>
+        None = -1,
+
+        /// <summary>
         /// The age 13 to 17
         /// </summary>
         AGE_13_17,
