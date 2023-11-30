@@ -30,7 +30,7 @@ namespace TikTok.ApiClient.Services
         {
             var adGroups = new List<Adgroup>();
 
-            var adGroupIds = model.Filtering.AdGroupIds;
+            var adGroupIds = model.Filtering.AdGroupIds.ToList();
 
             if (adGroupIds != null || model.Filtering.AdGroupIds.Count > 0)
             {
