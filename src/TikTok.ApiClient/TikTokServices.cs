@@ -59,6 +59,10 @@ namespace TikTok.ApiClient
             {
                 apiService = new VideoService(_authService);
             }
+            else if (typeof(TEntity) == typeof(ISparkAdsService))
+            {
+                apiService = new SparkAdsService(_authService);
+            }
             else
             {
                 throw new ApiServiceNotFoundException(typeof(TEntity));
