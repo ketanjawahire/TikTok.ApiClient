@@ -76,9 +76,13 @@ namespace TikTok.ApiClient.Services
                 throw new Exceptions.UnauthorizedAccessException();
 
             var result = Extract<ReportResponseRootObject, ReportResponseWrapper, ReportResponse>(response);
-
             var insight = new List<ReportResponse>();
-            
+
+            if (result.List is null)
+            {
+                return insight;
+            }
+
             MultiplePageHandler<ReportResponseRootObject, ReportResponseWrapper, ReportResponse>(result, _resourceUrl, queryString, insight).GetAwaiter().GetResult();
 
             return insight;
