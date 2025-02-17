@@ -221,10 +221,57 @@ namespace TikTok.ApiClient.Enums
         /// Industry qualification is rejected (can be used as filter)
         /// </summary>
         ADGROUP_STATUS_INDUSTRY_QUALIFICATION_DENY,
+        
+        /// <summary>
+        /// Authorization for the asset or assets in the ad group is missing.
+        /// </summary>
+        ADGROUP_STATUS_ASSET_AUTHORIZATION_LOST,
 
         /// <summary>
         /// Transcoding of the video or videos in the ad group failed.
         /// </summary>
         ADGROUP_STATUS_TRANSCODING_FAIL,
+
+        /// <summary>
+        /// The ad account has reached the ad group quota limit.
+        /// To create an active ad group, you need to pause or delete an ad group with the "active "or "in review" status.
+        /// </summary>
+        ADGROUP_STATUS_ADGROUP_QUOTA_LIMIT,
+
+        /// <summary>
+        /// The identity that you try to use in an ad within the ad group is unavailable because it is already used by an ad group with the optimization goal GMV.
+        /// (optimization_goal = GMV)
+        /// </summary>
+        ADGROUP_STATUS_IDENTITY_USED_BY_GMV_MAX_AD,
+
+        /// <summary>
+        /// All keywords for the ad group within a Search Campaign are under review.
+        /// </summary>
+        ADGROUP_STATUS_SEARCH_KEYWORDS_IN_REVIEW,
+
+        /// <summary>
+        /// All keywords for the ad group within a Search Campaign are rejected, or no keywords are set.
+        /// </summary>
+        ADGROUP_STATUS_SEARCH_KEYWORDS_NOT_AVAILABLE,
+
+        /// <summary>
+        /// Some keywords for the ad group within a Search Campaign are approved while other keywords are in review or disapproved.
+        /// </summary>
+        ADGROUP_STATUS_SEARCH_KEYWORDS_PARTIAL_APPROVED,
+
+        /// <summary>
+        /// One or more ads have been rejected.
+        /// </summary>
+        ADGROUP_STATUS_REVIEW_PARTIALLY_APPROVED,
+
+        /// <summary>
+        /// One or more creatives in the Promote ad group are not approved.
+        /// </summary>
+        ADGROUP_STATUS_PROMOTE_AD_NOT_APPROVED,
+
+        /// <summary>
+        /// The Promote order is withdrawn.
+        /// </summary>
+        ADGROUP_STATUS_PROMOTE_WITHDRAW_ORDER
     }
 }
