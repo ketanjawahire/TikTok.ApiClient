@@ -5,6 +5,6 @@ namespace TikTok.ApiClient.Services.Interfaces
 {
     public interface IReportService : IApiService
     {
-        IEnumerable<ReportResponse> GetBasicReport(ReportInputModel model);
+        ReportResponseWrapper GetBasicReport(ReportInputModel model);
     }
 }
