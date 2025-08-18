@@ -10,5 +10,8 @@ namespace TikTok.ApiClient.Entities
         
         [JsonProperty("page_info")]
         public PageInfo PageInfo { get; set; }
+
+        [JsonProperty("total_metrics")]
+        public TotalMetrics TotalMetrics { get; set;}
     }
 }

@@ -21,7 +21,7 @@ namespace TikTok.ApiClient.Services
         }
 
         /// <inheritdoc />
-        public IEnumerable<ReportResponse> GetBasicReport(ReportInputModel model)
+        public ReportResponseWrapper GetBasicReport(ReportInputModel model)
         {
             // Validate all Required Parameters
             if (model.AdvertiserId == default)
@@ -69,6 +69,11 @@ namespace TikTok.ApiClient.Services
             if (model.Filters != null && model.Filters.Any())
                 queryString.Add("filtering", JsonConvert.SerializeObject(model.Filters));
 
+            if (model.IsTotalMetric)
+            {
+                queryString.Add("enable_total_metrics", "true");
+            }
+
             var message = new HttpRequestMessage(HttpMethod.Get, $"{_resourceUrl}?{queryString}");
             var response = Execute<ReportResponseRootObject>(message).GetAwaiter().GetResult();
 
@@ -80,12 +85,13 @@ namespace TikTok.ApiClient.Services
 
             if (result.List is null)
             {
-                return insight;
+                return result;
             }
 
             MultiplePageHandler<ReportResponseRootObject, ReportResponseWrapper, ReportResponse>(result, _resourceUrl, queryString, insight).GetAwaiter().GetResult();
 
-            return insight;
+            result.List = insight;
+            return result;
         }
     }
 }
