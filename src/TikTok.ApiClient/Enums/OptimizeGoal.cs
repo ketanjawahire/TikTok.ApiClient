@@ -77,6 +77,11 @@
         /// <summary>
         /// Landing Page View. The user clicks and loads the landing page successfully. The corresponding optimization_event is LANDING_PAGE_VIEW.
         /// </summary>
-        TRAFFIC_LANDING_PAGE_VIEW
+        TRAFFIC_LANDING_PAGE_VIEW,
+
+        /// <summary>
+        /// The engagement session.
+        /// </summary>
+        ENGAGEMENT_SESSION
     }
 }
