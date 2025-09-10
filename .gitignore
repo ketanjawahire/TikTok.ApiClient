@@ -1,3 +1,4 @@
+*.vs/
 src/.vs/
 src/ConsoleApp1/bin/
 src/ConsoleApp1/obj/

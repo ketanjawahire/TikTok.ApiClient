@@ -17,7 +17,7 @@ namespace TikTok.ApiClient
         /// Gets or sets error code.
         /// </summary>
         [JsonProperty("code")]
-        public int Code { get; set; }
+        public long Code { get; set; }
 
         /// <summary>
         /// Gets or sets error code.

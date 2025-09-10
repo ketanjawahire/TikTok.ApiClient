@@ -31,6 +31,12 @@ namespace TikTok.ApiClient.Enums
         /// <summary>
         /// When optimize_goal is VALUE, the deep event bidding type must be ROI_PACING
         /// </summary>
-        ROI_PACING
+        ROI_PACING,
+
+        /// <summary>
+        /// Bid without cost cap or ROAS goal. Valid only for Value Optimization (optimization_goal = VALUE).
+        /// For more details, <see href="https://ads.tiktok.com/marketing_api/docs?id=1739381743067137">Value Optimization</see>
+        /// </summary>
+        VO_HIGHEST_VALUE
     }
 }

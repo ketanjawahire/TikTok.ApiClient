@@ -75,6 +75,9 @@ namespace TikTok.ApiClient.Entities
 		/// </summary>
 		[JsonProperty("filters")]
 		public List<ReportInputFilter> Filters { get; set; }
+
+        [JsonProperty("enable_total_metrics")]
+        public bool IsTotalMetric { get; set; }
     }
 
     public class ReportInputFilter

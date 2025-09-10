@@ -81,6 +81,7 @@
 
         /// <summary>
         /// Engagement session.
+        /// The engagement session.
         /// </summary>
         ENGAGEMENT_SESSION
     }

@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -98,7 +98,14 @@ namespace TikTok.ApiClient.Services
                 var message = new HttpRequestMessage(HttpMethod.Get, $"{resourceUrl}?{queryStringCollection}");
                 var currentPageResponse = await Execute<TRoot>(message);
                 var currentPageResult = Extract<TRoot, TWrapper, TEntity>(currentPageResponse);
-                entityList.AddRange(currentPageResult.List);
+                if(currentPageResponse.code == 0)
+                {
+                    entityList.AddRange(currentPageResult.List);
+                }
+                else
+                {
+                    throw new ApiException($"ApiResponseCode: {currentPageResponse.code}, ErrorMessage: {currentPageResponse.Message}",new ApiError { Code = currentPageResponse.code, Data = currentPageResponse.Data, Message = currentPageResponse.Message });
+                }
             }
         }
 

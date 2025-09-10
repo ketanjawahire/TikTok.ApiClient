@@ -49,6 +49,16 @@
         /// <summary>
         /// "All statuses (excluding ""Deleted"")"
         /// </summary>
-        CAMPAIGN_STATUS_NOT_DELETE
+        CAMPAIGN_STATUS_NOT_DELETE,
+
+        /// <summary>
+        /// The advertiser account punish
+        /// </summary>
+        ADVERTISER_ACCOUNT_PUNISH,
+
+        /// <summary>
+        /// Awaiting release. The SKAN 4.0 Dedicated Campaign is under postback. Tiktok recommends to wait a few days to release this campaign for reporting accuracy.
+        /// </summary>
+        CAMPAIGN_STATUS_AWAITING_RELEASE
     }
 }
