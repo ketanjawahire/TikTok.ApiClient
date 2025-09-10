@@ -80,7 +80,6 @@
         TRAFFIC_LANDING_PAGE_VIEW,
 
         /// <summary>
-        /// Engagement session.
         /// The engagement session.
         /// </summary>
         ENGAGEMENT_SESSION
