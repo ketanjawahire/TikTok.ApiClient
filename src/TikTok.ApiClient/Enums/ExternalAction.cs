@@ -254,6 +254,11 @@
         /// <summary>
         /// Landing Page View. The user clicks and loads the landing page successfully.
         /// </summary>
-        LANDING_PAGE_VIEW
+        LANDING_PAGE_VIEW,
+
+        /// <summary>
+        /// Web add to wishlist
+        /// </summary>
+        ON_WEB_ADD_TO_WISHLIST
     }
 }
