@@ -82,9 +82,6 @@
         /// <summary>
         /// The engagement session.
         /// </summary>
-        ENGAGEMENT_SESSION,
-
-        // Temporary fix for enum serialization issue
-        A3
+        ENGAGEMENT_SESSION
     }
 }
