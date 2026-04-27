@@ -82,6 +82,18 @@
         /// The product sales.
         /// Product Shopping Ads that drive product purchases.
         /// </summary>
-        PRODUCT_SALES
+        PRODUCT_SALES,
+
+        /// <summary>
+        /// The Brand Consideration.
+        /// Brand consideration. Acquire a consideration audience who have demonstrated interest in your brand.
+        /// </summary>
+        BRAND_CONSIDERATION,
+
+        /// <summary>
+        /// The Top View Reach.
+        /// Reservation TopView. Show your ads designed to be shown when users open the app to as many people as possible.
+        /// </summary>
+        TOPVIEW_REACH
     }
 }
