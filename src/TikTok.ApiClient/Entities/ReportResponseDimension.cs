@@ -42,6 +42,30 @@ namespace TikTok.ApiClient.Entities
         public string StatTimeHour { get; set; }
 
         /// <summary>
+        /// Group by Placement
+        /// </summary>
+        [JsonProperty("placement")]
+        public string Placement { get; set; }
+
+        /// <summary>
+        /// Group by Device Brand
+        /// </summary>
+        [JsonProperty("device_brand_id")]
+        public string DeviceBrandId { get; set; }
+
+        /// <summary>
+        /// Group by Device Brand
+        /// </summary>
+        [JsonProperty("audience_tags")]
+        public string AudienceTags { get; set; }
+
+        /// <summary>
+        /// Group by Device Brand
+        /// </summary>
+        [JsonProperty("country_code")]
+        public string CountryCode { get; set; }
+
+        /// <summary>
         /// Group by age
         /// </summary>
         [JsonProperty("age")]
